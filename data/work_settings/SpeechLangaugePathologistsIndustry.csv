@@ -1,0 +1,11 @@
+naics_code,setting_name,employment,pct_of_total,annual_mean_wage,annual_median_wage
+56-1320,Temporary / Travel,2760,1.5,97710.0,100140.0
+61-1000,Educational Services,75020,42.0,86520.0,80280.0
+62-1100,Physician Practices,1680,0.9,102300.0,97100.0
+62-1340,Private Practice / Outpatient,47050,26.3,100370.0,98470.0
+62-1400,Outpatient Care Centers,1820,1.0,103870.0,97980.0
+62-1600,Home Health,5600,3.1,121260.0,117740.0
+62-2000,Hospitals,24910,13.9,102510.0,101560.0
+62-3100,Skilled Nursing Facilities,6780,3.8,111710.0,107870.0
+62-3300,Assisted Living / CCRC,830,0.5,108880.0,104970.0
+99-9000,Government,4120,2.3,99320.0,102070.0

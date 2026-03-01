@@ -1,0 +1,6 @@
+naics_code,setting_name,employment,pct_of_total,annual_mean_wage,annual_median_wage
+56-1320,Temporary / Travel,150.0,0.8,87210.0,83530.0
+61-1000,Educational Services,,,107460.0,105610.0
+62-1100,Physician Practices,6170.0,33.0,110920.0,102180.0
+62-1400,Outpatient Care Centers,750.0,4.0,137560.0,121360.0
+62-2000,Hospitals,10550.0,56.4,109340.0,101740.0

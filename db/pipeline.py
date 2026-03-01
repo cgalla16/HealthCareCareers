@@ -1,0 +1,43 @@
+"""
+db/pipeline.py — Orchestrator: rebuilds healthcare.db from all data sources.
+
+Run from project root:
+    python db/pipeline.py
+
+Data sources:
+    raw/occupations/    BLS OEWS xlsx files (by state)
+    raw/work_settings/  BLS OEWS industry xlsx files (by NAICS)
+    raw/schools/pt/     PT program CSV files
+    raw/schools/slp/    SLP program CSV files (future)
+"""
+
+import sqlite3
+from pathlib import Path
+
+from db.pipelines import occupations, schools, work_settings
+
+DB_PATH = Path(__file__).parent.parent / "healthcare.db"
+
+
+def main() -> None:
+    if DB_PATH.exists():
+        DB_PATH.unlink()
+
+    print(f"[DB]   Rebuilding {DB_PATH}")
+    con = sqlite3.connect(DB_PATH)
+
+    print("[occupations]")
+    occupations.load(con)
+
+    print("[schools]")
+    schools.load(con)
+
+    print("[work_settings]")
+    work_settings.load(con)
+
+    con.close()
+    print(f"[DONE] {DB_PATH}")
+
+
+if __name__ == "__main__":
+    main()

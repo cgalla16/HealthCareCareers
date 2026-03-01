@@ -1,0 +1,498 @@
+state,program_type,school,pass_rate
+Alabama,OT Doctoral-Level Programs,University of Alabama at Birmingham,91
+Alabama,OT Masters-Level Programs,Alabama State University,94
+Alabama,OT Masters-Level Programs,Tuskegee University,63
+Alabama,OT Masters-Level Programs,University of Alabama at Birmingham,100
+Alabama,OT Masters-Level Programs,University of South Alabama,100
+Alabama,OTA Level Program,Wallace State Community College,95
+Arizona,OT Doctoral-Level Programs,"A.T. Still University, Arizona School of Health Sciences",100
+Arizona,OT Doctoral-Level Programs,"Huntington University, Peoria",94
+Arizona,OT Doctoral-Level Programs,Northern Arizona University,95
+Arizona,OT Masters-Level Programs,"A.T. Still University, Arizona School of Health Sciences",100
+Arizona,OT Masters-Level Programs,"Midwestern University, Glendale",100
+Arizona,OTA Level Program,"Brookline College, Phoenix Campus",100
+Arizona,OTA Level Program,GateWay Community College,90
+Arizona,OTA Level Program,"Pima Medical Institute, Mesa",81
+Arizona,OTA Level Program,"Pima Medical Institute, Tucson",100
+Arkansas,OT Doctoral-Level Programs,"Arkansas State University, Jonesboro",83
+Arkansas,OT Doctoral-Level Programs,University of Arkansas - Fayetteville / University of Arkansas for Medical Sciences,96
+Arkansas,OT Doctoral-Level Programs,University of Central Arkansas,96
+Arkansas,OTA Level Program,"Arkansas State University, Jonesboro",87
+Arkansas,OTA Level Program,"Arkansas Tech University, Ozark Campus",60
+Arkansas,OTA Level Program,Baptist Health College Little Rock,94
+Arkansas,OTA Level Program,Cossatot Community College of the University of Arkansas,83
+California,OT Doctoral-Level Programs,Samuel Merritt University,91
+California,OT Doctoral-Level Programs,"University of St. Augustine for Health Sciences, California Campus",86
+California,OT Doctoral-Level Programs,"University of the Pacific, Sacramento",87
+California,OT Doctoral-Level Programs,"West Coast University, Los Angeles",91
+California,OT Masters-Level Programs,"California State University, Dominguez Hills",98
+California,OT Masters-Level Programs,Dominican University of California,93
+California,OT Masters-Level Programs,Loma Linda University Health,96
+California,OT Masters-Level Programs,Samuel Merritt University,50
+California,OT Masters-Level Programs,San Jose State University,97
+California,OT Masters-Level Programs,Stanbridge University,97
+California,OT Masters-Level Programs,University of Southern California,76
+California,OT Masters-Level Programs,"University of St. Augustine for Health Sciences, California Campus",86
+California,OT Masters-Level Programs,"West Coast University, Los Angeles",95
+California,OTA Level Program,"American Career College, Orange County Campus",84
+California,OTA Level Program,CBD College,72
+California,OTA Level Program,"Clovis Community College, Herndon Campus",100
+California,OTA Level Program,Grossmont College,78
+California,OTA Level Program,"Pima Medical Institute, San Marcos",100
+California,OTA Level Program,"Platt College, Anaheim",71
+California,OTA Level Program,Sacramento City College,88
+California,OTA Level Program,Santa Ana College,76
+California,OTA Level Program,Stanbridge University,83
+Colorado,OT Masters-Level Programs,Colorado Mesa University,100
+Colorado,OT Masters-Level Programs,Colorado State University,100
+Colorado,OTA Level Program,"Pima Medical Institute, Denver",100
+Colorado,OTA Level Program,Pueblo Community College,81
+Connecticut,OT Doctoral-Level Programs,Quinnipiac University,92
+Connecticut,OT Masters-Level Programs,Quinnipiac University,100
+Connecticut,OT Masters-Level Programs,Sacred Heart University,98
+Connecticut,OT Masters-Level Programs,University of Hartford,100
+Connecticut,OTA Level Program,Connecticut State Community College,81
+Connecticut,OTA Level Program,Goodwin University,73
+Delaware,OT Masters-Level Programs,Delaware State University,70
+Delaware,OTA Level Program,"Delaware Tech and Community College, George Campus",86
+Delaware,OTA Level Program,"Delaware Tech and Community College, Owens Campus",67
+District of Columbia,OT Doctoral-Level Programs,Howard University,100
+District of Columbia,OT Masters-Level Programs,Trinity Washington University,88
+District of Columbia,OTA Level Program,Trinity Washington University,88
+Florida,OT Doctoral-Level Programs,Gannon University-Florida Campus,83
+Florida,OT Doctoral-Level Programs,Jacksonville University,90
+Florida,OT Doctoral-Level Programs,"Nova Southeastern University, Tampa Bay Regional Campus",97
+Florida,OT Doctoral-Level Programs,University of Florida,100
+Florida,OT Doctoral-Level Programs,"University of St. Augustine for Health Sciences, Miami Campus",80
+Florida,OT Doctoral-Level Programs,"University of St. Augustine for Health Sciences, St. Augustine Campus",98
+Florida,OT Masters-Level Programs,AdventHealth University,100
+Florida,OT Masters-Level Programs,Barry University,71
+Florida,OT Masters-Level Programs,Florida Agricultural and Mechanical University,90
+Florida,OT Masters-Level Programs,Florida Gulf Coast University,100
+Florida,OT Masters-Level Programs,Florida International University,95
+Florida,OT Masters-Level Programs,"Keiser University, Fort Myers",70
+Florida,OT Masters-Level Programs,"Keiser University, Ft. Lauderdale Campus",72
+Florida,OT Masters-Level Programs,"Nova Southeastern University, Ft. Lauderdale",83
+Florida,OT Masters-Level Programs,"University of St. Augustine for Health Sciences, Miami Campus",70
+Florida,OT Masters-Level Programs,"University of St. Augustine for Health Sciences, St. Augustine Campus",92
+Florida,OTA Level Program,AdventHealth University,100
+Florida,OTA Level Program,"Concorde Career Institute, Miramar",60
+Florida,OTA Level Program,Daytona State College,93
+Florida,OTA Level Program,"Florida State College, Jacksonville",93
+Florida,OTA Level Program,"Keiser University, Daytona Beach",100
+Florida,OTA Level Program,"Keiser University, Fort Myers",82
+Florida,OTA Level Program,"Keiser University, Ft. Lauderdale",32
+Florida,OTA Level Program,"Keiser University, Jacksonville",73
+Florida,OTA Level Program,"Keiser University, Melbourne",89
+Florida,OTA Level Program,"Keiser University, Miami Campus",91
+Florida,OTA Level Program,"Keiser University, Orlando",67
+Florida,OTA Level Program,"Keiser University, Pembroke Pines",94
+Florida,OTA Level Program,"Keiser University, Tallahassee",87
+Florida,OTA Level Program,"Keiser University, Tampa",100
+Florida,OTA Level Program,"Keiser University, West Palm Beach Campus",82
+Florida,OTA Level Program,Polk State College,83
+Florida,OTA Level Program,"Praxis Institute, Hialeah Campus",9
+Florida,OTA Level Program,"South University, Tampa",100
+Florida,OTA Level Program,"State College of Florida, Manatee-Sarasota",100
+Georgia,OT Doctoral-Level Programs,"Brenau University, North Atlanta, Norcross Campus",83
+Georgia,OT Doctoral-Level Programs,Georgia State University,100
+Georgia,OT Masters-Level Programs,Augusta University,98
+Georgia,OT Masters-Level Programs,Brenau University,85
+Georgia,OT Masters-Level Programs,Middle Georgia State University,100
+Georgia,OTA Level Program,Albany State University,30
+Georgia,OTA Level Program,Augusta Technical College,56
+Georgia,OTA Level Program,"Chattahoochee Technical College, Canton Campus",80
+Georgia,OTA Level Program,Middle Georgia State University,100
+Hawaii,OTA Level Program,University of Hawaii/Kapiolani Community College,83
+Idaho,OT Masters-Level Programs,Idaho State University,100
+Idaho,OTA Level Program,College of Western Idaho,88
+Idaho,OTA Level Program,Idaho State University,100
+Illinois,OT Doctoral-Level Programs,"Midwestern University, Downers Grove",93
+Illinois,OT Doctoral-Level Programs,Rush University,100
+Illinois,OT Masters-Level Programs,Chicago State University,63
+Illinois,OT Masters-Level Programs,DePaul University,100
+Illinois,OT Masters-Level Programs,Elmhurst University,94
+Illinois,OT Masters-Level Programs,Governors State University,54
+Illinois,OT Masters-Level Programs,Lewis University,92
+Illinois,OT Masters-Level Programs,North Central College,86
+Illinois,OT Masters-Level Programs,University of Illinois Chicago,80
+Illinois,OTA Level Program,Fox College,80
+Illinois,OTA Level Program,"Illinois Central College, Peoria Campus",100
+Illinois,OTA Level Program,Lewis & Clark Community College,82
+Illinois,OTA Level Program,Lincoln Land Community College,67
+Illinois,OTA Level Program,McHenry County College,100
+Illinois,OTA Level Program,Parkland College,75
+Illinois,OTA Level Program,Shawnee Community College,71
+Illinois,OTA Level Program,South Suburban College of Cook County,0
+Illinois,OTA Level Program,Wright College,58
+Indiana,OT Doctoral-Level Programs,Huntington University,97
+Indiana,OT Doctoral-Level Programs,Indiana University,100
+Indiana,OT Doctoral-Level Programs,Indiana Wesleyan University,93
+Indiana,OT Doctoral-Level Programs,University of Indianapolis,100
+Indiana,OT Masters-Level Programs,Indiana State University,100
+Indiana,OT Masters-Level Programs,"Indiana University, South Bend",77
+Indiana,OT Masters-Level Programs,University of Indianapolis,100
+Indiana,OT Masters-Level Programs,University of Southern Indiana,97
+Indiana,OTA Level Program,Huntington University,83
+Indiana,OTA Level Program,Indiana Wesleyan University,100
+Indiana,OTA Level Program,University of Southern Indiana,93
+Iowa,OT Doctoral-Level Programs,Drake University,98
+Iowa,OT Doctoral-Level Programs,St. Ambrose University,94
+Iowa,OT Masters-Level Programs,Allen College,100
+Iowa,OTA Level Program,Hawkeye Community College,91
+Iowa,OTA Level Program,Indian Hills Community College,100
+Iowa,OTA Level Program,"Kirkwood Community College, Linn County Regional Center",93
+Kansas,OT Doctoral-Level Programs,University of Kansas Medical Center,96
+Kansas,OT Doctoral-Level Programs,"University of Saint Mary, Leavenworth",100
+Kansas,OTA Level Program,"Cleveland University, Kansas City",71
+Kansas,OTA Level Program,"Neosho County Community College, Ottawa",100
+Kansas,OTA Level Program,Newman University,100
+Kansas,OTA Level Program,Washburn University,71
+Kentucky,OT Doctoral-Level Programs,Eastern Kentucky University,100
+Kentucky,OT Doctoral-Level Programs,Spalding University,87
+Kentucky,OT Masters-Level Programs,Eastern Kentucky University,83
+Kentucky,OT Masters-Level Programs,"Murray State University, Paducah Regional Campus",100
+Kentucky,OTA Level Program,Jefferson Community and Technical College,67
+Kentucky,OTA Level Program,Madisonville Community College,80
+Kentucky,OTA Level Program,Ross College in Hopkinsville,100
+Louisiana,OT Masters-Level Programs,Louisiana State University Health New Orleans,100
+Louisiana,OT Masters-Level Programs,University of Louisiana at Monroe,95
+Louisiana,OTA Level Program,Bossier Parish Community College,85
+Louisiana,OTA Level Program,Delgado Community College,86
+Louisiana,OTA Level Program,University of Louisiana at Monroe,96
+Maine,OT Masters-Level Programs,Husson University,91
+Maine,OT Masters-Level Programs,University of New England,91
+Maine,OT Masters-Level Programs,University of Southern Maine at Lewiston-Auburn College,82
+Maine,OTA Level Program,Kennebec Valley Community College,100
+Maryland,OT Doctoral-Level Programs,Towson University,100
+Maryland,OT Masters-Level Programs,Towson University,100
+Maryland,OTA Level Program,Allegany College of Maryland,78
+Maryland,OTA Level Program,Community College of Baltimore County at Catonsville,75
+Maryland,OTA Level Program,Wor-Wic Community College,100
+Massachusetts,OT Doctoral-Level Programs,"Boston University, College of Health & Rehabilitation Sciences (Sargent College)",97
+Massachusetts,OT Doctoral-Level Programs,MGH Institute of Health Professions,100
+Massachusetts,OT Doctoral-Level Programs,Tufts University,100
+Massachusetts,OT Doctoral-Level Programs,Western New England University,79
+Massachusetts,OT Masters-Level Programs,American International College,55
+Massachusetts,OT Masters-Level Programs,Bay Path University-East Longmeadow Campus,88
+Massachusetts,OT Masters-Level Programs,Regis College,89
+Massachusetts,OT Masters-Level Programs,Salem State University,87
+Massachusetts,OT Masters-Level Programs,Springfield College,97
+Massachusetts,OT Masters-Level Programs,Worcester State University,100
+Massachusetts,OTA Level Program,Bristol Community College,100
+Massachusetts,OTA Level Program,North Shore Community College,100
+Massachusetts,OTA Level Program,Quinsigamond Community College,80
+Massachusetts,OTA Level Program,Springfield Technical Community College,80
+Michigan,OT Doctoral-Level Programs,"University of Michigan, Flint",89
+Michigan,OT Doctoral-Level Programs,Western Michigan University,93
+Michigan,OT Masters-Level Programs,Baker College Center for Graduate Studies,100
+Michigan,OT Masters-Level Programs,Davenport University,97
+Michigan,OT Masters-Level Programs,Eastern Michigan University,97
+Michigan,OT Masters-Level Programs,Grand Valley State University,98
+Michigan,OT Masters-Level Programs,Saginaw Valley State University,100
+Michigan,OT Masters-Level Programs,Wayne State University,96
+Michigan,OTA Level Program,Baker College of Muskegon,50
+Michigan,OTA Level Program,Baker College of Owosso,100
+Michigan,OTA Level Program,Grand Rapids Community College,100
+Michigan,OTA Level Program,Macomb Community College,88
+Michigan,OTA Level Program,Mott Community College,100
+Michigan,OTA Level Program,Western Michigan University,100
+Middlesex,OT Masters-Level Programs,Brunel University London,75
+Minnesota,OT Doctoral-Level Programs,St. Catherine University,90
+Minnesota,OT Doctoral-Level Programs,University of Minnesota,94
+Minnesota,OT Masters-Level Programs,College of St. Scholastica,100
+Minnesota,OT Masters-Level Programs,St. Catherine University,96
+Minnesota,OTA Level Program,Anoka Technical College,93
+Minnesota,OTA Level Program,Northland Community and Technical College,100
+Minnesota,OTA Level Program,St. Catherine University,89
+Mississippi,OT Doctoral-Level Programs,University of Mississippi Medical Center,100
+Mississippi,OT Masters-Level Programs,University of Mississippi Medical Center,100
+Mississippi,OTA Level Program,"Holmes Community College, Ridgeland",100
+Mississippi,OTA Level Program,"Itawamba Community College, Tupelo Campus",88
+Mississippi,OTA Level Program,Mississippi Gulf Coast Community College,100
+Mississippi,OTA Level Program,Pearl River Community College,89
+Missouri,OT Doctoral-Level Programs,Rockhurst University,91
+Missouri,OT Doctoral-Level Programs,University of Missouri,100
+Missouri,OT Doctoral-Level Programs,Washington University,96
+Missouri,OT Masters-Level Programs,Cox College,100
+Missouri,OT Masters-Level Programs,Maryville University,100
+Missouri,OT Masters-Level Programs,Missouri State University,100
+Missouri,OT Masters-Level Programs,St. Louis University,98
+Missouri,OT Masters-Level Programs,Washington University,100
+Missouri,OTA Level Program,Central Methodist University,100
+Missouri,OTA Level Program,"Crowder College, Webb City",80
+Missouri,OTA Level Program,"Jefferson College, Hillsboro",100
+Missouri,OTA Level Program,"Metropolitan Community College, Penn Valley",100
+Missouri,OTA Level Program,Missouri Health Professions Consortium,76
+Missouri,OTA Level Program,Ozarks Technical Community College,100
+Missouri,OTA Level Program,St. Charles Community College,76
+Missouri,OTA Level Program,"St. Louis Community College, Forest Park",100
+Missouri,OTA Level Program,University of Missouri,77
+Montana,OT Doctoral-Level Programs,Rocky Mountain College,97
+Montana,OT Doctoral-Level Programs,"University of Mary, Billings",100
+Nebraska,OT Doctoral-Level Programs,College of Saint Mary,87
+Nebraska,OT Doctoral-Level Programs,Creighton University,97
+Nebraska,OT Doctoral-Level Programs,University of Nebraska Medical Center,100
+Nebraska,OT Masters-Level Programs,College of Saint Mary,67
+Nebraska,OT Masters-Level Programs,Nebraska Methodist College,92
+Nebraska,OTA Level Program,"Central Community College, Grand Island",79
+Nebraska,OTA Level Program,Union Adventist University,83
+Nevada,OT Doctoral-Level Programs,Touro University Nevada,94
+Nevada,OT Doctoral-Level Programs,"University of Nevada, Las Vegas",97
+Nevada,OTA Level Program,"Pima Medical Institute, Las Vegas",94
+New Hampshire,OT Masters-Level Programs,"MCPHS University, Manchester Campus",84
+New Hampshire,OT Masters-Level Programs,University of New Hampshire,96
+New Hampshire,OTA Level Program,River Valley Community College,100
+New Jersey,OT Doctoral-Level Programs,Kean University,100
+New Jersey,OT Doctoral-Level Programs,Monmouth University,100
+New Jersey,OT Doctoral-Level Programs,"Rutgers, The State University of New Jersey",100
+New Jersey,OT Masters-Level Programs,Kean University,93
+New Jersey,OT Masters-Level Programs,Seton Hall University,90
+New Jersey,OT Masters-Level Programs,Stockton University,100
+New Jersey,OTA Level Program,Eastwick College,66
+New Jersey,OTA Level Program,Felician University,0
+New Jersey,OTA Level Program,Raritan Valley Community College,75
+New Jersey,OTA Level Program,"Rutgers, The State University of New Jersey",81
+New Mexico,OT Masters-Level Programs,University of New Mexico,88
+New Mexico,OTA Level Program,"Eastern New Mexico University, Roswell",38
+New Mexico,OTA Level Program,San Juan College,100
+New York,OT Doctoral-Level Programs,New York Institute of Technology,96
+New York,OT Doctoral-Level Programs,Roberts Wesleyan University,100
+New York,OT Doctoral-Level Programs,Russell Sage College,100
+New York,OT Doctoral-Level Programs,"Yeshiva University, Jack and Pearl Resnick Campus",93
+New York,OT Masters-Level Programs,Clarkson University,83
+New York,OT Masters-Level Programs,Columbia University,96
+New York,OT Masters-Level Programs,D’Youville University,94
+New York,OT Masters-Level Programs,Dominican University New York,75
+New York,OT Masters-Level Programs,Hofstra University,94
+New York,OT Masters-Level Programs,Iona University,80
+New York,OT Masters-Level Programs,Ithaca College,94
+New York,OT Masters-Level Programs,Keuka College,97
+New York,OT Masters-Level Programs,Le Moyne College,83
+New York,OT Masters-Level Programs,"Long Island University, Brooklyn",82
+New York,OT Masters-Level Programs,Maria College,57
+New York,OT Masters-Level Programs,Mercy University,70
+New York,OT Masters-Level Programs,Nazareth University,100
+New York,OT Masters-Level Programs,New York Institute of Technology,97
+New York,OT Masters-Level Programs,New York University,94
+New York,OT Masters-Level Programs,Pace University - Westchester Campus,79
+New York,OT Masters-Level Programs,Russell Sage College,96
+New York,OT Masters-Level Programs,St. Bonaventure University,64
+New York,OT Masters-Level Programs,State University of New York Downstate Health Sciences University,97
+New York,OT Masters-Level Programs,Stony Brook University,88
+New York,OT Masters-Level Programs,Touro University,84
+New York,OT Masters-Level Programs,"University at Buffalo, State University of New York",91
+New York,OT Masters-Level Programs,Utica University,74
+New York,OT Masters-Level Programs,"York College, The City University of New York",71
+New York,OTA Level Program,"Bryant & Stratton College, Greece Campus",100
+New York,OTA Level Program,"Bryant & Stratton College, Syracuse Campus",100
+New York,OTA Level Program,Cayuga Community College,0
+New York,OTA Level Program,Erie Community College,100
+New York,OTA Level Program,Jamestown Community College,62
+New York,OTA Level Program,LaGuardia Community College,52
+New York,OTA Level Program,Maria College,50
+New York,OTA Level Program,Mercy University,58
+New York,OTA Level Program,Orange County Community College,78
+New York,OTA Level Program,Rockland Community College,100
+New York,OTA Level Program,"Suffolk County Community College, Michael J. Grant Campus",54
+New York,OTA Level Program,Villa Maria College,50
+North Carolina,OT Doctoral-Level Programs,Duke University School of Medicine,100
+North Carolina,OT Doctoral-Level Programs,Methodist University,89
+North Carolina,OT Doctoral-Level Programs,Wingate University,100
+North Carolina,OT Masters-Level Programs,Cabarrus College of Health Sciences,96
+North Carolina,OT Masters-Level Programs,East Carolina University,100
+North Carolina,OT Masters-Level Programs,Lenoir-Rhyne University,88
+North Carolina,OT Masters-Level Programs,"Pfeiffer University, Albemarle Campus",90
+North Carolina,OT Masters-Level Programs,University of North Carolina at Chapel Hill,100
+North Carolina,OT Masters-Level Programs,Winston-Salem State University,93
+North Carolina,OTA Level Program,Asheville-Buncombe Technical Community College,90
+North Carolina,OTA Level Program,Cabarrus College of Health Sciences,95
+North Carolina,OTA Level Program,Cape Fear Community College,100
+North Carolina,OTA Level Program,Central Piedmont Community College,100
+North Carolina,OTA Level Program,Durham Technical Community College,100
+North Carolina,OTA Level Program,Pitt Community College,78
+North Carolina,OTA Level Program,Rowan-Cabarrus Community College,94
+North Carolina,OTA Level Program,"South College, Asheville",100
+North Carolina,OTA Level Program,"Southwestern Community College, Jackson/Sylva Campus",100
+North Dakota,OT Doctoral-Level Programs,"University of Mary, Bismark",100
+North Dakota,OT Doctoral-Level Programs,University of North Dakota,100
+North Dakota,OTA Level Program,North Dakota State College of Science,90
+Ohio,OT Doctoral-Level Programs,Cleveland State University,93
+Ohio,OT Doctoral-Level Programs,Kettering College,100
+Ohio,OT Doctoral-Level Programs,Ohio State University,100
+Ohio,OT Doctoral-Level Programs,University of Findlay,100
+Ohio,OT Doctoral-Level Programs,University of Toledo,100
+Ohio,OT Doctoral-Level Programs,Xavier University,100
+Ohio,OT Masters-Level Programs,Muskingum University,100
+Ohio,OT Masters-Level Programs,Shawnee State University,87
+Ohio,OT Masters-Level Programs,University of Cincinnati,100
+Ohio,OT Masters-Level Programs,University of Findlay,100
+Ohio,OT Masters-Level Programs,Walsh University,94
+Ohio,OT Masters-Level Programs,Wilmington College,100
+Ohio,OTA Level Program,"Bryant & Stratton College, Solon Campus",75
+Ohio,OTA Level Program,Cincinnati State Technical and Community College,92
+Ohio,OTA Level Program,Cuyahoga Community College,86
+Ohio,OTA Level Program,"EHOVE Adult Career Center, Lorain County Community College",79
+Ohio,OTA Level Program,Kent State University at Ashtabula,100
+Ohio,OTA Level Program,Kent State University at East Liverpool,0
+Ohio,OTA Level Program,Lakeland Community College,78
+Ohio,OTA Level Program,Marion Technical College,100
+Ohio,OTA Level Program,Owens Community College,75
+Ohio,OTA Level Program,Rhodes State College,100
+Ohio,OTA Level Program,Shawnee State University,70
+Ohio,OTA Level Program,Sinclair Community College,100
+Ohio,OTA Level Program,Stark State College,84
+Ohio,OTA Level Program,Zane State College,82
+Oklahoma,OT Masters-Level Programs,"Northeastern State University, Muskogee Campus",100
+Oklahoma,OT Masters-Level Programs,University of Oklahoma Health Sciences Center,97
+Oklahoma,OTA Level Program,"Caddo-Kiowa Technology Center, Southwestern Oklahoma State University",70
+Oklahoma,OTA Level Program,Indian Capital Technology Center/Connors State College,90
+Oklahoma,OTA Level Program,Murray State College,90
+Oklahoma,OTA Level Program,Oklahoma City Community College,92
+Oklahoma,OTA Level Program,"Tulsa Community College, Metro Campus",92
+Oregon,OT Doctoral-Level Programs,Pacific University,100
+Oregon,OTA Level Program,"Linn-Benton Community College, Healthcare Occupations Center",100
+Pennsylvania,OT Doctoral-Level Programs,Cedar Crest College,100
+Pennsylvania,OT Doctoral-Level Programs,Chatham University,94
+Pennsylvania,OT Doctoral-Level Programs,Duquesne University,100
+Pennsylvania,OT Doctoral-Level Programs,Elizabethtown College,100
+Pennsylvania,OT Doctoral-Level Programs,Slippery Rock University,92
+Pennsylvania,OT Doctoral-Level Programs,St. Joseph's University,100
+Pennsylvania,OT Doctoral-Level Programs,Thomas Jefferson University-Center City Campus,100
+Pennsylvania,OT Doctoral-Level Programs,University of Pittsburgh,98
+Pennsylvania,OT Doctoral-Level Programs,Widener University,95
+Pennsylvania,OT Masters-Level Programs,Alvernia University,84
+Pennsylvania,OT Masters-Level Programs,Carlow University,100
+Pennsylvania,OT Masters-Level Programs,Duquesne University,100
+Pennsylvania,OT Masters-Level Programs,Elizabethtown College,91
+Pennsylvania,OT Masters-Level Programs,Gannon University,87
+Pennsylvania,OT Masters-Level Programs,Gwynedd Mercy University,90
+Pennsylvania,OT Masters-Level Programs,Messiah University,100
+Pennsylvania,OT Masters-Level Programs,Misericordia University,90
+Pennsylvania,OT Masters-Level Programs,Moravian University,100
+Pennsylvania,OT Masters-Level Programs,Salus University,92
+Pennsylvania,OT Masters-Level Programs,St. Francis University,100
+Pennsylvania,OT Masters-Level Programs,St. Joseph's University,86
+Pennsylvania,OT Masters-Level Programs,Temple University,67
+Pennsylvania,OT Masters-Level Programs,Thomas Jefferson University-Center City Campus,97
+Pennsylvania,OT Masters-Level Programs,Thomas Jefferson University-East Falls Campus,97
+Pennsylvania,OT Masters-Level Programs,University of Scranton,100
+Pennsylvania,OTA Level Program,Central Penn College,100
+Pennsylvania,OTA Level Program,"Community College of Allegheny County, Boyce",95
+Pennsylvania,OTA Level Program,Harcum College,75
+Pennsylvania,OTA Level Program,Lackawanna College,75
+Pennsylvania,OTA Level Program,"Pennsylvania State University, Berks",80
+Pennsylvania,OTA Level Program,"Pennsylvania State University, DuBois",100
+Pennsylvania,OTA Level Program,"Pennsylvania State University, Mont Alto",86
+Pennsylvania,OTA Level Program,"Pennsylvania State University, Shenango",78
+Pennsylvania,OTA Level Program,Thomas Jefferson University,92
+Puerto Rico,OT Masters-Level Programs,"University of Puerto Rico, Medical Sciences Center",17
+Puerto Rico,OTA Level Program,Huertas College,0
+Rhode Island,OT Doctoral-Level Programs,"Johnson & Wales University, Providence",95
+Rhode Island,OT Masters-Level Programs,New England Institute of Technology,72
+Rhode Island,OTA Level Program,Community College of Rhode Island,80
+Rhode Island,OTA Level Program,New England Institute of Technology,100
+South Carolina,OT Doctoral-Level Programs,Medical University of South Carolina,100
+South Carolina,OT Doctoral-Level Programs,Presbyterian College,95
+South Carolina,OTA Level Program,"Greenville Technical College, Benson Campus",100
+South Carolina,OTA Level Program,"Horry-Georgetown Technical College, Grand Strand Campus",92
+South Carolina,OTA Level Program,"Piedmont Technical College, Newberry Campus",88
+South Carolina,OTA Level Program,"South University, Columbia",25
+South Carolina,OTA Level Program,"Southeastern College, Charleston Campus",100
+South Carolina,OTA Level Program,Trident Technical College,100
+South Dakota,OT Doctoral-Level Programs,University of South Dakota,100
+South Dakota,OTA Level Program,Lake Area Technical College,88
+Tennessee,OT Doctoral-Level Programs,Belmont University,100
+Tennessee,OT Doctoral-Level Programs,Lincoln Memorial University,100
+Tennessee,OT Doctoral-Level Programs,University of Tennessee at Chattanooga,100
+Tennessee,OT Masters-Level Programs,Belmont University,100
+Tennessee,OT Masters-Level Programs,Milligan University,100
+Tennessee,OT Masters-Level Programs,Tennessee State University,79
+Tennessee,OT Masters-Level Programs,Tennessee Wesleyan University - Downtown Knoxville Site,93
+Tennessee,OT Masters-Level Programs,University of Tennessee Health Science Center,97
+Tennessee,OTA Level Program,"Concorde Career College, Memphis",57
+Tennessee,OTA Level Program,Jackson State Community College,80
+Tennessee,OTA Level Program,Nashville State Community College,88
+Tennessee,OTA Level Program,Roane State Community College,92
+Tennessee,OTA Level Program,"South College, Knoxville",63
+Tennessee,OTA Level Program,"South College, Nashville",86
+Tennessee,OTA Level Program,Walters State Community College,90
+Texas,OT Doctoral-Level Programs,Abilene Christian University,86
+Texas,OT Doctoral-Level Programs,Baylor University,92
+Texas,OT Doctoral-Level Programs,Texas Tech University Health Sciences Center,100
+Texas,OT Doctoral-Level Programs,Texas Woman's University,98
+Texas,OT Doctoral-Level Programs,U.S. Army Medical Center of Excellence/Baylor University,100
+Texas,OT Doctoral-Level Programs,"University of St. Augustine for Health Sciences, Austin Campus",81
+Texas,OT Doctoral-Level Programs,"University of St. Augustine for Health Sciences, Dallas Campus",80
+Texas,OT Doctoral-Level Programs,University of Texas Health Science Center at San Antonio,98
+Texas,OT Doctoral-Level Programs,University of Texas Medical Branch,98
+Texas,OT Masters-Level Programs,Abilene Christian University,83
+Texas,OT Masters-Level Programs,University of Mary Hardin-Baylor,80
+Texas,OT Masters-Level Programs,"University of St. Augustine for Health Sciences, Austin Campus",92
+Texas,OT Masters-Level Programs,University of Texas at El Paso,82
+Texas,OT Masters-Level Programs,University of Texas at Tyler,100
+Texas,OTA Level Program,Amarillo College,82
+Texas,OTA Level Program,Austin Community College,100
+Texas,OTA Level Program,"Dallas College, Mountain View Campus",80
+Texas,OTA Level Program,Del Mar College,81
+Texas,OTA Level Program,Houston Community College,76
+Texas,OTA Level Program,"Lone Star College, Kingwood",95
+Texas,OTA Level Program,"Lone Star College, Tomball",84
+Texas,OTA Level Program,McLennan Community College,100
+Texas,OTA Level Program,Medical Education and Training Campus/Uniformed Services University,80
+Texas,OTA Level Program,Navarro College,89
+Texas,OTA Level Program,Panola College,53
+Texas,OTA Level Program,Parker University,50
+Texas,OTA Level Program,"Pima Medical Institute, El Paso",92
+Texas,OTA Level Program,"Pima Medical Institute, Houston",81
+Texas,OTA Level Program,"San Jacinto College, South Campus",100
+Texas,OTA Level Program,South Texas College,100
+Texas,OTA Level Program,St. Philip’s College,100
+Texas,OTA Level Program,Tyler Junior College,92
+Texas,OTA Level Program,Weatherford College,69
+Utah,OT Masters-Level Programs,University of Utah,97
+Utah,OTA Level Program,Joyce University of Nursing and Health Sciences,96
+Utah,OTA Level Program,Salt Lake Community College,100
+Virginia,OT Doctoral-Level Programs,"Emory and Henry University, Marion Campus",100
+Virginia,OT Doctoral-Level Programs,Mary Baldwin University,100
+Virginia,OT Doctoral-Level Programs,Shenandoah University,97
+Virginia,OT Doctoral-Level Programs,Virginia Commonwealth University,98
+Virginia,OT Masters-Level Programs,James Madison University,100
+Virginia,OT Masters-Level Programs,Radford University,96
+Virginia,OT Masters-Level Programs,Shenandoah University,100
+Virginia,OT Masters-Level Programs,"Shenandoah University, Scholar Plaza Campus",92
+Virginia,OTA Level Program,Eastern Virginia Career College,75
+Virginia,OTA Level Program,Northern Virginia Community College,93
+Virginia,OTA Level Program,Radford University Carilion,100
+Virginia,OTA Level Program,"South University, Richmond",100
+Virginia,OTA Level Program,"South University, Virginia Beach",0
+Virginia,OTA Level Program,Southwest Virginia Community College,77
+Virginia,OTA Level Program,"Tidewater Community College, Virginia Beach Campus",80
+Washington,OT Doctoral-Level Programs,University of Puget Sound,100
+Washington,OT Masters-Level Programs,Eastern Washington University,94
+Washington,OT Masters-Level Programs,University of Puget Sound,93
+Washington,OT Masters-Level Programs,University of Washington,100
+Washington,OTA Level Program,Bates Technical College,60
+Washington,OTA Level Program,Green River College,100
+Washington,OTA Level Program,Lake Washington Institute of Technology,92
+Washington,OTA Level Program,"Pima Medical Institute, Renton",83
+Washington,OTA Level Program,Spokane Falls Community College,100
+West Virginia,OT Doctoral-Level Programs,West Virginia University,100
+West Virginia,OT Masters-Level Programs,West Virginia University,85
+West Virginia,OTA Level Program,"University of Charleston, Beckley",91
+Wisconsin,OT Doctoral-Level Programs,Concordia University Wisconsin,100
+Wisconsin,OT Doctoral-Level Programs,Marquette University,100
+Wisconsin,OT Doctoral-Level Programs,Mount Mary University,100
+Wisconsin,OT Doctoral-Level Programs,"University of Wisconsin, Madison",100
+Wisconsin,OT Masters-Level Programs,Carroll University,100
+Wisconsin,OT Masters-Level Programs,Concordia University Wisconsin,91
+Wisconsin,OT Masters-Level Programs,Mount Mary University,88
+Wisconsin,OT Masters-Level Programs,"University of Wisconsin, LaCrosse",100
+Wisconsin,OT Masters-Level Programs,"University of Wisconsin, Milwaukee",93
+Wisconsin,OTA Level Program,"Bryant & Stratton College, Wauwatosa Campus",67
+Wisconsin,OTA Level Program,Fox Valley Technical College,100
+Wisconsin,OTA Level Program,Madison Area Technical College,93
+Wisconsin,OTA Level Program,Milwaukee Area Technical College,92
+Wisconsin,OTA Level Program,"Northwood Technical College, Ashland Campus",100
+Wisconsin,OTA Level Program,Western Technical College,100
+Wyoming,OTA Level Program,Casper College,100
