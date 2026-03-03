@@ -1,198 +1,204 @@
-# Healthcare Occupation Salary Explorer
+# HealthCareer
 
-An interactive data visualization dashboard that maps US healthcare occupation salaries by state, built with Streamlit and Plotly. Data sourced from the **Bureau of Labor Statistics (BLS) May 2024** Occupational Employment and Wage Statistics.
+An interactive dashboard for exploring US healthcare occupation salaries — by state, by work setting, and by training program. Data sourced from the **Bureau of Labor Statistics (BLS) OEWS May 2024** and accreditation bodies (FPTA, NBCOT).
 
 ---
 
 ## Product Overview
 
-### What It Does
-Users can explore how salaries for specific healthcare occupations vary across all 50 US states (plus DC and Puerto Rico) through an interactive choropleth map. Hovering over any state reveals the annual mean wage, annual median wage, and total number of employees in that state for the selected occupation.
+### Pages
 
-### Current Occupations Covered
+| Route | Description |
+|-------|-------------|
+| `/map` | Interactive US choropleth — annual mean wage by state, switchable across all 4 occupations |
+| `/careers/[slug]` | Per-occupation overview — KPIs, salary percentile bar, work setting breakdown, program stats |
+| `/programs` | Program comparison tool — browse and compare up to 4 accredited programs side-by-side |
+
+### Occupations Covered
 - Occupational Therapists
 - Physical Therapists
 - Radiation Therapists
 - Speech-Language Pathologists
 
-### Key Features
-- **Interactive US map** — color-coded by annual mean wage (Blues scale, min-to-max range per occupation)
-- **Sidebar occupation selector** — radio toggle to switch between occupation types
-- **Rich hover tooltips** — Annual Mean Wage (formatted), Annual Median Wage, and Employee count per state
-- **Missing data callout** — states with no BLS data are shown in gray with a caption listing them by name
-- **Cached queries** — Streamlit's `@st.cache_data` prevents redundant database reads on re-renders
-
-### Current Build Status
-> MVP with 4 occupations and choropleth map. Refactored into module directories.
-> Pending: growth rate data, field landing pages, percentile charts, field comparison view.
+### Build Status
+> All 3 pages live. Pending: real BLS OOH growth rates, SLP/RT school data, OT graduates_tested.
 
 ---
 
-## Technical Overview
-
-### Architecture
+## Architecture
 
 ```
-raw/*.xlsx  (BLS source files)
+raw/                    ← BLS xlsx + school CSVs (source data, drop new files here)
       │
       ▼
-db/pipeline.py              ← cleans xlsx → writes data/*.csv → builds healthcare.db
-      │                         (falls back to existing CSVs if no xlsx present)
-      ├── data/*.csv          ← intermediate, auditable cleaned CSVs
+db/pipeline.py          ← ETL: cleans xlsx → writes data/*.csv → builds healthcare.db
       │
       ▼
-healthcare.db               ← SQLite database (3 tables)
+healthcare.db           ← SQLite (7 tables, read by both Python tests and Next.js)
       │
       ▼
-db/queries.py               ← cached data layer (pandas + sqlite3)
+web/lib/db.js           ← better-sqlite3 queries (server components, build-time)
       │
       ▼
-viz/map.py                  ← Plotly choropleth builder
-      │
-      ▼
-app.py                      ← Streamlit entry point (UI + wiring)
+web/app/                ← Next.js 15 App Router (all pages pre-rendered as static HTML)
 ```
 
-### File Structure
+---
+
+## File Structure
 
 ```
-app.py                       # Streamlit entry point
-refresh_db.py                # thin wrapper → calls db/pipeline.py
-requirements.txt
+refresh_db.py                # rebuilds healthcare.db from raw/ sources
+requirements.txt             # Python pipeline deps
+scrape_nbcot.py              # OT data scraper
 
 healthcare.db                # SQLite DB (generated, not committed)
-raw/                         # input BLS xlsx files (drop new files here)
-data/                        # cleaned intermediate CSVs (auditable, one per occupation)
+raw/
+    occupations/             # BLS OEWS state-level xlsx (one per occupation)
+    work_settings/           # BLS OEWS industry xlsx (one per occupation)
+    schools/
+        pt/                  # FPTA PT pass-rate CSVs
+        slp/                 # future
+data/                        # cleaned intermediate CSVs (auditable)
 
 constants/
-    states.py                # STATE_ABBREVS dict (full name → 2-letter abbreviation)
+    states.py                # STATE_ABBREVS dict {full name → 2-letter abbrev}
+    occupations.py           # OCCUPATIONS list
 
 db/
-    queries.py               # load_data() — cached SQL query via pandas
-    pipeline.py              # full ETL: xlsx → cleaned CSV → DB
+    pipeline.py              # ETL orchestrator
+    pipelines/
+        occupations.py       # BLS state xlsx → employment_stats
+        schools.py           # school CSVs → schools + programs tables
+        work_settings.py     # BLS industry xlsx → work_setting_salaries + occupation_national_stats
+    queries.py               # Python queries (used by tests)
 
-viz/
-    map.py                   # choropleth builder (setup_page, build_map, render_map, show_missing_note)
-    charts.py                # placeholder for future percentile charts
+tests/
+    test_pipeline.py
+    test_queries.py
+    test_states.py
+
+web/
+    app/
+        layout.jsx           # global CSS vars, fonts, shared animation classes
+        page.jsx             # redirect / → /map
+        map/page.jsx         # choropleth map page (static)
+        careers/[slug]/page.jsx  # career overview — 4 static pages via generateStaticParams
+        programs/page.jsx    # program comparison
+    components/
+        SiteNav.jsx          # top navigation bar
+        OccupationNav.jsx    # shared occupation tab strip (client)
+        CareerOccupationNav.jsx  # career nav wrapper (router.push)
+        UsaMap.jsx           # choropleth map (react-simple-maps, d3-scale)
+        SalaryPercentileBar.jsx  # custom SVG percentile range bar
+        KpiRow.jsx           # 4-stat KPI grid
+        WorkSettingsTable.jsx    # salary by work setting table
+        ProgramStatsRow.jsx  # program stats grid
+        ProgramComparison.jsx    # browse + compare UI
+    lib/
+        db.js                # all DB query functions (better-sqlite3)
+        constants.js         # OCCUPATIONS, SLUGS, STATE_ABBREVS
+        styles.js            # shared style constants (S.statBox, S.pill, S.tableCell, etc.)
 ```
 
-### Module Responsibilities
+---
 
-| File | Role |
-|------|------|
-| [app.py](app.py) | Main Streamlit entry point — page setup, sidebar filter, data load, map render |
-| [refresh_db.py](refresh_db.py) | Thin CLI wrapper — calls `db/pipeline.main()` |
-| [db/pipeline.py](db/pipeline.py) | Full ETL — reads xlsx from `raw/`, cleans data, writes CSVs, builds SQLite DB |
-| [db/queries.py](db/queries.py) | Cached SQL query — returns a `DataFrame` with state abbrev and formatted wage columns |
-| [viz/map.py](viz/map.py) | Plotly choropleth figure builder and Streamlit rendering helpers |
-| [constants/states.py](constants/states.py) | Static dict mapping full state names → 2-letter USPS abbreviations (52 entries) |
-| [requirements.txt](requirements.txt) | Python dependencies |
+## Database Schema
 
-### Database Schema
+**7 tables:** `states`, `occupations`, `employment_stats`, `schools`, `programs`, `work_setting_salaries`, `occupation_national_stats`
 
-**`states`**
-| Column | Type | Notes |
-|--------|------|-------|
-| id | INTEGER PK | |
-| name | TEXT UNIQUE | Full state name (e.g., "California") |
+**`employment_stats`** — BLS OEWS state-level data (52 states × 4 occupations = 204 rows)
 
-**`occupations`**
-| Column | Type | Notes |
-|--------|------|-------|
-| id | INTEGER PK | |
-| name | TEXT UNIQUE | Occupation label (e.g., "Physical Therapists") |
+| Column | Notes |
+|--------|-------|
+| state_id, occupation_id | FK → states, occupations |
+| annual_mean_wage | Primary map color dimension |
+| annual_median_wage | Shown in hover tooltip |
+| number_of_employees | Shown in hover tooltip |
+| annual_10th/25th/75th/90th_percentile_wage | Salary distribution |
 
-**`employment_stats`**
-| Column | Type | Notes |
-|--------|------|-------|
-| id | INTEGER PK | |
-| state_id | INTEGER FK | → states.id |
-| occupation_id | INTEGER FK | → occupations.id |
-| number_of_employees | REAL | |
-| hourly_mean_wage | REAL | |
-| annual_mean_wage | REAL | Primary map color dimension |
-| hourly_10th/25th/75th/90th_percentile_wage | REAL | Full wage distribution |
-| annual_10th/25th/75th/90th_percentile_wage | REAL | Full wage distribution |
-| annual_median_wage | REAL | Shown in hover tooltip |
-| employment_per_1000_jobs | REAL | BLS location metric |
-| location_quotient | REAL | BLS concentration metric |
+**`work_setting_salaries`** — BLS OEWS industry-level data (10 NAICS codes tracked)
 
-Unique constraint on `(state_id, occupation_id)`. Current DB: **52 states, 4 occupations, 204 rows**.
+| Column | Notes |
+|--------|-------|
+| occupation_id, naics_code | Composite unique key |
+| setting_name | Human-readable label |
+| pct_of_total, annual_mean_wage, annual_median_wage | |
 
-### Tech Stack
+**`occupation_national_stats`** — National totals extracted from industry file totals row
+
+**`programs`** — Accredited training programs with pass rates (PT: 300 programs, OT: 272 programs)
+
+---
+
+## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| UI / App framework | [Streamlit](https://streamlit.io/) >= 1.32 |
-| Visualization | [Plotly Express](https://plotly.com/python/plotly-express/) >= 5.20 |
-| Data manipulation | [pandas](https://pandas.pydata.org/) >= 2.0 |
+| Frontend | [Next.js 15](https://nextjs.org/) + React 19 |
+| Database (frontend) | [better-sqlite3](https://github.com/WiseLibs/better-sqlite3) |
+| Map | [react-simple-maps](https://www.react-simple-maps.io/) + d3-scale + d3-interpolate |
+| Styling | Inline JSX styles + CSS custom properties (no framework) |
+| ETL pipeline | Python 3.11, pandas >= 2.0, openpyxl |
 | Database | SQLite (stdlib `sqlite3`) |
-| Excel parsing | openpyxl >= 3.1 |
-| Language | Python 3.11+ |
 
-### Setup & Running
+---
 
+## Setup & Running
+
+### Frontend
 ```bash
-# 1. Install dependencies
+cd web
+npm install --legacy-peer-deps   # react-simple-maps has a React 16-18 peer dep declaration
+npm run dev                       # dev server at localhost:3000
+npm run build                     # production build (all pages static)
+```
+
+### Data Pipeline
+```bash
 pip install -r requirements.txt
 
-# 2. Drop BLS xlsx files into raw/ then build the database
-#    (falls back to existing CSVs in data/ for any occupation without a new xlsx)
+# Drop new BLS xlsx files into raw/occupations/ or raw/work_settings/,
+# or new school CSVs into raw/schools/<key>/, then:
 python refresh_db.py
-
-# 3. Launch the app
-python -m streamlit run app.py
 ```
 
 ---
 
-## Data Source & ETL
+## Data Sources & ETL
 
-**Bureau of Labor Statistics — Occupational Employment and Wage Statistics (OEWS)**
-- Survey period: May 2024
-- Coverage: US states, DC, and Puerto Rico
-- Source files: BLS xlsx downloads, placed in `raw/` (one per occupation)
+**BLS OEWS May 2024** — state-level and industry-level xlsx files
+- State files → `raw/occupations/` → `employment_stats` table
+- Industry files → `raw/work_settings/` → `work_setting_salaries` + `occupation_national_stats`
 
-### ETL Pipeline (`db/pipeline.py`)
+**School program data**
+- PT: FPTA pass-rate CSVs (2 files joined on School Code) → `raw/schools/pt/`
+- OT: NBCOT CSV → `raw/schools/ot/`
+- RT, SLP: pending
 
-Each xlsx file goes through the following cleaning steps before being written to `data/*.csv` and loaded into the DB:
-
-1. **Skip BLS metadata rows** — rows 1–5 are header/metadata; row 6 contains column headers
-2. **Drop RSE columns** — relative standard error columns are removed
-3. **Strip footnote markers** — e.g., `"Annual mean wage (2)"` → `"Annual mean wage"`
-4. **Normalize state names** — e.g., `"Alabama (01-00000)"` → `"Alabama"`; non-state rows are dropped
-5. **Replace suppression markers** — BLS `(8)` and `*` values replaced with `NaN`
-6. **Coerce to numeric** — all data columns cast to float; unparseable values become `NaN`
-
-### Data Columns Ingested
-
-| Cleaned BLS Column | DB Column |
-|--------------------|-----------|
-| Number of Employees | number_of_employees |
-| Hourly mean wage | hourly_mean_wage |
-| Annual mean wage | annual_mean_wage |
-| Hourly 10th/25th/75th/90th percentile wage | hourly_*_percentile_wage |
-| Annual 10th/25th/75th/90th percentile wage | annual_*_percentile_wage |
-| Annual median wage | annual_median_wage |
-| Employment per 1,000 jobs | employment_per_1000_jobs |
-| Location Quotient | location_quotient |
+### ETL Steps (per BLS xlsx)
+1. Skip 5 metadata rows; row 6 = column headers
+2. Drop RSE columns
+3. Strip footnote markers from column names
+4. Normalize state names, drop non-state rows
+5. Replace BLS suppression markers `(8)` / `*` with NaN
+6. Coerce all data columns to float
 
 ### Adding a New Occupation
-
-1. Download the BLS OES xlsx for the occupation
-2. Name it consistently (e.g., `PhysicalTherapists.xlsx`) and drop it into `raw/`
-3. Add an entry to `FILES` in [db/pipeline.py](db/pipeline.py) and to `OCCUPATIONS` in [app.py](app.py)
-4. Run `python refresh_db.py`
+1. Download BLS OEWS xlsx files (state + industry) for the occupation
+2. Drop into `raw/occupations/` and `raw/work_settings/`
+3. Add to `FILE_TO_OCCUPATION` in `db/pipelines/occupations.py` and `work_settings.py`
+4. Add to `OCCUPATIONS` in `constants/occupations.py` and `web/lib/constants.js`
+5. Run `python refresh_db.py`
 
 ---
 
-## Roadmap / Planned Improvements
+## Roadmap
 
-- [ ] Percentile wage distribution charts per state (viz/charts.py)
-- [ ] Field landing pages — deep-dive view per occupation
-- [ ] Field comparison view — side-by-side salary across occupations
-- [ ] Growth rate data overlay (BLS employment projections)
+- [ ] Real BLS OOH 10-year growth rates (currently hardcoded 10%)
+- [ ] SLP and RT school/program data
+- [ ] OT graduates_tested data (not in current NBCOT CSV)
+- [ ] Percentile chart on career pages
+- [ ] Program cards with program-level salary context
 - [ ] Year-over-year salary comparison (multi-year BLS data)
-- [ ] Wage range filter in sidebar
-- [ ] Export to CSV from UI
-- [ ] Deployment (Streamlit Community Cloud or similar)
+- [ ] Deployment

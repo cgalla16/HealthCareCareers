@@ -1,0 +1,19 @@
+{
+  "name": "healthcare-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.9.1",
+    "d3-scale": "^4.0.2",
+    "next": "^15.2.3",
+    "prop-types": "^15.8.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-simple-maps": "^3.0.0"
+  }
+}
