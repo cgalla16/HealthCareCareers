@@ -218,10 +218,11 @@ NORMALIZERS = {
 def _create_schema(cur) -> None:
     cur.executescript("""
         CREATE TABLE IF NOT EXISTS schools (
-            id       INTEGER PRIMARY KEY,
-            name     TEXT NOT NULL,
-            city     TEXT,
-            state_id INTEGER REFERENCES states(id)
+            id               INTEGER PRIMARY KEY,
+            name             TEXT NOT NULL,
+            city             TEXT,
+            state_id         INTEGER REFERENCES states(id),
+            scorecard_unitid INTEGER
         );
 
         CREATE TABLE IF NOT EXISTS programs (
