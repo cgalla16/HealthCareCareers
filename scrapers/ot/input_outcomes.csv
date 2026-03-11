@@ -1,0 +1,272 @@
+program_id,school_name,city,state,degree_type
+302,Alabama State University,,Alabama,MOT
+303,Tuskegee University,,Alabama,MOT
+304,University of Alabama at Birmingham,,Alabama,MOT
+301,University of Alabama at Birmingham,,Alabama,OTD
+305,University of South Alabama,,Alabama,MOT
+309,"A.T. Still University, Arizona School of Health Sciences",,Arizona,MOT
+306,"A.T. Still University, Arizona School of Health Sciences",,Arizona,OTD
+307,"Huntington University, Peoria",,Arizona,OTD
+310,"Midwestern University, Glendale",,Arizona,MOT
+308,Northern Arizona University,,Arizona,OTD
+311,"Arkansas State University, Jonesboro",,Arkansas,OTD
+312,University of Arkansas - Fayetteville / University of Arkansas for Medical Sciences,,Arkansas,OTD
+313,University of Central Arkansas,,Arkansas,OTD
+318,"California State University, Dominguez Hills",,California,MOT
+319,Dominican University of California,,California,MOT
+320,Loma Linda University Health,,California,MOT
+321,Samuel Merritt University,,California,MOT
+314,Samuel Merritt University,,California,OTD
+322,San Jose State University,,California,MOT
+323,Stanbridge University,,California,MOT
+324,University of Southern California,,California,MOT
+325,"University of St. Augustine for Health Sciences, California Campus",,California,MOT
+315,"University of St. Augustine for Health Sciences, California Campus",,California,OTD
+316,"University of the Pacific, Sacramento",,California,OTD
+326,"West Coast University, Los Angeles",,California,MOT
+317,"West Coast University, Los Angeles",,California,OTD
+327,Colorado Mesa University,,Colorado,MOT
+328,Colorado State University,,Colorado,MOT
+330,Quinnipiac University,,Connecticut,MOT
+329,Quinnipiac University,,Connecticut,OTD
+331,Sacred Heart University,,Connecticut,MOT
+332,University of Hartford,,Connecticut,MOT
+333,Delaware State University,,Delaware,MOT
+334,Howard University,,District of Columbia,OTD
+335,Trinity Washington University,,District of Columbia,MOT
+342,AdventHealth University,,Florida,MOT
+343,Barry University,,Florida,MOT
+344,Florida Agricultural and Mechanical University,,Florida,MOT
+345,Florida Gulf Coast University,,Florida,MOT
+346,Florida International University,,Florida,MOT
+336,Gannon University-Florida Campus,,Florida,OTD
+337,Jacksonville University,,Florida,OTD
+347,"Keiser University, Fort Myers",,Florida,MOT
+348,"Keiser University, Ft. Lauderdale Campus",,Florida,MOT
+349,"Nova Southeastern University, Ft. Lauderdale",,Florida,MOT
+338,"Nova Southeastern University, Tampa Bay Regional Campus",,Florida,OTD
+339,University of Florida,,Florida,OTD
+350,"University of St. Augustine for Health Sciences, Miami Campus",,Florida,MOT
+340,"University of St. Augustine for Health Sciences, Miami Campus",,Florida,OTD
+351,"University of St. Augustine for Health Sciences, St. Augustine Campus",,Florida,MOT
+341,"University of St. Augustine for Health Sciences, St. Augustine Campus",,Florida,OTD
+354,Augusta University,,Georgia,MOT
+355,Brenau University,,Georgia,MOT
+352,"Brenau University, North Atlanta, Norcross Campus",,Georgia,OTD
+353,Georgia State University,,Georgia,OTD
+356,Middle Georgia State University,,Georgia,MOT
+357,Idaho State University,,Idaho,MOT
+360,Chicago State University,,Illinois,MOT
+361,DePaul University,,Illinois,MOT
+362,Elmhurst University,,Illinois,MOT
+363,Governors State University,,Illinois,MOT
+364,Lewis University,,Illinois,MOT
+358,"Midwestern University, Downers Grove",,Illinois,OTD
+365,North Central College,,Illinois,MOT
+359,Rush University,,Illinois,OTD
+366,University of Illinois Chicago,,Illinois,MOT
+367,Huntington University,,Indiana,OTD
+371,Indiana State University,,Indiana,MOT
+368,Indiana University,,Indiana,OTD
+372,"Indiana University, South Bend",,Indiana,MOT
+369,Indiana Wesleyan University,,Indiana,OTD
+373,University of Indianapolis,,Indiana,MOT
+370,University of Indianapolis,,Indiana,OTD
+374,University of Southern Indiana,,Indiana,MOT
+377,Allen College,,Iowa,MOT
+375,Drake University,,Iowa,OTD
+376,St. Ambrose University,,Iowa,OTD
+378,University of Kansas Medical Center,,Kansas,OTD
+379,"University of Saint Mary, Leavenworth",,Kansas,OTD
+382,Eastern Kentucky University,,Kentucky,MOT
+380,Eastern Kentucky University,,Kentucky,OTD
+383,"Murray State University, Paducah Regional Campus",,Kentucky,MOT
+381,Spalding University,,Kentucky,OTD
+384,Louisiana State University Health New Orleans,,Louisiana,MOT
+385,University of Louisiana at Monroe,,Louisiana,MOT
+386,Husson University,,Maine,MOT
+387,University of New England,,Maine,MOT
+388,University of Southern Maine at Lewiston-Auburn College,,Maine,MOT
+390,Towson University,,Maryland,MOT
+389,Towson University,,Maryland,OTD
+395,American International College,,Massachusetts,MOT
+396,Bay Path University-East Longmeadow Campus,,Massachusetts,MOT
+391,"Boston University, College of Health & Rehabilitation Sciences (Sargent College)",,Massachusetts,OTD
+392,MGH Institute of Health Professions,,Massachusetts,OTD
+397,Regis College,,Massachusetts,MOT
+398,Salem State University,,Massachusetts,MOT
+399,Springfield College,,Massachusetts,MOT
+393,Tufts University,,Massachusetts,OTD
+394,Western New England University,,Massachusetts,OTD
+400,Worcester State University,,Massachusetts,MOT
+403,Baker College Center for Graduate Studies,,Michigan,MOT
+404,Davenport University,,Michigan,MOT
+405,Eastern Michigan University,,Michigan,MOT
+406,Grand Valley State University,,Michigan,MOT
+407,Saginaw Valley State University,,Michigan,MOT
+401,"University of Michigan, Flint",,Michigan,OTD
+408,Wayne State University,,Michigan,MOT
+402,Western Michigan University,,Michigan,OTD
+412,College of St. Scholastica,,Minnesota,MOT
+413,St. Catherine University,,Minnesota,MOT
+410,St. Catherine University,,Minnesota,OTD
+411,University of Minnesota,,Minnesota,OTD
+415,University of Mississippi Medical Center,,Mississippi,MOT
+414,University of Mississippi Medical Center,,Mississippi,OTD
+419,Cox College,,Missouri,MOT
+420,Maryville University,,Missouri,MOT
+421,Missouri State University,,Missouri,MOT
+416,Rockhurst University,,Missouri,OTD
+422,St. Louis University,,Missouri,MOT
+417,University of Missouri,,Missouri,OTD
+423,Washington University,,Missouri,MOT
+418,Washington University,,Missouri,OTD
+424,Rocky Mountain College,,Montana,OTD
+425,"University of Mary, Billings",,Montana,OTD
+429,College of Saint Mary,,Nebraska,MOT
+426,College of Saint Mary,,Nebraska,OTD
+427,Creighton University,,Nebraska,OTD
+430,Nebraska Methodist College,,Nebraska,MOT
+428,University of Nebraska Medical Center,,Nebraska,OTD
+431,Touro University Nevada,,Nevada,OTD
+432,"University of Nevada, Las Vegas",,Nevada,OTD
+433,"MCPHS University, Manchester Campus",,New Hampshire,MOT
+434,University of New Hampshire,,New Hampshire,MOT
+438,Kean University,,New Jersey,MOT
+435,Kean University,,New Jersey,OTD
+436,Monmouth University,,New Jersey,OTD
+437,"Rutgers, The State University of New Jersey",,New Jersey,OTD
+439,Seton Hall University,,New Jersey,MOT
+440,Stockton University,,New Jersey,MOT
+441,University of New Mexico,,New Mexico,MOT
+446,Clarkson University,,New York,MOT
+447,Columbia University,,New York,MOT
+449,Dominican University New York,,New York,MOT
+448,D’Youville University,,New York,MOT
+450,Hofstra University,,New York,MOT
+451,Iona University,,New York,MOT
+452,Ithaca College,,New York,MOT
+453,Keuka College,,New York,MOT
+454,Le Moyne College,,New York,MOT
+455,"Long Island University, Brooklyn",,New York,MOT
+456,Maria College,,New York,MOT
+457,Mercy University,,New York,MOT
+458,Nazareth University,,New York,MOT
+459,New York Institute of Technology,,New York,MOT
+442,New York Institute of Technology,,New York,OTD
+460,New York University,,New York,MOT
+461,Pace University - Westchester Campus,,New York,MOT
+443,Roberts Wesleyan University,,New York,OTD
+462,Russell Sage College,,New York,MOT
+444,Russell Sage College,,New York,OTD
+463,St. Bonaventure University,,New York,MOT
+464,State University of New York Downstate Health Sciences University,,New York,MOT
+465,Stony Brook University,,New York,MOT
+466,Touro University,,New York,MOT
+467,"University at Buffalo, State University of New York",,New York,MOT
+468,Utica University,,New York,MOT
+445,"Yeshiva University, Jack and Pearl Resnick Campus",,New York,OTD
+469,"York College, The City University of New York",,New York,MOT
+473,Cabarrus College of Health Sciences,,North Carolina,MOT
+470,Duke University School of Medicine,,North Carolina,OTD
+474,East Carolina University,,North Carolina,MOT
+475,Lenoir-Rhyne University,,North Carolina,MOT
+471,Methodist University,,North Carolina,OTD
+476,"Pfeiffer University, Albemarle Campus",,North Carolina,MOT
+477,University of North Carolina at Chapel Hill,,North Carolina,MOT
+472,Wingate University,,North Carolina,OTD
+478,Winston-Salem State University,,North Carolina,MOT
+479,"University of Mary, Bismark",,North Dakota,OTD
+480,University of North Dakota,,North Dakota,OTD
+481,Cleveland State University,,Ohio,OTD
+482,Kettering College,,Ohio,OTD
+487,Muskingum University,,Ohio,MOT
+483,Ohio State University,,Ohio,OTD
+488,Shawnee State University,,Ohio,MOT
+489,University of Cincinnati,,Ohio,MOT
+490,University of Findlay,,Ohio,MOT
+484,University of Findlay,,Ohio,OTD
+485,University of Toledo,,Ohio,OTD
+491,Walsh University,,Ohio,MOT
+492,Wilmington College,,Ohio,MOT
+486,Xavier University,,Ohio,OTD
+493,"Northeastern State University, Muskogee Campus",,Oklahoma,MOT
+494,University of Oklahoma Health Sciences Center,,Oklahoma,MOT
+495,Pacific University,,Oregon,OTD
+505,Alvernia University,,Pennsylvania,MOT
+506,Carlow University,,Pennsylvania,MOT
+496,Cedar Crest College,,Pennsylvania,OTD
+497,Chatham University,,Pennsylvania,OTD
+507,Duquesne University,,Pennsylvania,MOT
+498,Duquesne University,,Pennsylvania,OTD
+508,Elizabethtown College,,Pennsylvania,MOT
+499,Elizabethtown College,,Pennsylvania,OTD
+509,Gannon University,,Pennsylvania,MOT
+510,Gwynedd Mercy University,,Pennsylvania,MOT
+511,Messiah University,,Pennsylvania,MOT
+512,Misericordia University,,Pennsylvania,MOT
+513,Moravian University,,Pennsylvania,MOT
+514,Salus University,,Pennsylvania,MOT
+500,Slippery Rock University,,Pennsylvania,OTD
+515,St. Francis University,,Pennsylvania,MOT
+516,St. Joseph's University,,Pennsylvania,MOT
+501,St. Joseph's University,,Pennsylvania,OTD
+517,Temple University,,Pennsylvania,MOT
+518,Thomas Jefferson University-Center City Campus,,Pennsylvania,MOT
+502,Thomas Jefferson University-Center City Campus,,Pennsylvania,OTD
+519,Thomas Jefferson University-East Falls Campus,,Pennsylvania,MOT
+503,University of Pittsburgh,,Pennsylvania,OTD
+520,University of Scranton,,Pennsylvania,MOT
+504,Widener University,,Pennsylvania,OTD
+521,"University of Puerto Rico, Medical Sciences Center",,Puerto Rico,MOT
+522,"Johnson & Wales University, Providence",,Rhode Island,OTD
+523,New England Institute of Technology,,Rhode Island,MOT
+524,Medical University of South Carolina,,South Carolina,OTD
+525,Presbyterian College,,South Carolina,OTD
+526,University of South Dakota,,South Dakota,OTD
+530,Belmont University,,Tennessee,MOT
+527,Belmont University,,Tennessee,OTD
+528,Lincoln Memorial University,,Tennessee,OTD
+531,Milligan University,,Tennessee,MOT
+532,Tennessee State University,,Tennessee,MOT
+533,Tennessee Wesleyan University - Downtown Knoxville Site,,Tennessee,MOT
+534,University of Tennessee Health Science Center,,Tennessee,MOT
+529,University of Tennessee at Chattanooga,,Tennessee,OTD
+544,Abilene Christian University,,Texas,MOT
+535,Abilene Christian University,,Texas,OTD
+536,Baylor University,,Texas,OTD
+537,Texas Tech University Health Sciences Center,,Texas,OTD
+538,Texas Woman's University,,Texas,OTD
+539,U.S. Army Medical Center of Excellence/Baylor University,,Texas,OTD
+545,University of Mary Hardin-Baylor,,Texas,MOT
+546,"University of St. Augustine for Health Sciences, Austin Campus",,Texas,MOT
+540,"University of St. Augustine for Health Sciences, Austin Campus",,Texas,OTD
+541,"University of St. Augustine for Health Sciences, Dallas Campus",,Texas,OTD
+542,University of Texas Health Science Center at San Antonio,,Texas,OTD
+543,University of Texas Medical Branch,,Texas,OTD
+547,University of Texas at El Paso,,Texas,MOT
+548,University of Texas at Tyler,,Texas,MOT
+549,University of Utah,,Utah,MOT
+550,"Emory and Henry University, Marion Campus",,Virginia,OTD
+554,James Madison University,,Virginia,MOT
+551,Mary Baldwin University,,Virginia,OTD
+555,Radford University,,Virginia,MOT
+556,Shenandoah University,,Virginia,MOT
+552,Shenandoah University,,Virginia,OTD
+557,"Shenandoah University, Scholar Plaza Campus",,Virginia,MOT
+553,Virginia Commonwealth University,,Virginia,OTD
+559,Eastern Washington University,,Washington,MOT
+560,University of Puget Sound,,Washington,MOT
+558,University of Puget Sound,,Washington,OTD
+561,University of Washington,,Washington,MOT
+563,West Virginia University,,West Virginia,MOT
+562,West Virginia University,,West Virginia,OTD
+568,Carroll University,,Wisconsin,MOT
+569,Concordia University Wisconsin,,Wisconsin,MOT
+564,Concordia University Wisconsin,,Wisconsin,OTD
+565,Marquette University,,Wisconsin,OTD
+570,Mount Mary University,,Wisconsin,MOT
+566,Mount Mary University,,Wisconsin,OTD
+571,"University of Wisconsin, LaCrosse",,Wisconsin,MOT
+567,"University of Wisconsin, Madison",,Wisconsin,OTD
+572,"University of Wisconsin, Milwaukee",,Wisconsin,MOT
