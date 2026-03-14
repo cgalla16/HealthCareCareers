@@ -6,7 +6,10 @@ and populates:
   - schools.scorecard_unitid        (UPDATE)
   - school_scorecard table          (INSERT OR REPLACE)
 
-Gracefully skips if the CSV is absent so refresh_db.py works offline.
+Acceptance criteria (both must pass or the row is skipped):
+  1. match_score >= 0.95  — conservative threshold; eliminates wrong-institution
+     and wrong-campus fuzzy matches while keeping clear name-variant matches
+  2. scorecard_state == our_state abbreviation — rejects cross-state campus matches
 
 school_scorecard columns kept:
   ownership        "Public" / "Private nonprofit" / "For-profit"
@@ -23,9 +26,12 @@ Fields intentionally excluded:
 
 import csv
 from pathlib import Path
+from constants.states import STATE_ABBREVS
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 CSV_PATH     = PROJECT_ROOT / "data" / "scorecard_exploration.csv"
+
+MIN_SCORE = 0.95
 
 
 def _create_schema(cur) -> None:
@@ -49,22 +55,32 @@ def load(con) -> None:
     cur = con.cursor()
     _create_schema(cur)
 
-    # Cache occupation IDs
-    occ_pt = cur.execute("SELECT id FROM occupations WHERE name = 'Physical Therapists'").fetchone()
-    occ_ot = cur.execute("SELECT id FROM occupations WHERE name = 'Occupational Therapists'").fetchone()
-
     matched = 0
-    skipped = 0
+    skip_no_unitid = 0
+    skip_low_score = 0
+    skip_state_mismatch = 0
+    skip_no_db_match = 0
 
     with open(CSV_PATH, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
             unitid = row.get("scorecard_unitid", "").strip()
             if not unitid:
-                skipped += 1
+                skip_no_unitid += 1
+                continue
+
+            score = _float(row.get("match_score"))
+            if score is None or score < MIN_SCORE:
+                skip_low_score += 1
+                continue
+
+            our_state     = row["our_state"].strip()
+            scorecard_st  = row.get("scorecard_state", "").strip()
+            expected_abbr = STATE_ABBREVS.get(our_state)
+            if expected_abbr and scorecard_st and scorecard_st != expected_abbr:
+                skip_state_mismatch += 1
                 continue
 
             school_name  = row["our_school_name"].strip()
-            state_name   = row["our_state"].strip()
             ownership    = row.get("ownership", "").strip() or None
             locale       = row.get("locale", "").strip() or None
             school_url   = row.get("school_url", "").strip() or None
@@ -75,21 +91,18 @@ def load(con) -> None:
                 SELECT s.id FROM schools s
                 JOIN states st ON st.id = s.state_id
                 WHERE s.name = ? AND st.name = ?
-            """, (school_name, state_name)).fetchone()
+            """, (school_name, our_state)).fetchone()
 
             if school_row is None:
-                skipped += 1
+                skip_no_db_match += 1
                 continue
 
             school_id = school_row[0]
 
-            # Update schools.scorecard_unitid
             cur.execute(
                 "UPDATE schools SET scorecard_unitid = ? WHERE id = ?",
                 (int(unitid), school_id),
             )
-
-            # Upsert school_scorecard
             cur.execute("""
                 INSERT OR REPLACE INTO school_scorecard
                     (school_id, ownership, locale, school_url, total_enrollment)
@@ -99,7 +112,17 @@ def load(con) -> None:
             matched += 1
 
     con.commit()
-    print(f"  [scorecard] {matched} schools enriched, {skipped} skipped (unmatched or no unitid)")
+    total_skipped = skip_no_unitid + skip_low_score + skip_state_mismatch + skip_no_db_match
+    print(f"  [scorecard] {matched} schools enriched, {total_skipped} skipped "
+          f"(no_unitid={skip_no_unitid}, low_score={skip_low_score}, "
+          f"state_mismatch={skip_state_mismatch}, no_db_match={skip_no_db_match})")
+
+
+def _float(val):
+    try:
+        return float(val) if val and str(val).strip() else None
+    except (ValueError, TypeError):
+        return None
 
 
 def _int(val):

@@ -208,13 +208,27 @@ python refresh_db.py
 
 ---
 
+## Scrapers
+
+Separate pipelines in `scrapers/` collect program-level data not available in BLS/Scorecard.
+
+### PT (`scrapers/pt/`)
+Collects cost and program length for ~300 DPT programs via the APTA accredited schools directory.
+- `07_parse_apta_directory.py` — harvests program URLs (no API key; one-time)
+- `05_validate_urls.py` — validates URLs + initial financial extraction via Claude Haiku
+- `08_extract_data.py` — focused cost + length extraction; handles per-credit/semester/year formats; sub-page discovery for landing pages
+
+See [`scrapers/pt/README.md`](scrapers/pt/README.md) for full run instructions.
+
+---
+
 ## Roadmap
 
 - [ ] Real BLS OOH 10-year growth rates (currently hardcoded 10%)
 - [ ] SLP and RT school/program data
 - [ ] OT graduates_tested data (not in current NBCOT CSV)
 - [ ] Complete College Scorecard CSV collection (~360 schools remaining; rate limited)
-- [ ] Program-level cost data from an alternative source (Scorecard only has undergrad tuition)
+- [ ] Load PT cost/length data from `scrapers/pt/output/pt_programs.csv` into `programs` table
 - [ ] Percentile chart on career pages
 - [ ] Program cards with program-level salary context
 - [ ] Year-over-year salary comparison (multi-year BLS data)
