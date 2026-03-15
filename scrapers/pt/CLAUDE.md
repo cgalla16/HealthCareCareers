@@ -110,3 +110,104 @@ python 04_apply_manual.py     # merges manual fixes back into pt_programs.csv
 - `01_load_programs.py` — initial CSV setup (already done)
 - `02_discover_urls.py` — Serper-based URL discovery (replaced by 07 for new runs)
 - `06_rediscover_rejected.py` — Claude web search rediscovery (no longer needed; APTA URLs serve this purpose)
+
+---
+
+## Cost & Length Data Audit (2026-03-14)
+
+Post-extraction analysis of 299 DPT programs. `09_audit_clean.py` has cleared 56 known-bad rows.
+
+### Summary Stats
+
+| Metric | program_length_months | tuition_per_year |
+|--------|----------------------|-----------------|
+| Valid rows | 259 / 299 (86.6%) | 225 / 299 (75.3%) |
+| Missing | 40 (13.4%) | 74 (24.7%) |
+| Min | 12 (Mercy — wrong) | $633 (Winston-Salem — wrong) |
+| Max | 66 (Duquesne — AUDIT_CLEARED) | $102,000 (Clarke) |
+| Mean | 33.2 months | $37,346 |
+| Median | 34 months | $37,934 |
+
+### Does the Distribution Make Sense?
+
+**Length — mostly yes.** Mode is 36 months (44%), the standard 3-year DPT cadence. 83% fall
+30–36 months. Accelerated programs at 24–27 months exist legitimately (e.g., Army-Baylor at 23
+months). Outliers at 12 and 66 months are clearly extraction errors.
+
+**Tuition — partially, with a structural problem.** Private schools at $40–60k/yr is realistic.
+But many state schools likely extracted in-state tuition only — most DPT students are out-of-state.
+The $37k mean is inflated by private schools and the distribution is effectively bimodal
+(public vs. private) without that label in the data.
+
+### Confirmed Outliers
+
+**Clearly wrong — should be nulled:**
+
+| ID | School | Value | Why it's wrong |
+|----|--------|-------|----------------|
+| 25 | Mercy University | 12 months | No accredited DPT is 12 months |
+| 191 | Winston-Salem State | $633/yr | Admin fees only, not tuition |
+| 88 | Univ North Florida | $2,291/yr | In-state fees, not full tuition |
+
+**Suspicious — needs verification:**
+
+| ID | School | Value | Concern |
+|----|--------|-------|---------|
+| 129 | Clarke University | $102,000/yr | Verify this is per-year, not total cost mislabeled |
+| 74/65 | USC Hybrid | $86,125/yr | High but plausible for USC hybrid program |
+| 19 | SUNY Downstate | $9,282/yr | Likely in-state only |
+| 192 | Western Carolina | $8,154/yr | Likely in-state only |
+| 170 | U Montana | $9,241/yr | Likely in-state only |
+| 267 | Angelo State | $6,170/yr | Likely in-state only |
+| 299 | U Puerto Rico | $7,317/yr | May be accurate (PR is a commonwealth) |
+
+### What We Missed and Why
+
+**1. Domain mismatch detection (biggest miss, ~43+ rows contaminated)**
+Serper returned popular PDFs (UNLV, Idaho State, U Montana, U Mary, BU) as top Google hits for
+many unrelated DPT searches. `05_validate_urls.py` checked page content with Claude but didn't
+verify the source domain matched the school's own domain. Should have checked `urlparse(url).netloc`
+or page `<title>` against the school name — would have caught >90% of these before extraction.
+
+**2. In-state vs. out-of-state tuition not standardized**
+State schools report both rates; Claude grabbed whichever appeared first (usually in-state).
+The extraction prompt didn't specify a preference. Should have extracted both rates explicitly
+and used out-of-state as the display value.
+
+**3. No post-extraction range validation**
+Calculation errors ($334,884 for UW, $419,022 for Mercer) and fees-only values ($633, $1,130)
+weren't caught until a manual audit pass. Should have auto-flagged anything outside [8000, 85000]
+for tuition and [24, 42] for length at write time.
+
+**4. LLM summing in-state + out-of-state columns**
+Three programs had costs calculated as in-state + OOS summed together (e.g., $334,884 = $167k × 2).
+HTML tables show both columns side-by-side. Should have added a prompt guard: "If you see two
+tuition columns, extract ONLY the out-of-state value. Never sum them."
+
+### What We Did Well
+
+- APTA directory fetch (07) gave reliable program homepage URLs with no API key
+- `csv_store.py` atomic upserts prevented corruption on interrupts; safe to Ctrl+C and resume
+- `extraction_notes` and `cost_basis` columns provide full traceability for every value
+- `09_audit_clean.py` caught systematic contamination groups and documented root causes
+
+### Next Steps
+
+**P0 — Add 3 more rows to 09_audit_clean.py, then re-run:**
+- Program 25 (Mercy): null length — 12 months is impossible
+- Program 191 (Winston-Salem): null cost — $633 is fees only
+- Program 88 (UNF): null cost — $2,291 is in-state fees (fact_sheet already cleared)
+- Program 129 (Clarke): verify $102k is truly per-year before deciding
+
+```bash
+python 09_audit_clean.py
+python 08_extract_data.py   # re-extracts AUDIT_CLEARED rows via apta_program_url
+```
+
+**P1 — State school in-state/OOS review:**
+Manually check the ~7 programs with tuition < $10k (listed in table above). Consider adding a
+`tuition_residency` column ("in_state" / "out_of_state" / "unknown").
+
+**P2 — Load into DB (after P0–P1 complete):**
+Update `db/pipelines/schools.py` to populate `tuition_per_year` and `program_length_months`
+in the `programs` table. Both columns already exist in the schema.

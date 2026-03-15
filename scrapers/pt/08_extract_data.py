@@ -8,13 +8,11 @@ Priority targets:
 Staleness threshold: data_year ending year < 2025.
 
 Strategy per row:
-  Case A — fresh data_year (>=2025), length missing → re-fetch source URL, extract length only
-  Case B — stale/missing + apta_program_url valid (direct) → fetch apta, extract cost+length
-  Case C — stale/missing + apta_program_url is landing page → sub-page discovery
-  Case D — no apta, fallback to fact_sheet_url
+  Fresh  — data_year >=2025, length or cost missing → re-fetch source, fall through to subpages
+  Stale  — try apta_url direct → subpages (apta + outcomes_url) → trusted fact_sheet fallback
 
-Sub-page discovery: heuristic keyword scoring of links (no API call),
-fetch top 3 candidate pages, merge best cost + length found.
+Sub-page discovery: keyword-scored links from apta_url + outcomes_url merged,
+fetch top MAX_SUBPAGES candidates, merge best cost + length found.
 
 Usage:
   python 08_extract_data.py
@@ -22,6 +20,7 @@ Usage:
   python 08_extract_data.py --force
   python 08_extract_data.py --stale-only
   python 08_extract_data.py --landing-only
+  python 08_extract_data.py --recalculate-cost
 """
 
 import os
@@ -36,7 +35,9 @@ from urllib.parse import urljoin, urlparse
 import requests
 import anthropic
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Literal
+
+VALID_COST_BASIS = {"total", "per_year", "per_semester", "per_credit"}
 from dotenv import load_dotenv
 
 load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
@@ -59,17 +60,29 @@ except ImportError:
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 INPUT_FILE = "pt_programs.csv"
 
-MAX_PAGE_CHARS = 10000
+MAX_PAGE_CHARS = 20000
 DELAY_MIN = 1.0
 DELAY_MAX = 2.5
-MAX_SUBPAGES = 3
+MAX_SUBPAGES = 5
 
-COST_KEYWORDS = ["tuition", "cost", "fee", "financial", "afford", "price", "expenses"]
+COST_KEYWORDS = ["tuition", "cost", "fee", "financial", "afford", "price", "expenses",
+                 "fact-sheet", "factsheet", "fact_sheet"]
 LENGTH_KEYWORDS = ["curriculum", "length", "duration", "schedule", "overview", "program-info",
                    "program_info", "about", "admission", "years", "months"]
+SKIP_PATH_FRAGMENTS = ["netpricecalculator", "net-price-calculator", "netprice",
+                       "concerned-about", "student-wellness", "counseling"]
 
 
 # ── helpers ──────────────────────────────────────────────────────────────────
+
+def same_domain(url1: str, url2: str) -> bool:
+    """Return True if both URLs share the same registered domain (last 2 parts of hostname)."""
+    def root(u):
+        host = urlparse(u).netloc.lower().split(":")[0]
+        parts = host.split(".")
+        return ".".join(parts[-2:]) if len(parts) >= 2 else host
+    return bool(url1 and url2 and root(url1) == root(url2))
+
 
 def ending_year(s) -> Optional[int]:
     """Extract the last 4-digit year from a data_year string like '2022-2023' → 2023."""
@@ -162,14 +175,22 @@ def score_links(links: list) -> list:
     results = []
     for abs_url, anchor in links:
         path = urlparse(abs_url).path.lower()
+        # Skip .docx (unreadable) and .pdf when pdfplumber unavailable
+        if path.endswith(".docx"):
+            continue
+        if path.endswith(".pdf") and not HAS_PDFPLUMBER:
+            continue
+        # Skip pages that won't have fixed cost figures
+        if any(frag in path for frag in SKIP_PATH_FRAGMENTS):
+            continue
         combined = anchor + " " + path
         cost_score = sum(1 for kw in COST_KEYWORDS if kw in combined)
         len_score = sum(1 for kw in LENGTH_KEYWORDS if kw in combined)
-        total = cost_score * 2 + len_score  # cost weighted slightly higher
+        fact_sheet_boost = 2 if any(p in combined for p in ["fact sheet", "financial fact", "fact-sheet", "factsheet"]) else 0
+        total = cost_score * 2 + len_score + fact_sheet_boost
         if total > 0:
             results.append((total, abs_url))
     results.sort(reverse=True)
-    # Deduplicate while preserving order
     seen = set()
     deduped = []
     for score, url in results:
@@ -182,10 +203,10 @@ def score_links(links: list) -> list:
 # ── Claude extraction ─────────────────────────────────────────────────────────
 
 class DataExtraction(BaseModel):
-    program_length_months: Optional[int] = None   # total DPT program duration in months
+    program_length_months: Optional[int] = None
     total_program_cost: Optional[int] = None      # always the full-program total (computed if needed)
     tuition_per_year: Optional[int] = None        # annual figure for cross-check
-    cost_basis: Optional[str] = None              # "total" | "per_year" | "per_semester" | "per_credit"
+    cost_basis: Optional[Literal["total", "per_year", "per_semester", "per_credit"]] = None
     cost_components: Optional[str] = None         # raw figures used, max 60 chars e.g. "1150/cr x 126cr"
     data_year: Optional[str] = None               # e.g. "2024-2025"
     notes: Optional[str] = None                   # max 80 chars
@@ -195,10 +216,15 @@ SYSTEM_PROMPT = (
     "Extract DPT program cost and duration only.\n\n"
     "COST RULES — always populate total_program_cost as the full-program dollar total:\n"
     "- Explicit total on page: use it, set cost_basis='total'\n"
-    "- Per year stated: multiply by program years, set cost_basis='per_year'\n"
-    "- Per semester stated: multiply by number of semesters, set cost_basis='per_semester'\n"
+    "- Per year stated: multiply by program_length_years "
+    "(use known_program_length_months/12 if provided in the message; DPT is typically 3 years otherwise), "
+    "set cost_basis='per_year'\n"
+    "- Per semester stated: multiply by number of semesters "
+    "(use known_program_length_months/6 if provided; DPT is typically 6 semesters otherwise), "
+    "set cost_basis='per_semester'\n"
     "- Per credit hour stated: multiply rate by total credits, set cost_basis='per_credit'\n"
     "- Multiple formats present: prefer explicit total, else compute\n"
+    "- cost_basis MUST be exactly one of: total, per_year, per_semester, per_credit\n"
     "- Set cost_components to the raw figures used (max 60 chars, e.g. '9500/sem x 9sem' or '1150/cr x 126cr')\n"
     "- Set tuition_per_year to annual figure if stated or derivable\n"
     "- Return null for total_program_cost only if no cost data present at all\n\n"
@@ -208,10 +234,16 @@ SYSTEM_PROMPT = (
 )
 
 
-def extract_from_page(client, url: str, school_name: str, page_text: str) -> DataExtraction:
+def extract_from_page(client, url: str, school_name: str, page_text: str,
+                      known_length_months: Optional[int] = None) -> DataExtraction:
     """Call Claude Haiku to extract cost + length from pre-fetched page text."""
+    length_hint = (
+        f"\nKnown program length: {known_length_months} months "
+        f"({known_length_months / 12:.1f} years) — use this for per-year/per-semester cost calculations."
+        if known_length_months else ""
+    )
     user_msg = (
-        f"School: {school_name} (DPT program)\n"
+        f"School: {school_name} (DPT program){length_hint}\n"
         f"URL: {url}\n\n"
         f"{page_text}"
     )
@@ -225,32 +257,41 @@ def extract_from_page(client, url: str, school_name: str, page_text: str) -> Dat
     return response.parsed_output
 
 
-# ── per-row strategies ────────────────────────────────────────────────────────
+# ── extraction primitives ─────────────────────────────────────────────────────
 
-def try_direct(client, url: str, school_name: str) -> tuple:
+def try_direct(client, url: str, school_name: str,
+               known_length_months: Optional[int] = None) -> tuple:
     """Fetch url and extract. Returns (DataExtraction or None, fetch_status)."""
     text, status = fetch_page_text(url)
     if not text:
         return None, status
     try:
-        result = extract_from_page(client, url, school_name, text)
+        result = extract_from_page(client, url, school_name, text, known_length_months)
         return result, "ok"
     except Exception as e:
         return None, f"llm_error:{str(e)[:60]}"
 
 
-def try_subpages(client, landing_url: str, school_name: str) -> tuple:
+def try_subpages(client, landing_url: str, school_name: str,
+                 known_length_months: Optional[int] = None,
+                 extra_url: Optional[str] = None) -> tuple:
     """
-    Discover and fetch sub-pages from landing_url.
+    Discover and fetch sub-pages from landing_url (and optionally extra_url).
     Returns (merged DataExtraction or None, extraction_notes_suffix).
     """
     links = extract_links(landing_url)
+    if extra_url and extra_url != landing_url:
+        extra_links = extract_links(extra_url)
+        seen_urls = {url for url, _ in links}
+        for link in extra_links:
+            if link[0] not in seen_urls:
+                links.append(link)
+                seen_urls.add(link[0])
     if not links:
         return None, "no_links"
 
     scored = score_links(links)
     candidates = [url for _, url in scored[:MAX_SUBPAGES]]
-
     if not candidates:
         return None, "no_scored_links"
 
@@ -260,18 +301,15 @@ def try_subpages(client, landing_url: str, school_name: str) -> tuple:
     best_year = None
     length_src = ""
     cost_src = ""
-    notes_parts = []
 
     for sub_url in candidates:
         time.sleep(random.uniform(DELAY_MIN, DELAY_MAX))
         text, status = fetch_page_text(sub_url)
         if not text:
-            notes_parts.append(f"fetch_failed:{url_slug(sub_url)}")
             continue
         try:
-            result = extract_from_page(client, sub_url, school_name, text)
-        except Exception as e:
-            notes_parts.append(f"llm_err:{url_slug(sub_url)}")
+            result = extract_from_page(client, sub_url, school_name, text, known_length_months)
+        except Exception:
             continue
 
         slug = url_slug(sub_url)
@@ -285,9 +323,8 @@ def try_subpages(client, landing_url: str, school_name: str) -> tuple:
             best_tpy = result.tuition_per_year
         if result.data_year and best_year is None:
             best_year = result.data_year
-
         if best_length and best_cost:
-            break  # got everything we need
+            break
 
     if best_length is None and best_cost is None and best_tpy is None:
         return None, "subpages_no_data"
@@ -306,6 +343,79 @@ def try_subpages(client, landing_url: str, school_name: str) -> tuple:
     return merged, note
 
 
+def _merge_cost(base: DataExtraction, src: DataExtraction):
+    """Merge cost fields from src into base in-place."""
+    base.total_program_cost = src.total_program_cost
+    base.tuition_per_year = src.tuition_per_year or base.tuition_per_year
+    base.data_year = src.data_year or base.data_year
+    base.cost_basis = src.cost_basis
+    base.cost_components = src.cost_components
+
+
+# ── per-row strategy ──────────────────────────────────────────────────────────
+
+def _extract_for_row(client, args, *, school_name, apta_url, fact_url, outcomes_url,
+                     extracted_from, vstatus, stale, known_len, has_reliable_cost):
+    """
+    Try sources in priority order. Returns (DataExtraction | None, note, force_cost).
+
+    Fresh path  — data current (>=2025): re-fetch known source, fall through to subpages if cost null.
+    Stale path  — try apta direct → subpages (apta + outcomes) → trusted fact_sheet fallback.
+    """
+    trusted_fact = fact_url if same_domain(fact_url, apta_url) else ""
+    if fact_url and not trusted_fact:
+        print(f"  [domain mismatch] fact_sheet_url ignored — different school")
+
+    # ── Fresh path ────────────────────────────────────────────────────────────
+    if not stale:
+        src = extracted_from or trusted_fact or apta_url
+        if not src:
+            return None, "no_url", False
+        label = "len+cost" if not has_reliable_cost else "len"
+        print(f"  fresh: {label}  {src[:70]}")
+        result, _ = try_direct(client, src, school_name, known_len)
+        if result and not result.total_program_cost and apta_url:
+            print(f"  fresh→subpages: cost null, discovering")
+            sub, sub_note = try_subpages(client, apta_url, school_name,
+                                         known_len or result.program_length_months,
+                                         extra_url=outcomes_url)
+            if sub and sub.total_program_cost:
+                _merge_cost(result, sub)
+                return result, f"{label}:{url_slug(src)}+{sub_note}", False
+        if result:
+            return result, f"{label}:{url_slug(src)}", False
+        return None, "fetch_failed", False
+
+    # ── Stale path ────────────────────────────────────────────────────────────
+    if apta_url and vstatus in ("confirmed_landing", "valid", ""):
+        # Step 1: try apta_url directly — many pages now embed cost in HTML
+        print(f"  stale→apta direct  {apta_url[:70]}")
+        result, _ = try_direct(client, apta_url, school_name, known_len)
+        if result and result.total_program_cost:
+            return result, "cost+len:apta_direct", True
+
+        # Step 2: apta direct had no cost — discover sub-pages (apta + outcomes)
+        print(f"  stale→subpages")
+        length_hint = known_len or (result.program_length_months if result else None)
+        sub, sub_note = try_subpages(client, apta_url, school_name, length_hint,
+                                     extra_url=outcomes_url)
+        if sub:
+            if result and sub.total_program_cost:
+                _merge_cost(result, sub)
+                return result, f"cost+len:apta_direct+{sub_note}", True
+            return sub, sub_note, True
+
+    # Step 3: fallback to fact_sheet_url (only same-domain, not superseded)
+    fact_superseded = bool(extracted_from and extracted_from != fact_url)
+    if trusted_fact and not fact_superseded:
+        print(f"  stale→fact_sheet  {trusted_fact[:70]}")
+        result, _ = try_direct(client, trusted_fact, school_name, known_len)
+        if result:
+            return result, "cost+len:fact_sheet_stale", True
+
+    return None, "all_sources_failed", False
+
+
 # ── main ──────────────────────────────────────────────────────────────────────
 
 def build_update(program_id, result: DataExtraction, note: str,
@@ -316,15 +426,13 @@ def build_update(program_id, result: DataExtraction, note: str,
     """
     update = {"program_id": program_id}
 
-    # Program length — always take new value if found
     if result.program_length_months:
         update["program_length_months"] = str(result.program_length_months)
 
-    # Cost fields — overwrite if new data is fresher, first time, or forced
     new_yr = ending_year(result.data_year or "")
     old_yr = ending_year(existing_year or "")
     is_fresher = (new_yr or 0) > (old_yr or 0)
-    is_first = not old_yr  # no existing data at all
+    is_first = not old_yr
 
     if is_fresher or is_first or force_cost:
         if result.total_program_cost:
@@ -334,7 +442,6 @@ def build_update(program_id, result: DataExtraction, note: str,
         if result.data_year:
             update["data_year"] = result.data_year
 
-    # Audit fields — always written (describe the extraction itself, not the data vintage)
     if result.cost_basis:
         update["cost_basis"] = result.cost_basis
     if result.cost_components:
@@ -371,7 +478,6 @@ def main():
         print(f"ERROR: output/{INPUT_FILE} not found.")
         sys.exit(1)
 
-    # Ensure new columns exist
     for col in ("program_length_months", "extraction_notes"):
         if col not in df.columns:
             df[col] = ""
@@ -380,14 +486,14 @@ def main():
         if args.force:
             return True
         has_length = str(row.get("program_length_months", "")).strip() not in ("", "None")
+        has_reliable_cost = str(row.get("cost_basis", "")).strip() in VALID_COST_BASIS
         data_yr = str(row.get("data_year", "")).strip()
         stale = is_stale(data_yr)
         if args.stale_only:
             return stale
         if args.landing_only:
             return row.get("validation_status", "") == "confirmed_landing"
-        # Default: process if missing length OR data is stale
-        return (not has_length) or stale
+        return (not has_length) or (not has_reliable_cost)
 
     def _has_viable_url(row) -> bool:
         apta = str(row.get("apta_program_url", "")).strip()
@@ -415,85 +521,39 @@ def main():
         school_name = row["school_name"]
         apta_url = str(row.get("apta_program_url", "")).strip()
         fact_url = str(row.get("fact_sheet_url", "")).strip()
+        outcomes_url = str(row.get("outcomes_url", "")).strip() or None
         extracted_from = str(row.get("extracted_from_url", "")).strip()
         data_yr = str(row.get("data_year", "")).strip()
         vstatus = str(row.get("validation_status", "")).strip()
-        apta_confirmed = str(row.get("apta_landing_confirmed", "")).strip().lower() == "true"
         has_length = str(row.get("program_length_months", "")).strip() not in ("", "None")
+        has_reliable_cost = str(row.get("cost_basis", "")).strip() in VALID_COST_BASIS
         stale = is_stale(data_yr)
+        known_len = int(row.get("program_length_months", "") or 0) if has_length else None
 
-        print(f"[{i+1}/{total}] {school_name}  status={vstatus}  stale={stale}  has_len={has_length}")
+        print(f"[{i+1}/{total}] {school_name}  stale={stale}  has_len={has_length}  reliable_cost={has_reliable_cost}")
 
-        result = None
-        note = ""
+        result, note, force_cost = _extract_for_row(
+            client, args,
+            school_name=school_name,
+            apta_url=apta_url,
+            fact_url=fact_url,
+            outcomes_url=outcomes_url,
+            extracted_from=extracted_from,
+            vstatus=vstatus,
+            stale=stale,
+            known_len=known_len,
+            has_reliable_cost=has_reliable_cost,
+        )
 
-        # ── Case A: fresh data, only need length ──────────────────────────────
-        if not stale and not has_length:
-            src = extracted_from or fact_url or apta_url
-            if src:
-                print(f"  Case A: re-fetch source for length  {src[:70]}")
-                result, fstatus = try_direct(client, src, school_name)
-                if result:
-                    note = f"len:{url_slug(src)}"
-                    # Don't overwrite fresh cost data — only take length
-                    update = {"program_id": program_id}
-                    if result.program_length_months:
-                        update["program_length_months"] = str(result.program_length_months)
-                    update["extraction_notes"] = note[:100]
-                    upsert_record(INPUT_FILE, update)
-                    print(f"  length={result.program_length_months}mo")
-                    done += 1
-                else:
-                    print(f"  [FAILED] {fstatus}")
-                    skipped += 1
-            else:
-                print("  [SKIP] no source URL")
-                skipped += 1
-
-        # ── Case B: stale/missing + apta direct (known valid from apta) ──────
-        elif stale and apta_url and apta_confirmed and extracted_from == apta_url:
-            print(f"  Case B: apta direct  {apta_url[:70]}")
-            result, fstatus = try_direct(client, apta_url, school_name)
-            if result:
-                note = "cost+len:apta_direct"
-                upsert_record(INPUT_FILE, build_update(program_id, result, note, data_yr, force_cost=args.recalculate_cost))
-                print(f"  cost={result.total_program_cost}  length={result.program_length_months}mo  year={result.data_year}")
-                done += 1
-            else:
-                print(f"  [FAILED] {fstatus} — falling through to sub-page")
-                # Fall through to Case C if apta_url still available
-                vstatus = "confirmed_landing"  # treat as landing for fallback
-                result = None
-
-        # ── Case C: stale/missing + apta landing page (sub-page discovery) ───
-        if stale and apta_url and result is None and vstatus in ("confirmed_landing", "valid", ""):
-            print(f"  Case C: sub-page discovery  {apta_url[:70]}")
-            result, sub_note = try_subpages(client, apta_url, school_name)
-            if result:
-                note = sub_note
-                upsert_record(INPUT_FILE, build_update(program_id, result, note, data_yr, force_cost=args.recalculate_cost))
-                print(f"  cost={result.total_program_cost}  length={result.program_length_months}mo  year={result.data_year}")
-                done += 1
-            else:
-                print(f"  [NO DATA from subpages: {sub_note}] — trying fact_sheet fallback")
-                result = None
-
-        # ── Case D: fallback to fact_sheet_url ────────────────────────────────
-        if result is None and fact_url and (stale or not has_length):
-            print(f"  Case D: fact_sheet fallback  {fact_url[:70]}")
-            result, fstatus = try_direct(client, fact_url, school_name)
-            if result:
-                stale_tag = "_stale" if stale else ""
-                note = f"cost+len:fact_sheet{stale_tag}"
-                upsert_record(INPUT_FILE, build_update(program_id, result, note, data_yr, force_cost=args.recalculate_cost))
-                print(f"  cost={result.total_program_cost}  length={result.program_length_months}mo  year={result.data_year}")
-                done += 1
-            else:
-                print(f"  [FAILED] {fstatus}")
-                skipped += 1
-
-        elif result is None and not (stale or not has_length):
-            pass  # already handled above (Case A or already complete)
+        if result:
+            if args.recalculate_cost:
+                force_cost = True
+            upsert_record(INPUT_FILE, build_update(program_id, result, note, data_yr, force_cost))
+            print(f"  => cost={result.total_program_cost}  len={result.program_length_months}mo  year={result.data_year}")
+            done += 1
+        else:
+            print(f"  => [NO DATA] {note}")
+            skipped += 1
 
         if i < total - 1:
             time.sleep(random.uniform(DELAY_MIN, DELAY_MAX))
