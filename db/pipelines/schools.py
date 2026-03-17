@@ -88,10 +88,43 @@ def clean_pt(raw_dir: Path) -> pd.DataFrame:
     merged["degree_type"] = "DPT"
     merged["city"]        = None
 
+    # Merge scraper cost/length data by school_name + state
+    scraper_csv = PROJECT_ROOT / "scrapers" / "pt" / "output" / "pt_programs.csv"
+    if scraper_csv.exists():
+        scraper = pd.read_csv(scraper_csv, dtype=str)
+        # scraper CSV already has full state names (e.g. "Iowa"), no mapping needed
+        cost_cols = [c for c in [
+            "school_name", "state",
+            "program_length_months", "tuition_per_year",
+            "tuition_instate", "tuition_is_oos", "total_program_cost",
+        ] if c in scraper.columns]
+        cost_df = scraper[cost_cols].copy()
+        for col in ["program_length_months", "tuition_per_year", "tuition_instate", "total_program_cost"]:
+            if col in cost_df.columns:
+                cost_df[col] = pd.to_numeric(cost_df[col], errors="coerce")
+        if "tuition_is_oos" in cost_df.columns:
+            cost_df["tuition_is_oos"] = cost_df["tuition_is_oos"].map({"yes": 1, "no": 0})
+        merged = pd.merge(merged, cost_df, on=["school_name", "state"], how="left")
+        # Ensure all expected columns exist even if absent from the scraper CSV
+        for col in ["program_length_months", "tuition_per_year", "tuition_instate", "tuition_is_oos", "total_program_cost"]:
+            if col not in merged.columns:
+                merged[col] = pd.NA
+        tpy_count = cost_df["tuition_per_year"].notna().sum() if "tuition_per_year" in cost_df.columns else 0
+        len_count = cost_df["program_length_months"].notna().sum() if "program_length_months" in cost_df.columns else 0
+        print(f"         -> scraper merge: {tpy_count} tuition, {len_count} length values loaded")
+    else:
+        merged["program_length_months"] = pd.NA
+        merged["tuition_per_year"]      = pd.NA
+        merged["tuition_instate"]       = pd.NA
+        merged["tuition_is_oos"]        = pd.NA
+        merged["total_program_cost"]    = pd.NA
+
     return merged[[
         "school_code", "school_name", "city", "state", "degree_type",
         "board_pass_rate_first_time_2yr", "board_pass_rate_ultimate_2yr",
         "graduates_tested",
+        "program_length_months", "tuition_per_year",
+        "tuition_instate", "tuition_is_oos", "total_program_cost",
     ]]
 
 
@@ -239,6 +272,9 @@ def _create_schema(cur) -> None:
             board_pass_rate_first_time_2yr REAL,
             board_pass_rate_ultimate_2yr   REAL,
             tuition_per_year               REAL,
+            tuition_instate                REAL,
+            tuition_is_oos                 INTEGER,
+            total_program_cost             REAL,
             graduates_tested               INTEGER,
             UNIQUE (school_id, occupation_id, degree_type)
         );
@@ -294,8 +330,9 @@ def _insert_programs(cur, con, df: pd.DataFrame, occupation_name: str) -> None:
                 program_length_months, acceptance_rate, applications_received,
                 seats_available, graduation_rate,
                 board_pass_rate_first_time_2yr, board_pass_rate_ultimate_2yr,
-                tuition_per_year, graduates_tested
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                tuition_per_year, tuition_instate, tuition_is_oos,
+                total_program_cost, graduates_tested
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 school_id, occ_id,
@@ -305,7 +342,9 @@ def _insert_programs(cur, con, df: pd.DataFrame, occupation_name: str) -> None:
                 val(row, "seats_available"), val(row, "graduation_rate"),
                 val(row, "board_pass_rate_first_time_2yr"),
                 val(row, "board_pass_rate_ultimate_2yr"),
-                val(row, "tuition_per_year"), val(row, "graduates_tested"),
+                val(row, "tuition_per_year"), val(row, "tuition_instate"),
+                val(row, "tuition_is_oos"),  val(row, "total_program_cost"),
+                val(row, "graduates_tested"),
             ),
         )
         total_rows += 1

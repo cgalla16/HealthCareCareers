@@ -98,6 +98,26 @@ CLEANUPS = [
     # Group L: Fees-only / single-year mislabeled as total
     (36,  True,  False, False, "cost=$1,130 is admin fees only, not DPT tuition"),
     (101, True,  False, False, "cost=$19,005 is single academic year, not full program total"),
+    # Group M: Wrong source document (residency/fellowship sheets used for DPT)
+    (191, True,  False, False, "cost=$633 from neuro-residency fact sheet, not DPT tuition"),
+    # Group N: Length anomaly confirmed post-audit
+    (25,  False, True,  False, "length=12mo impossible for DPT; cost already null"),
+    # Group O: LLM grabbed wrong sub-page (grad fees page vs DPT fact sheet)
+    # True FPTA form values: Yr1=$39,480 Yr2=$37,260 Yr3=$33,200 Total=$109,940
+    (129, True,  False, False, "cost=$102k wrong; LLM used grad-fees page not FPTA form; re-extract after prompt hardening"),
+    # Group P: Residency/fellowship programs mistakenly extracted (spot-check 2026-03-16)
+    (128, True,  False, True,  "St Ambrose: residency/fellowship fact sheet, not DPT; malformed APTA URL"),
+    (141, True,  False, True,  "Franciscan U LA: SLU pt-residency fact sheet extracted, not DPT"),
+    (162, True,  False, True,  "Maryville U MO: pt-residency fact sheet, not DPT"),
+    (172, True,  False, True,  "Creighton NE: geriatric residency (Geri-Res) fact sheet, not DPT"),
+    (202, True,  False, True,  "U Toledo OH: sports PT residency fact sheet, not DPT"),
+    (264, True,  False, True,  "UT Southwestern TX: neuro PT residency fact sheet, not DPT"),
+    (272, True,  False, True,  "UTMB Galveston TX: neuro PT residency fact sheet, not DPT"),
+    (276, True,  False, True,  "UT Southwestern variant: neuro PT residency, not DPT"),
+    (277, True,  False, True,  "UT Southwestern variant: neuro PT residency, not DPT"),
+    (297, True,  True,  True,  "Carroll WI: residency financial fact sheet, not DPT; wrong length too"),
+    # Group Q: Length anomaly confirmed via spot-check 2026-03-16
+    (187, False, True,  False, "Faulkner AL: 28mo wrong; website shows 8 semesters (~48mo DPT)"),
 ]
 
 

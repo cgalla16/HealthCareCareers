@@ -146,6 +146,10 @@ export function getPrograms() {
       p.graduates_tested,
       p.program_length_months,
       p.tuition_per_year,
+      p.tuition_instate,
+      p.tuition_is_oos,
+      p.total_program_cost,
+      sc.ownership,
       e.annual_mean_wage                  AS area_salary
     FROM programs p
     JOIN schools     sch ON sch.id = p.school_id
@@ -154,6 +158,7 @@ export function getPrograms() {
     LEFT JOIN employment_stats e
         ON  e.state_id      = sch.state_id
         AND e.occupation_id = p.occupation_id
+    LEFT JOIN school_scorecard sc ON sc.school_id = p.school_id
     ORDER BY sch.name
   `).all();
 
@@ -170,7 +175,11 @@ export function getPrograms() {
     programSize:   r.graduates_tested  ?? null,
     // Scaffold — columns exist in DB, will be non-null once pipeline fills them
     lengthMonths:  r.program_length_months ?? null,
-    cost:          r.tuition_per_year      ?? null,
+    cost:          r.total_program_cost    ?? null,   // total program cost (preferred display metric)
+    tuitionPerYear: r.tuition_per_year     ?? null,   // annual rate (shown as OOS context)
+    tuitionInstate: r.tuition_instate      ?? null,   // in-state annual rate (public schools)
+    tuitionIsOos:   r.tuition_is_oos === 1 ? true : r.tuition_is_oos === 0 ? false : null,
+    schoolType:     r.ownership === 1 ? 'public' : r.ownership != null ? 'private' : null,
     // Real data — BLS annual mean wage for the program's state + occupation
     areaSalary:    r.area_salary ?? null,
   }));

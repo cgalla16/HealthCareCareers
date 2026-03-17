@@ -122,6 +122,23 @@ def fetch_page_text(url: str) -> tuple:
                     t = page.extract_text()
                     if t:
                         parts.append(t)
+                    # Extract fillable form field values (e.g. FPTA financial fact sheets)
+                    field_lines = []
+                    for annot in page.annots:
+                        data = annot.get("data", {})
+                        title = data.get("T", b"")
+                        value = data.get("V", None)
+                        if isinstance(title, bytes):
+                            title = title.decode("latin-1", errors="replace")
+                        if isinstance(value, bytes):
+                            value = value.decode("latin-1", errors="replace")
+                        elif value is not None:
+                            value = str(value)
+                        skip_defaults = {"Choose Response", "Choose Program", ""}
+                        if value and value.strip() and value not in skip_defaults:
+                            field_lines.append(f"[FORM FIELD] {title}: {value}")
+                    if field_lines:
+                        parts.append("\n".join(field_lines))
             return "\n".join(parts)[:MAX_PAGE_CHARS], "pdf"
         else:
             if HAS_BS4:
@@ -205,7 +222,9 @@ def score_links(links: list) -> list:
 class DataExtraction(BaseModel):
     program_length_months: Optional[int] = None
     total_program_cost: Optional[int] = None      # always the full-program total (computed if needed)
-    tuition_per_year: Optional[int] = None        # annual figure for cross-check
+    tuition_per_year: Optional[int] = None        # annual OOS rate for public schools; only rate for private
+    tuition_instate: Optional[int] = None         # in-state annual rate (public schools only)
+    tuition_is_oos: Optional[bool] = None         # True if tuition_per_year is the out-of-state rate
     cost_basis: Optional[Literal["total", "per_year", "per_semester", "per_credit"]] = None
     cost_components: Optional[str] = None         # raw figures used, max 60 chars e.g. "1150/cr x 126cr"
     data_year: Optional[str] = None               # e.g. "2024-2025"
@@ -228,9 +247,20 @@ SYSTEM_PROMPT = (
     "- Set cost_components to the raw figures used (max 60 chars, e.g. '9500/sem x 9sem' or '1150/cr x 126cr')\n"
     "- Set tuition_per_year to annual figure if stated or derivable\n"
     "- Return null for total_program_cost only if no cost data present at all\n\n"
+    "RESIDENCY RULES:\n"
+    "- If BOTH in-state AND out-of-state tuition rates are visible, extract BOTH separately:\n"
+    "  * tuition_per_year = out-of-state rate, tuition_instate = in-state rate, tuition_is_oos=true\n"
+    "  * NEVER add them together — they are two separate rates, not addends\n"
+    "- If only one rate is shown and it is unusually low (e.g. under $12,000/yr), set tuition_is_oos=false\n"
+    "- For private institutions (no in-state/out-of-state distinction): set tuition_is_oos=false\n"
+    "- Leave tuition_is_oos=null only when residency cannot be determined\n\n"
+    "RANGE SANITY (flag but still extract):\n"
+    "- Per-year tuition outside $8,000-$85,000: set notes to 'RANGE_WARN: {value}/yr'\n"
+    "- Total program cost outside $50,000-$280,000: set notes to 'RANGE_WARN: {value} total'\n"
+    "- Per-credit rate outside $500-$2,500: flag similarly in notes\n\n"
     "LENGTH: program_length_months = total program duration in months (DPT typically 30-36).\n"
     "DATA YEAR: academic year the figures apply to (e.g. 2024-2025).\n"
-    "notes: max 80 chars, terse."
+    "notes: max 80 chars, terse. Use for RANGE_WARN or other anomalies only."
 )
 
 
@@ -298,6 +328,8 @@ def try_subpages(client, landing_url: str, school_name: str,
     best_length = None
     best_cost = None
     best_tpy = None
+    best_tpy_instate = None
+    best_is_oos = None
     best_year = None
     length_src = ""
     cost_src = ""
@@ -321,6 +353,10 @@ def try_subpages(client, landing_url: str, school_name: str,
             cost_src = slug
         if result.tuition_per_year and best_tpy is None:
             best_tpy = result.tuition_per_year
+        if result.tuition_instate and best_tpy_instate is None:
+            best_tpy_instate = result.tuition_instate
+        if result.tuition_is_oos is not None and best_is_oos is None:
+            best_is_oos = result.tuition_is_oos
         if result.data_year and best_year is None:
             best_year = result.data_year
         if best_length and best_cost:
@@ -333,6 +369,8 @@ def try_subpages(client, landing_url: str, school_name: str,
         program_length_months=best_length,
         total_program_cost=best_cost,
         tuition_per_year=best_tpy,
+        tuition_instate=best_tpy_instate,
+        tuition_is_oos=best_is_oos,
         data_year=best_year,
     )
     note = ""
@@ -439,6 +477,10 @@ def build_update(program_id, result: DataExtraction, note: str,
             update["total_program_cost"] = str(result.total_program_cost)
         if result.tuition_per_year:
             update["tuition_per_year"] = str(result.tuition_per_year)
+        if result.tuition_instate:
+            update["tuition_instate"] = str(result.tuition_instate)
+        if result.tuition_is_oos is not None:
+            update["tuition_is_oos"] = "yes" if result.tuition_is_oos else "no"
         if result.data_year:
             update["data_year"] = result.data_year
 
@@ -459,6 +501,8 @@ def main():
                         help="Overwrite existing cost data regardless of data_year (use after prompt changes)")
     parser.add_argument("--stale-only", action="store_true", help="Only rows with stale/missing data")
     parser.add_argument("--landing-only", action="store_true", help="Only confirmed_landing rows")
+    parser.add_argument("--program-ids", type=str, default=None,
+                        help="Comma-separated program IDs to force-reprocess (e.g. 19,192,170)")
     args = parser.parse_args()
 
     if not ANTHROPIC_API_KEY:
@@ -482,7 +526,12 @@ def main():
         if col not in df.columns:
             df[col] = ""
 
+    target_ids = set(x.strip() for x in args.program_ids.split(",")) if args.program_ids else None
+
     def _row_needs_processing(row) -> bool:
+        pid = str(row.get("program_id", "")).strip()
+        if target_ids is not None:
+            return pid in target_ids
         if args.force:
             return True
         has_length = str(row.get("program_length_months", "")).strip() not in ("", "None")
@@ -549,7 +598,12 @@ def main():
             if args.recalculate_cost:
                 force_cost = True
             upsert_record(INPUT_FILE, build_update(program_id, result, note, data_yr, force_cost))
-            print(f"  => cost={result.total_program_cost}  len={result.program_length_months}mo  year={result.data_year}")
+            oos_tag = ""
+            if result.tuition_instate:
+                oos_tag = f"  instate={result.tuition_instate}  oos={result.tuition_per_year}"
+            elif result.tuition_per_year:
+                oos_tag = f"  tpy={result.tuition_per_year}  oos={result.tuition_is_oos}"
+            print(f"  => cost={result.total_program_cost}  len={result.program_length_months}mo  year={result.data_year}{oos_tag}")
             done += 1
         else:
             print(f"  => [NO DATA] {note}")

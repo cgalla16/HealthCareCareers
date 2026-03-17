@@ -185,21 +185,194 @@ tuition columns, extract ONLY the out-of-state value. Never sum them."
 
 ### Next Steps
 
-**P0 — Add 3 more rows to 09_audit_clean.py, then re-run:**
-- Program 25 (Mercy): null length — 12 months is impossible
-- Program 191 (Winston-Salem): null cost — $633 is fees only
-- Program 88 (UNF): null cost — $2,291 is in-state fees (fact_sheet already cleared)
-- Program 129 (Clarke): verify $102k is truly per-year before deciding
+**P0 — Done (2026-03-16): audit cleanup expanded to 60 rows**
+- Added IDs 25 (Mercy 12mo), 191 (Winston-Salem $633), 129 (Clarke $102k) to `09_audit_clean.py`
+- Clarke ($102k) confirmed wrong via FPTA PDF form fields: actual values Yr1=$39,480 / Yr2=$37,260 / Yr3=$33,200 / Total=$109,940
+- ID 88 (UNF $2,291 in-state) was already in cleanup list and re-nulled
 
 ```bash
-python 09_audit_clean.py
-python 08_extract_data.py   # re-extracts AUDIT_CLEARED rows via apta_program_url
+python 09_audit_clean.py   # already run; 60 rows cleaned
 ```
 
-**P1 — State school in-state/OOS review:**
-Manually check the ~7 programs with tuition < $10k (listed in table above). Consider adding a
-`tuition_residency` column ("in_state" / "out_of_state" / "unknown").
+**P1 — Re-extract with hardened prompt (run after adding ANTHROPIC_API_KEY to .env)**
 
-**P2 — Load into DB (after P0–P1 complete):**
-Update `db/pipelines/schools.py` to populate `tuition_per_year` and `program_length_months`
-in the `programs` table. Both columns already exist in the schema.
+08_extract_data.py now has 3 new guardrails:
+- OOS preference: extracts OOS as `tuition_per_year`, in-state as `tuition_instate`
+- No-summing guard: never add side-by-side columns together
+- Range sanity: flags values outside [$8k–$85k]/yr or [$50k–$280k] total in `notes`
+
+New CSV columns added: `tuition_instate`, `tuition_is_oos`
+PDF form field extraction also added (fixes FPTA fillable PDF parsing)
+
+```bash
+# Create .env with ANTHROPIC_API_KEY=your_key, then:
+
+# 1. Re-extract known state-school rows with OOS-first prompt
+python 08_extract_data.py --program-ids 19,192,170,267,299
+
+# 2. Re-extract all rows with missing or AUDIT_CLEARED cost/length
+python 08_extract_data.py
+
+# 3. Target: >=85% tuition coverage (>= 255/299) before DB load
+python -c "import pandas as pd; df=pd.read_csv('output/pt_programs.csv'); print(df['tuition_per_year'].notna().sum(), '/ 299 tuition')"
+```
+
+State school OOS verification checklist (check after re-extraction):
+
+| ID | School | Old value | Expected |
+|----|--------|-----------|----------|
+| 19 | SUNY Downstate | $9,282 in-state | OOS rate |
+| 192 | Western Carolina | $8,154 in-state | OOS rate |
+| 170 | U Montana | $9,241 in-state | OOS rate |
+| 267 | Angelo State | $6,170 in-state | OOS rate |
+| 299 | U Puerto Rico | $7,317 | Likely correct (keep) |
+
+**P2 — DB + frontend: DONE (2026-03-16)**
+
+- DB schema: added `total_program_cost`, `tuition_instate`, `tuition_is_oos` columns
+- `db/pipelines/schools.py` `clean_pt()`: merges scraper CSV on school_name+state
+- `web/lib/db.js` `getPrograms()`: returns all new fields + `schoolType` (public/private from scorecard)
+- `web/components/ProgramComparison.jsx`: shows total cost as primary metric (barMax $250k),
+  Public/Private pill on browse cards, OOS badge in compare table, Best Value insight
+
+After re-extraction, run `python refresh_db.py` and `cd web && npm run build` to push to production.
+
+### Prompt Guardrails (added to 08_extract_data.py)
+
+These rules exist because of specific failure modes observed in the 2026-03-14 audit:
+
+1. **OOS preference** — State school pages show both rates; LLM was grabbing in-state first.
+   Rule: extract OOS as primary, in-state as secondary.
+
+2. **No-summing guard** — Three programs had costs calculated as in-state + OOS summed
+   (e.g. $334,884 = $167k × 2). Side-by-side table columns look like addends.
+   Rule: extract each column separately, never sum them.
+
+3. **Range sanity** — Values like $633/yr (fees only) and $334,884 (summing error) weren't caught
+   until manual audit. Rule: flag values outside plausible ranges in `notes` field, don't null them.
+
+---
+
+## Spot-Check Audit (2026-03-16) — In-State/OOS Re-extraction + Residency Leakage
+
+After re-running `08_extract_data.py` with the hardened OOS-first prompt, coverage is now ~212/299
+(71%) tuition. Spot-checking identified additional bad data and new next steps.
+
+### Spot-Check Findings
+
+**High outliers verified (>$70k/yr):**
+
+| ID | School | Tuition/yr | Total | Status |
+|----|--------|-----------|-------|--------|
+| 35 | Boston University | $70,110 | $190,623 | CORRECT (within 3-5% of live page) |
+| 74 | USC Hybrid DPT | $86,125 | $232,815 | CORRECT (2025 data, credible breakdown) |
+| 64 | Pacific University CA | $73,731 | $158,258 | STALE — 2022-23, needs refresh |
+| 217 | Pacific University OR | $74,469 | $165,065 | INCOMPLETE — Year 3 cost missing |
+| 69 | USA Health (St Augustine CA) | $84,023 | $226,805 | UNVERIFIED — page 404'd |
+
+**Public school in-state/OOS verified:**
+
+| ID | School | In-State | OOS | Status |
+|----|--------|---------|-----|--------|
+| 72 | San Diego State | $28,434 | $47,334 | CORRECT — verified on live page (2025-26) |
+| 53 | Arkansas State | per-credit $378 | — | CORRECT — verified on live page |
+| 192 | Western Carolina NC | $8,154 | — | VALID but OOS rate not extracted — re-extract |
+
+**Residency/fellowship leakage — NEW discoveries (programs to null in 09_audit_clean.py):**
+
+These programs had residency/fellowship financial fact sheets extracted instead of DPT data.
+All show suspiciously low total costs ($225–$9,557) that are only residency fees.
+
+| ID | School | Bad Total | Root Cause |
+|----|--------|-----------|------------|
+| 128 | St Ambrose University IA | $9,557 | Orthopaedic/Fellowship fact sheet; malformed APTA URL |
+| 141 | Franciscan U LA | $3,554 | SLU pt-residency-financial-factsheet.pdf |
+| 162 | Maryville U MO | $5,331 | pt-residency-financial-factsheet.pdf |
+| 172 | Creighton University NE | $225 | 25-26-financial-fact-sheet-Geri-Res.pdf (geriatric residency) |
+| 202 | University of Toledo OH | $2,210 | residency-and-fellowship-financial-fact-sheet2024-2025-sports.pdf |
+| 264 | UT Southwestern TX | $647 | Financial-Fact-Sheet-Nuero-PT-Residency.pdf |
+| 272 | UTMB Galveston TX | $647 | Same neuro PT residency PDF |
+| 276 | UT Southwestern variant | $647 | Same neuro PT residency PDF |
+| 277 | UT Southwestern variant | $647 | Same neuro PT residency PDF |
+| 297 | Carroll University WI | $8,000 | residency-financial-fact-sheet.pdf; length 27mo also wrong |
+
+**Length anomaly confirmed via spot-check:**
+
+| ID | School | CSV Length | Actual | Action |
+|----|--------|-----------|--------|--------|
+| 187 | Faulkner University AL | 28 months | ~48 months (8 semesters) | Null length |
+
+---
+
+### Next Steps (as of 2026-03-16)
+
+**Step 1 — Add new residency rows to `09_audit_clean.py`:**
+
+Add the following to the `CLEANUPS` list:
+
+```python
+# Group P: Residency/fellowship programs mistakenly extracted (spot-check 2026-03-16)
+(128, True, False, True,  "St Ambrose: residency/fellowship fact sheet, not DPT; malformed APTA URL"),
+(141, True, False, True,  "Franciscan U LA: SLU pt-residency fact sheet extracted, not DPT"),
+(162, True, False, True,  "Maryville U MO: pt-residency fact sheet, not DPT"),
+(172, True, False, True,  "Creighton NE: geriatric residency (Geri-Res) fact sheet, not DPT"),
+(202, True, False, True,  "U Toledo OH: sports PT residency fact sheet, not DPT"),
+(264, True, False, True,  "UT Southwestern TX: neuro PT residency fact sheet, not DPT"),
+(272, True, False, True,  "UTMB Galveston TX: neuro PT residency fact sheet, not DPT"),
+(276, True, False, True,  "UT Southwestern variant: neuro PT residency, not DPT"),
+(277, True, False, True,  "UT Southwestern variant: neuro PT residency, not DPT"),
+(297, True,  True, True,  "Carroll WI: residency financial fact sheet, not DPT; wrong length too"),
+# Group Q: Length anomaly confirmed via spot-check
+(187, False, True, False, "Faulkner AL: 28mo wrong; website shows 8 semesters (~48mo DPT)"),
+```
+
+**Step 2 — Add residency detection guardrail to SYSTEM_PROMPT in `08_extract_data.py`:**
+
+```
+RESIDENCY GUARD: If the page is clearly about a postgraduate residency or fellowship
+program (not an entry-level DPT degree), return all fields as null and set
+notes='RESIDENCY_SKIP: not entry-level DPT'.
+```
+
+This prevents future re-extraction from landing on residency pages after fact_sheet_url is cleared.
+
+**Step 3 — Re-run cleanup and re-extract:**
+
+```bash
+# 1. Apply extended cleanup
+python 09_audit_clean.py
+
+# 2. Re-extract stale programs (Pacific CA 2022, USC main blank/2022, UPR 2019)
+python 08_extract_data.py --stale-only
+
+# 3. Re-extract specific problem programs
+python 08_extract_data.py --program-ids 217,192
+
+# 4. Check coverage
+python -c "
+import pandas as pd
+df = pd.read_csv('output/pt_programs.csv')
+df['tuition_per_year'] = pd.to_numeric(df['tuition_per_year'], errors='coerce')
+print('tuition_per_year:', df['tuition_per_year'].notna().sum(), '/', len(df))
+df['program_length_months'] = pd.to_numeric(df['program_length_months'], errors='coerce')
+print('program_length_months:', df['program_length_months'].notna().sum(), '/', len(df))
+"
+```
+
+**Target:** ≥230/299 (77%+) tuition coverage after this pass.
+
+**Step 4 (optional P1) — Add cross-validation sanity check to `09_audit_clean.py`:**
+
+Flag rows where `total_program_cost / (program_length_months / 12)` differs from
+`tuition_per_year` by more than 40%. This catches future Carroll-style mismatches
+($34,945/yr vs $8,000 total) before they ship to the DB.
+
+### Programs Still Needing Manual Attention
+
+| ID | School | Issue |
+|----|--------|-------|
+| 64 | Pacific University CA | Stale 2022-23 data — re-extract should fix |
+| 65 | USC main DPT | Blank / 2022 data — re-extract should fix |
+| 217 | Pacific University OR | Year 3 cost missing — re-extract should fix |
+| 299 | University of Puerto Rico | 2019-20 data — re-extract with newer fact sheet |
+| 192 | Western Carolina NC | Only in-state extracted — re-extract for OOS |

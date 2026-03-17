@@ -18,9 +18,9 @@ const CAREER_META = {
 
 const METRICS = [
   {
-    key: 'cost',   label: 'Program Cost',    sub: 'Total tuition',
-    icon: '💰', color: 'var(--amber)', barMax: 90000,
-    fmt: p => p.cost != null ? f$(p.cost) : null,
+    key: 'cost',   label: 'Total Program Cost',  sub: 'Full program tuition',
+    icon: '💰', color: 'var(--amber)', barMax: 250000,
+    fmt: p => p.cost != null ? fK(p.cost) : null,
     bar: p => p.cost,
     hi: false, scaffold: true,
   },
@@ -126,9 +126,19 @@ function BrowseCard({ p, selected, onToggle, disabled }) {
         <div style={{ position:'absolute',top:12,right:12,width:22,height:22,borderRadius:'50%',background:'var(--teal)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:11,color:'white',fontWeight:900 }}>✓</div>
       )}
 
-      <span className="pill" style={{ background:'var(--blue-lt)', color:'var(--blue)', marginBottom:10 }}>
-        {p.career} · {p.degreeType}
-      </span>
+      <div style={{ display:'flex', gap:6, flexWrap:'wrap', marginBottom:10 }}>
+        <span className="pill" style={{ background:'var(--blue-lt)', color:'var(--blue)' }}>
+          {p.career} · {p.degreeType}
+        </span>
+        {p.schoolType && (
+          <span className="pill" style={{
+            background: p.schoolType === 'public' ? 'var(--teal-lt)' : 'var(--paper)',
+            color: p.schoolType === 'public' ? 'var(--teal)' : 'var(--muted)',
+          }}>
+            {p.schoolType === 'public' ? 'Public' : 'Private'}
+          </span>
+        )}
+      </div>
 
       <div style={{ fontSize:15,fontWeight:700,color:'var(--ink)',fontFamily:"'Fraunces',serif",lineHeight:1.3,marginBottom:3 }}>
         {p.name}
@@ -140,7 +150,11 @@ function BrowseCard({ p, selected, onToggle, disabled }) {
           { label:'Pass Rate',   val: p.boardPassRate != null ? `${p.boardPassRate.toFixed(1)}%` : '—',     accent:'var(--green)' },
           { label:'Area Salary', val: p.areaSalary    != null ? fK(p.areaSalary) : '—',                     accent:'var(--teal)'  },
           { label:'Length',      val: p.lengthMonths  != null ? `${p.lengthMonths} mo` : 'Coming soon',      accent:'var(--blue)'  },
-          { label:'Cost',        val: p.cost          != null ? fK(p.cost) : 'Coming soon',                  accent:'var(--amber)' },
+          {
+            label: p.tuitionIsOos && p.schoolType === 'public' ? 'Total Cost (OOS)' : 'Total Cost',
+            val:   p.cost != null ? fK(p.cost) : 'Coming soon',
+            accent:'var(--amber)',
+          },
         ].map(item => (
           <div key={item.label} style={S.statBox}>
             <div style={{ ...S.statLabel, marginBottom: 2 }}>{item.label}</div>
@@ -240,6 +254,12 @@ function CompareTable({ programs, onRemove }) {
                       <div className="bar-fill" style={{ width:`${Math.min(100,(barVal/m.barMax)*100)}%`, background:isWinner?m.color:'var(--rule)', opacity:isWinner?1:0.55 }} />
                     </div>
                   )}
+                  {m.key === 'cost' && p.tuitionIsOos && p.schoolType === 'public' && (
+                    <div style={{ fontSize:10, color:'var(--muted)', fontFamily:"'Figtree',sans-serif", marginTop:3 }}>
+                      Out-of-state rate
+                      {p.tuitionInstate ? ` · In-state: ${fK(p.tuitionInstate)}/yr` : ''}
+                    </div>
+                  )}
                 </>
               )}
             </div>
@@ -289,18 +309,27 @@ function CompareTable({ programs, onRemove }) {
 function InsightStrip({ programs }) {
   if (programs.length < 2) return null;
 
-  const withCost   = programs.filter(p => p.cost         != null);
-  const withPass   = programs.filter(p => p.boardPassRate != null);
-  const withSalary = programs.filter(p => p.areaSalary   != null);
+  const withCost      = programs.filter(p => p.cost         != null);
+  const withPass      = programs.filter(p => p.boardPassRate != null);
+  const withSalary    = programs.filter(p => p.areaSalary   != null);
+  const withBothValue = programs.filter(p => p.cost != null && p.boardPassRate != null);
 
-  const cheapest = withCost.length   ? withCost.reduce((a,b)   => a.cost         <= b.cost         ? a : b) : null;
-  const bestPass = withPass.length   ? withPass.reduce((a,b)   => a.boardPassRate >= b.boardPassRate ? a : b) : null;
-  const bestMkt  = withSalary.length ? withSalary.reduce((a,b) => a.areaSalary   >= b.areaSalary   ? a : b) : null;
+  const cheapest  = withCost.length      ? withCost.reduce((a,b)   => a.cost         <= b.cost         ? a : b) : null;
+  const bestPass  = withPass.length      ? withPass.reduce((a,b)   => a.boardPassRate >= b.boardPassRate ? a : b) : null;
+  const bestMkt   = withSalary.length    ? withSalary.reduce((a,b) => a.areaSalary   >= b.areaSalary   ? a : b) : null;
+  const bestValue = withBothValue.length >= 3
+    ? withBothValue.reduce((a, b) => {
+        const scoreA = a.boardPassRate / (a.cost / 10000);
+        const scoreB = b.boardPassRate / (b.cost / 10000);
+        return scoreA >= scoreB ? a : b;
+      })
+    : null;
 
   const items = [
-    cheapest && { icon:'💸', label:'Lowest Tuition',     val:f$(cheapest.cost),                       school:cheapest.name, accent:'var(--amber)' },
-    bestPass && { icon:'📋', label:'Highest Pass Rate',  val:`${bestPass.boardPassRate.toFixed(1)}%`, school:bestPass.name, accent:'var(--green)' },
-    bestMkt  && { icon:'📍', label:'Best Salary Market', val:f$(bestMkt.areaSalary),                  school:bestMkt.name,  accent:'var(--teal)'  },
+    cheapest  && { icon:'💸', label:'Lowest Total Cost',  val:fK(cheapest.cost),                        school:cheapest.name,  accent:'var(--amber)' },
+    bestPass  && { icon:'📋', label:'Highest Pass Rate',  val:`${bestPass.boardPassRate.toFixed(1)}%`,  school:bestPass.name,  accent:'var(--green)' },
+    bestValue && { icon:'🏆', label:'Best Value',         val:`${bestValue.boardPassRate.toFixed(1)}% · ${fK(bestValue.cost)}`, school:bestValue.name, accent:'#7C3AED' },
+    bestMkt   && { icon:'📍', label:'Best Salary Market', val:f$(bestMkt.areaSalary),                   school:bestMkt.name,   accent:'var(--teal)'  },
   ].filter(Boolean);
 
   if (!items.length) return null;
