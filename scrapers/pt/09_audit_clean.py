@@ -1,5 +1,9 @@
 """
-09_audit_clean.py — Null known-bad data identified in post-run audit (~53 rows).
+09_audit_clean.py — Null known-bad data identified in post-run audit (~60 rows).
+
+WARNING: This script replays ALL CLEANUPS entries every run. Do NOT re-run after rows have
+been successfully re-extracted — it will re-null them and trigger a 130+ row reprocessing cycle.
+For new one-off nulls, use a targeted inline Python command instead (see Groups R/S comments).
 
 Root causes found:
   1. Wrong-school fact_sheet_url — Serper matched wrong institution's PDF.
@@ -118,6 +122,17 @@ CLEANUPS = [
     (297, True,  True,  True,  "Carroll WI: residency financial fact sheet, not DPT; wrong length too"),
     # Group Q: Length anomaly confirmed via spot-check 2026-03-16
     (187, False, True,  False, "Faulkner AL: 28mo wrong; website shows 8 semesters (~48mo DPT)"),
+    # Group R: x12 multiplication bug (2026-03-17) — nulled via targeted one-off command, not here.
+    # Re-running this script would re-null 39 rows that were already successfully re-extracted.
+    # Use the inline null command from the plan instead.
+    # (106, True, False, False, "Brenau GA: total=$180k = tuition x12, not x3yr"),
+    # (129, True, False, False, "Clarke IA: total=$306k = tuition x12; known actual=$109,940 from FPTA PDF"),
+    # (211, True, False, False, "U Dayton OH: total=$479k = tuition x12, not x3yr"),
+    # (231, True, False, False, "Misericordia PA: total=$207k = tuition x12; components show $146k"),
+    # (181, True, False, False, "Kean NJ: total=$396k implausible; re-extract"),
+    # Group S: Residual bad values (2026-03-17) — same note, use targeted null command
+    # (25,  True, False, False, "Mercy NY: $550 total re-extracted from residency page"),
+    # (264, False, True, False, "UT Southwestern TX: length=31mo from HEERF page, not program page"),
 ]
 
 

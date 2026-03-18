@@ -367,7 +367,7 @@ Flag rows where `total_program_cost / (program_length_months / 12)` differs from
 `tuition_per_year` by more than 40%. This catches future Carroll-style mismatches
 ($34,945/yr vs $8,000 total) before they ship to the DB.
 
-### Programs Still Needing Manual Attention
+### Programs Still Needing Manual Attention (as of 2026-03-16)
 
 | ID | School | Issue |
 |----|--------|-------|
@@ -376,3 +376,95 @@ Flag rows where `total_program_cost / (program_length_months / 12)` differs from
 | 217 | Pacific University OR | Year 3 cost missing — re-extract should fix |
 | 299 | University of Puerto Rico | 2019-20 data — re-extract with newer fact sheet |
 | 192 | Western Carolina NC | Only in-state extracted — re-extract for OOS |
+
+---
+
+## Audit + Prompt Hardening (2026-03-17) — ×12 Multiplication Bug + RANGE_WARN Fix
+
+### Root Causes Found
+
+**1. ×12 multiplication bug (6 rows confirmed)**
+`total_program_cost` was being set to `tuition_per_year × 12` instead of `× years`. The SYSTEM_PROMPT
+said "use `known_program_length_months/12`" — the LLM was using the months value (e.g., 36) as the
+multiplier directly. One variant: the LLM treated an annual figure as per-semester and multiplied by
+6 semesters (ratio = 6.0 exactly).
+
+**2. RANGE_WARN never reached the CSV**
+The LLM was correctly returning `notes='RANGE_WARN: ...'` for out-of-range values, but `build_update()`
+in `08_extract_data.py` never read `result.notes` — it was silently discarded. The `extraction_notes`
+column only received the strategy string (e.g., `"cost+len:apta_direct"`).
+
+**3. 09_audit_clean.py is not safe to re-run**
+The script replays ALL ~60 CLEANUPS entries every time. Of those, 39 rows had already been
+successfully re-extracted after prior cleanup passes. Re-running would re-null all 39, triggering
+another 130+ row processing cycle. Future one-off nulls must use targeted inline commands instead.
+
+### Fixes Applied to `08_extract_data.py`
+
+1. **RESIDENCY_SKIP guard** — added at top of SYSTEM_PROMPT. If the page is a residency/fellowship
+   program, LLM returns all null and sets `notes='RESIDENCY_SKIP: not entry-level DPT'`.
+
+2. **Years-explicit cost rules** — changed "use `known_program_length_months/12`" to "multiply by
+   the X.X YEARS value from the hint, NOT the months value." Prevents ×12 confusion.
+
+3. **CALC CHECK guard** — added after COST RULES: verifies `total / tuition ≈ program years (2–5)`.
+   If ratio exceeds 6, LLM must recheck before returning.
+
+4. **Length hint rewritten** — user message now leads with `X.X YEARS` and gives explicit multipliers:
+   `"Per-year costs: multiply by 3.0. Per-semester costs: multiply by 6.0 semesters."`
+
+5. **`result.notes` now written to CSV** — `build_update()` appends LLM `notes` to `extraction_notes`
+   so RANGE_WARN and RESIDENCY_SKIP surface in the output file.
+
+### Warning Added to `09_audit_clean.py`
+
+Header now documents the re-run hazard. Groups R and S are added as commented entries only —
+they were applied via targeted one-off null command.
+
+### Rows Fixed This Session
+
+| ID | School | Before | After |
+|----|--------|--------|-------|
+| 106 | Brenau GA | $180k total (×12 bug) | $40,240/yr, $139k total ✅ |
+| 181 | Kean NJ | $396k total implausible | $38,565 OOS / $28,060 in-state, $108k ✅ |
+| 185 | Alabama State | $22k in-state only | $32,960/yr, $94k total ✅ |
+| 88 | U North Florida | $18k in-state only | $62,784/yr, $188k total ✅ |
+| 192 | Western Carolina NC | $8k in-state only | $26,239 OOS / $9,959 in-state ✅ |
+| 131 | Allen College | $14k bad | $31,358/yr, $118k total ✅ |
+| 145 | U Maryland Eastern Shore | $16k in-state | $24,576/yr, $95k total ✅ |
+| 231 | Misericordia PA | $207k (×12 bug) | $69,000/yr, $207k total — ratio 3.0 ✅ |
+| 129 | Clarke IA | $306k (×12 bug) | $109,940 total (manual, from FPTA PDF) ✅ |
+
+Rows nulled, awaiting next API run:
+
+| ID | School | Issue |
+|----|--------|-------|
+| 211 | U Dayton OH | ratio=6.0 (annual treated as per-semester × 6); re-extract |
+| 266 | UTEP TX | Extraction landed on a news article — wrong URL |
+| 299 | UPR | 2021 PDF returns per-credit fees ($200), not tuition |
+| 264 | UT Southwestern TX | No usable URL; HEERF page has no program data |
+| 278 | U Utah | In-state $13,440 only; OOS total $120,670 — mixed data |
+
+### Coverage After This Session
+
+| Metric | Count | % |
+|--------|-------|---|
+| tuition_per_year | 232 / 299 | 77.6% |
+| total_program_cost | 238 / 299 | 79.6% |
+| program_length_months | 257 / 299 | 86.0% |
+| tuition_instate populated | 24 / 299 | 8.0% |
+| tuition_is_oos = yes | 22 / 299 | 7.4% |
+
+Tuition range: min $10,000 / median $40,290 / max $86,125 (USC Hybrid, verified correct).
+Ratio > 6 remaining: 1 row (U Utah 278 — in-state/OOS mismatch, not a bug).
+
+### Programs Still Needing Attention
+
+| ID | School | Issue |
+|----|--------|-------|
+| 211 | U Dayton OH | Re-extract with fixed prompt (ratio=6.0 bug) |
+| 65 | USC main DPT | Re-extract to test RANGE_WARN fires at $95k+ |
+| 266 | UTEP TX | Needs correct DPT program URL |
+| 299 | U Puerto Rico | Needs post-2021 tuition source |
+| 264 | UT Southwestern TX | No usable DPT URL found |
+| 278 | U Utah | Mixed in-state/OOS — re-extract for OOS rate |

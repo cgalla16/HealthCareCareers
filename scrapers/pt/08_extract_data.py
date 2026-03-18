@@ -232,21 +232,26 @@ class DataExtraction(BaseModel):
 
 
 SYSTEM_PROMPT = (
+    "RESIDENCY GUARD: If the page is clearly about a postgraduate residency or fellowship program "
+    "(not an entry-level DPT degree), return ALL fields as null and set "
+    "notes='RESIDENCY_SKIP: not entry-level DPT'. Indicators: page title or headings contain "
+    "'Residency', 'Fellowship', 'post-professional', or 'post-graduate residency'.\n\n"
     "Extract DPT program cost and duration only.\n\n"
     "COST RULES — always populate total_program_cost as the full-program dollar total:\n"
     "- Explicit total on page: use it, set cost_basis='total'\n"
-    "- Per year stated: multiply by program_length_years "
-    "(use known_program_length_months/12 if provided in the message; DPT is typically 3 years otherwise), "
-    "set cost_basis='per_year'\n"
-    "- Per semester stated: multiply by number of semesters "
-    "(use known_program_length_months/6 if provided; DPT is typically 6 semesters otherwise), "
-    "set cost_basis='per_semester'\n"
+    "- Per year stated: multiply by program_length_YEARS from the length hint (the X.X years value, "
+    "NOT the months value; DPT is typically 3 years if no hint), set cost_basis='per_year'\n"
+    "- Per semester stated: multiply by number of semesters from the length hint "
+    "(the X.X semesters value; DPT is typically 6 semesters if no hint), set cost_basis='per_semester'\n"
     "- Per credit hour stated: multiply rate by total credits, set cost_basis='per_credit'\n"
     "- Multiple formats present: prefer explicit total, else compute\n"
     "- cost_basis MUST be exactly one of: total, per_year, per_semester, per_credit\n"
     "- Set cost_components to the raw figures used (max 60 chars, e.g. '9500/sem x 9sem' or '1150/cr x 126cr')\n"
     "- Set tuition_per_year to annual figure if stated or derivable\n"
     "- Return null for total_program_cost only if no cost data present at all\n\n"
+    "CALC CHECK: After computing total_program_cost, verify: "
+    "total_program_cost / tuition_per_year must approximately equal program years (typically 2-5). "
+    "If the ratio exceeds 6, you have a calculation error — recheck and correct before returning.\n\n"
     "RESIDENCY RULES:\n"
     "- If BOTH in-state AND out-of-state tuition rates are visible, extract BOTH separately:\n"
     "  * tuition_per_year = out-of-state rate, tuition_instate = in-state rate, tuition_is_oos=true\n"
@@ -268,8 +273,9 @@ def extract_from_page(client, url: str, school_name: str, page_text: str,
                       known_length_months: Optional[int] = None) -> DataExtraction:
     """Call Claude Haiku to extract cost + length from pre-fetched page text."""
     length_hint = (
-        f"\nKnown program length: {known_length_months} months "
-        f"({known_length_months / 12:.1f} years) — use this for per-year/per-semester cost calculations."
+        f"\nKnown program length: {known_length_months / 12:.1f} YEARS ({known_length_months} months). "
+        f"Per-year costs: multiply by {known_length_months / 12:.1f}. "
+        f"Per-semester costs: multiply by {known_length_months / 6:.1f} semesters."
         if known_length_months else ""
     )
     user_msg = (
@@ -489,7 +495,9 @@ def build_update(program_id, result: DataExtraction, note: str,
     if result.cost_components:
         update["cost_components"] = result.cost_components
 
-    update["extraction_notes"] = note[:100]
+    llm_notes = getattr(result, "notes", None) or ""
+    combined = f"{note}|{llm_notes}" if llm_notes else note
+    update["extraction_notes"] = combined[:120]
     return update
 
 
