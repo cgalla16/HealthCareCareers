@@ -1,0 +1,5 @@
+occupation_name,bls_growth_pct,projection_period,source_url
+Physical Therapists,14.0,2023-2033,https://www.bls.gov/ooh/healthcare/physical-therapists.htm
+Occupational Therapists,12.0,2023-2033,https://www.bls.gov/ooh/healthcare/occupational-therapists.htm
+Radiation Therapists,-2.0,2023-2033,https://www.bls.gov/ooh/healthcare/radiation-therapists.htm
+Speech-Language Pathologists,19.0,2023-2033,https://www.bls.gov/ooh/healthcare/speech-language-pathologists.htm
