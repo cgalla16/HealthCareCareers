@@ -199,6 +199,43 @@ def _read_files() -> dict:
     return dfs
 
 
+OOH_PATH = PROJECT_ROOT / "raw" / "bls_ooh_projections.csv"
+
+
+def load_ooh_projections(con) -> None:
+    """
+    Update bls_growth_pct in occupation_national_stats from raw/bls_ooh_projections.csv.
+
+    Must be called AFTER work_settings.load() has created the occupation_national_stats rows.
+    Uses UPDATE (not INSERT) so it always overwrites the placeholder 10.0.
+    To refresh projections: edit raw/bls_ooh_projections.csv and rerun refresh_db.py.
+    """
+    if not OOH_PATH.exists():
+        print(f"  [SKIP] bls_ooh_projections.csv not found at {OOH_PATH}")
+        return
+
+    df = pd.read_csv(OOH_PATH)
+    cur = con.cursor()
+    updated = 0
+
+    for _, row in df.iterrows():
+        result = cur.execute(
+            """
+            UPDATE occupation_national_stats
+            SET bls_growth_pct = ?
+            WHERE occupation_id = (SELECT id FROM occupations WHERE name = ?)
+            """,
+            (float(row["bls_growth_pct"]), str(row["occupation_name"])),
+        )
+        if result.rowcount == 0:
+            print(f"  [WARN] bls_ooh_projections: no DB row for '{row['occupation_name']}' — skipped")
+        else:
+            updated += 1
+
+    con.commit()
+    print(f"  [OOH]  Updated bls_growth_pct for {updated} occupations from {OOH_PATH.name}")
+
+
 def load(con) -> None:
     """Load occupation data into a provided DB connection. Used by the orchestrator."""
     cur = con.cursor()

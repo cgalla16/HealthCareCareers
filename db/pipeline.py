@@ -39,6 +39,9 @@ def main() -> None:
     print("[work_settings]")
     work_settings.load(con)
 
+    print("[ooh_projections]")
+    occupations.load_ooh_projections(con)
+
     con.close()
     print(f"[DONE] {DB_PATH}")
 
