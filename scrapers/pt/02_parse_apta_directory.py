@@ -1,5 +1,5 @@
 """
-07_parse_apta_directory.py — Harvest PT program URLs from the APTA accredited schools directory.
+02_parse_apta_directory.py — Harvest PT program URLs from the APTA accredited schools directory.
 
 Fetches https://aptaapps.apta.org/accreditedschoolsdirectory/AllPrograms.aspx in a single request
 (server-rendered, no JavaScript needed), extracts all DPT program entries, and matches them against
@@ -18,7 +18,7 @@ Match actions recorded in url_map.csv (match_action column):
   no_match       — no match found in pt_programs.csv (check url_map_unmatched.csv)
 
 Usage:
-  python 07_parse_apta_directory.py
+  python 02_parse_apta_directory.py
 """
 
 import os

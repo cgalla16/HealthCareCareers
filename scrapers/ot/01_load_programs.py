@@ -99,9 +99,8 @@ def main():
 
     print(f"\nDone. Both CSVs initialized.")
     print(f"Next steps:")
-    print(f"  python 02_discover_outcomes_urls.py   # A.4.2 outcomes pages")
-    print(f"  python 03_discover_tuition_urls.py    # A.4.4 tuition pages")
-    print(f"  (These can run in separate terminals simultaneously)")
+    print(f"  Populate discovered_url columns from a program directory or manual lookup,")
+    print(f"  then run: python 04_validate_urls.py --pipeline outcomes|tuition")
 
 
 if __name__ == "__main__":

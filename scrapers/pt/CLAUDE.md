@@ -22,7 +22,7 @@ Serper API is no longer needed for new runs (URL discovery now uses the APTA dir
 
 ### Phase 1 — Populate program URLs (one-time, already done)
 ```bash
-python 07_parse_apta_directory.py
+python 02_parse_apta_directory.py
 ```
 Fetches https://aptaapps.apta.org/accreditedschoolsdirectory/AllPrograms.aspx (no API key needed),
 extracts all DPT program homepage URLs, and writes them into `output/pt_programs.csv`.
@@ -49,11 +49,11 @@ It keeps the **best result** across both URLs using this priority ranking:
 
 ### Phase 3 — Extract program cost and length
 ```bash
-python 08_extract_data.py --limit 5    # test run
-python 08_extract_data.py              # process all remaining rows
-python 08_extract_data.py --force      # reprocess everything
-python 08_extract_data.py --stale-only # only rows with stale/missing data (year < 2025)
-python 08_extract_data.py --landing-only # only confirmed_landing rows (sub-page path)
+python 06_extract_data.py --limit 5    # test run
+python 06_extract_data.py              # process all remaining rows
+python 06_extract_data.py --force      # reprocess everything
+python 06_extract_data.py --stale-only # only rows with stale/missing data (year < 2025)
+python 06_extract_data.py --landing-only # only confirmed_landing rows (sub-page path)
 ```
 
 Targets:
@@ -90,9 +90,9 @@ python 04_apply_manual.py     # merges manual fixes back into pt_programs.csv
 
 | Column | Source | Description |
 |--------|--------|-------------|
-| `fact_sheet_url` | Serper search (02_discover_urls.py) | Previously discovered financial fact sheet URL |
-| `apta_program_url` | APTA directory (07_parse_apta_directory.py) | Reliable DPT program homepage |
-| `outcomes_url` | APTA directory (07_parse_apta_directory.py) | CAPTE outcomes page (A.4.2) |
+| `fact_sheet_url` | Legacy Serper discovery (historical) | Previously discovered financial fact sheet URL |
+| `apta_program_url` | APTA directory (02_parse_apta_directory.py) | Reliable DPT program homepage |
+| `outcomes_url` | APTA directory (02_parse_apta_directory.py) | CAPTE outcomes page (A.4.2) |
 | `validation_status` | 05_validate_urls.py | See table above |
 | `extracted_from_url` | 05_validate_urls.py | Which URL actually yielded valid data |
 | `tuition_per_year` | 05_validate_urls.py | Extracted financial data |
@@ -106,16 +106,11 @@ python 04_apply_manual.py     # merges manual fixes back into pt_programs.csv
 - `fact_sheet_url_2` has been removed — it was lower-confidence than `fact_sheet_url` and added no value
 - The APTA directory fetch requires no API key and has no rate limit concern
 
-## Legacy Scripts (less relevant now)
-- `01_load_programs.py` — initial CSV setup (already done)
-- `02_discover_urls.py` — Serper-based URL discovery (replaced by 07 for new runs)
-- `06_rediscover_rejected.py` — Claude web search rediscovery (no longer needed; APTA URLs serve this purpose)
-
 ---
 
 ## Cost & Length Data Audit (2026-03-14)
 
-Post-extraction analysis of 299 DPT programs. `09_audit_clean.py` has cleared 56 known-bad rows.
+Post-extraction analysis of 299 DPT programs. `07_audit_clean.py` has cleared 56 known-bad rows.
 
 ### Summary Stats
 
@@ -186,22 +181,22 @@ tuition columns, extract ONLY the out-of-state value. Never sum them."
 
 ### What We Did Well
 
-- APTA directory fetch (07) gave reliable program homepage URLs with no API key
+- APTA directory fetch (02) gave reliable program homepage URLs with no API key
 - `csv_store.py` atomic upserts prevented corruption on interrupts; safe to Ctrl+C and resume
 - `extraction_notes` and `cost_basis` columns provide full traceability for every value
-- `09_audit_clean.py` caught systematic contamination groups and documented root causes
+- `07_audit_clean.py` caught systematic contamination groups and documented root causes
 
 ### Next Steps
 
-**P0 — Add 3 more rows to 09_audit_clean.py, then re-run:**
+**P0 — Add 3 more rows to 07_audit_clean.py, then re-run:**
 - Program 25 (Mercy): null length — 12 months is impossible
 - Program 191 (Winston-Salem): null cost — $633 is fees only
 - Program 88 (UNF): null cost — $2,291 is in-state fees (fact_sheet already cleared)
 - Program 129 (Clarke): verify $102k is truly per-year before deciding
 
 ```bash
-python 09_audit_clean.py
-python 08_extract_data.py   # re-extracts AUDIT_CLEARED rows via apta_program_url
+python 07_audit_clean.py
+python 06_extract_data.py   # re-extracts AUDIT_CLEARED rows via apta_program_url
 ```
 
 **P1 — State school in-state/OOS review:**

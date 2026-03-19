@@ -3,7 +3,7 @@
 
 Writes output/pt_review.csv with all non-success rows, sorted by priority.
 Open this in Excel/Sheets and manually fill in fact_sheet_url + set url_status=manual_override.
-Then re-run 02_discover_urls.py to skip those rows automatically.
+Then run 04_apply_manual.py to merge the corrections back into pt_programs.csv.
 
 Also prints a summary of results by status.
 """

@@ -1,5 +1,5 @@
 """
-04_export_review.py — Export rows needing human review from BOTH OT pipelines.
+03_export_review.py — Export rows needing human review from BOTH OT pipelines.
 
 Writes:
   output/ot_outcomes_review.csv  — A.4.2 rows needing attention
@@ -121,7 +121,7 @@ def main():
         print("  2. For each row, find the correct URL manually")
         print("  3. Paste it in 'manual_url' column")
         print("  4. Set url_status = 'manual_override'")
-        print("  5. Run: python 05_apply_manual.py")
+        print("  5. Run: python 04_apply_manual.py")
 
     # Cross-pipeline coverage report
     outcomes_df = load_csv(PIPELINES[0]["master"])

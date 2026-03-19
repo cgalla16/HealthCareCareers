@@ -1,5 +1,5 @@
 """
-06_validate_urls.py — Validate discovered URLs using Claude Haiku + extract data.
+05_validate_urls.py — Validate discovered URLs using Claude Haiku + extract data.
 
 Fetches each discovered URL, asks Claude to:
   1. Confirm the page belongs to the correct school and graduate program
@@ -11,10 +11,10 @@ Adds columns to the URL CSV:
   + data fields depending on pipeline (graduation_rate_pct, tuition_per_year, etc.)
 
 Usage:
-  python 06_validate_urls.py --pipeline outcomes
-  python 06_validate_urls.py --pipeline tuition
-  python 06_validate_urls.py --pipeline outcomes --limit 5
-  python 06_validate_urls.py --pipeline outcomes --force
+  python 05_validate_urls.py --pipeline outcomes
+  python 05_validate_urls.py --pipeline tuition
+  python 05_validate_urls.py --pipeline outcomes --limit 5
+  python 05_validate_urls.py --pipeline outcomes --force
 """
 
 import os
@@ -272,7 +272,7 @@ def main():
     print(f"\n{'='*60}")
     print(f"Done.")
     print(f"  Valid:    {valid}")
-    print(f"  Rejected: {rejected}  -> run 07_rediscover_rejected.py")
+    print(f"  Rejected: {rejected}  -> review manually or supply URLs via 04_apply_manual.py")
     print(f"  Failed:   {failed}")
 
 

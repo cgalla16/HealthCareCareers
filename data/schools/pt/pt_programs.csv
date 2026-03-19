@@ -1,301 +1,301 @@
-school_code,school_name,city,state,degree_type,board_pass_rate_first_time_2yr,board_pass_rate_ultimate_2yr,graduates_tested,program_length_months,tuition_per_year,tuition_instate,tuition_is_oos,total_program_cost
-0001,Old Dominion University,,Virginia,DPT,91.6,97.59,83.0,35.0,67747.0,,,176804.0
-0002,Virginia Commonwealth University,,Virginia,DPT,93.9,98.26,115.0,35.0,39907.0,20134.0,1.0,108550.0
-0008,Shenandoah University,,Virginia,DPT,86.1,100.0,79.0,32.0,,,,
-0010,Marymount University,,Virginia,DPT,83.6,98.63,73.0,,,,,
-0011,Hampton University,,Virginia,DPT,78.3,95.65,23.0,28.0,32724.0,,,117935.0
-0014,University of Lynchburg,,Virginia,DPT,83.7,100.0,92.0,30.0,42370.0,,,113165.0
-0015,Radford University,,Virginia,DPT,94.4,98.15,54.0,30.0,51744.0,25676.0,1.0,144317.0
-0017,Shenandoah University - EXPANSION PROGRAM at  Northern Virginia Campus,,Virginia,DPT,100.0,100.0,36.0,33.0,33075.0,,,129595.0
-0020,Mary Baldwin University,,Virginia,DPT,82.5,98.25,57.0,33.0,35536.0,,,125715.0
-0021,Emory and Henry College,,Virginia,DPT,84.8,96.61,59.0,33.0,37896.0,,,122295.0
-0101,Columbia University,,New York,DPT,92.3,100.0,143.0,32.0,40978.0,,,153055.0
-0102,Daemen University,,New York,DPT,94.5,98.43,127.0,32.0,42735.0,,,128787.0
-0103,Hunter College (CUNY),,New York,DPT,87.5,100.0,56.0,36.0,40850.0,17300.0,1.0,111654.0
-0104,Ithaca College,,New York,DPT,90.4,99.26,135.0,28.0,54556.0,,,184047.0
-0105,Long Island University - Brooklyn Campus,,New York,DPT,71.6,97.3,74.0,29.0,,,,
-0106,New York University,,New York,DPT,70.1,93.59,77.0,36.0,56712.0,,,189040.0
-0107,Russell Sage College,,New York,DPT,78.4,97.3,74.0,,,,,
-0108,"University at Buffalo, State University of New York",,New York,DPT,88.0,97.59,83.0,36.0,24390.0,,,93108.0
-0109,SUNY (State University of NY) Downstate Health  Sciences University,,New York,DPT,89.7,100.0,39.0,36.0,24820.0,,,86966.0
-0110,Stony Brook University,,New York,DPT,82.1,100.0,95.0,,32518.0,,,112937.0
-0111,State University of NY Upstate Medical University,,New York,DPT,82.2,100.0,73.0,33.0,,,,
-0112,Touro University,,New York,DPT,78.7,100.0,61.0,36.0,22388.0,,,107937.0
-0121,D'youville College,,New York,DPT,71.1,96.39,83.0,33.0,40250.0,,,129395.0
-0125,The College of Staten Island,,New York,DPT,85.7,100.0,42.0,36.0,,,,
-0126,Mercy University,,New York,DPT,79.8,96.3,79.0,,,,,
-0127,New York Medical College,,New York,DPT,72.4,95.4,87.0,36.0,38825.0,,,126979.0
-0128,Utica University,,New York,DPT,77.3,96.97,66.0,,46468.0,,,169068.0
-0136,New York Institute of Technology,,New York,DPT,78.8,96.97,66.0,36.0,62580.0,,,165347.0
-0137,Clarkson University,,New York,DPT,69.7,94.12,33.0,36.0,25438.0,,,101752.0
-0138,Nazareth University,,New York,DPT,88.9,100.0,99.0,36.0,66333.0,,,206810.0
-0139,Dominican University New York,,New York,DPT,90.5,100.0,42.0,35.0,39200.0,,,129639.0
-0140,Touro University - EXPANSION PROGRAM at NYC,,New York,DPT,83.3,96.77,60.0,,,,,
-0141,Stony Brook University - Expansion Program at  Southampton Campus,,New York,DPT,76.7,100.0,60.0,35.0,43219.0,,,129657.0
-0144,Marist College,,New York,DPT,86.5,100.0,37.0,36.0,,,,
-0201,Boston University,,Massachusetts,DPT,83.3,98.55,138.0,36.0,79650.0,,,210490.0
-0202,Northeastern University,,Massachusetts,DPT,84.4,97.93,192.0,,,,,
-0203,Simmons University,,Massachusetts,DPT,85.1,97.3,74.0,36.0,58835.0,,,171851.0
-0204,Springfield College,,Massachusetts,DPT,91.1,97.47,79.0,35.0,58176.0,,,152345.0
-0205,University of Massachusetts Lowell,,Massachusetts,DPT,86.6,100.0,67.0,36.0,45794.0,,,138000.0
-0219,MGH Institute of Health Professions,,Massachusetts,DPT,83.8,99.26,136.0,,,,,
-0220,American International College,,Massachusetts,DPT,78.9,96.15,52.0,36.0,,,,
-0222,MCPHS University,,Massachusetts,DPT,82.6,98.55,69.0,30.0,60600.0,,,151500.0
-0225,Tufts University,,Massachusetts,DPT,68.8,,80.0,33.0,,,,
-0301,Northern Arizona University,,Arizona,DPT,81.1,98.9,90.0,25.0,20495.0,,,65950.0
-0303,A.T. Still University of Health Sciences,,Arizona,DPT,83.3,100.0,120.0,36.0,55500.0,,,166500.0
-0307,Franklin Pierce University - AZ,,Arizona,DPT,63.5,92.86,126.0,36.0,54156.0,,,112952.0
-0310,Northern Arizona University - EXPANSION PROGRAM  in PHOENIX,,Arizona,DPT,88.4,100.0,95.0,33.0,21696.0,,,100559.0
-0312,Midwestern University - AZ,,Arizona,DPT,79.8,96.97,99.0,30.0,48490.0,,,128048.0
-0313,Creighton University-Arizona Health Education Alliance,,Arizona,DPT,,,,33.0,37934.0,,,184066.0
-0314,Tufts University - Phoenix,,Arizona,DPT,51.7,,58.0,,84000.0,,,252000.0
-0316,Northern Arizona University - Hybrid Expansion Program,,Arizona,DPT,,,,32.0,17540.0,,,70080.0
-0401,University of Central Arkansas,,Arkansas,DPT,92.9,100.0,113.0,36.0,26939.0,,,62205.0
-0405,Arkansas State University,,Arkansas,DPT,86.8,100.0,53.0,36.0,13356.0,,0.0,40068.0
-0409,Harding University,,Arkansas,DPT,96.3,100.0,54.0,32.0,46590.0,,,143844.0
-0410,University of Arkansas for Medical Sciences,,Arkansas,DPT,100.0,100.0,45.0,34.0,20000.0,,,79364.0
-0413,Arkansas Colleges of Health Education,,Arkansas,DPT,42.9,,28.0,36.0,33000.0,,,109959.0
-0501,"California State University, Fresno",,California,DPT,89.1,100.0,64.0,,25835.0,,,79868.0
-0502,"California State University, Long Beach",,California,DPT,98.6,100.0,71.0,36.0,21212.0,,,127272.0
-0503,"California State University, Northridge",,California,DPT,94.9,98.31,59.0,30.0,28980.0,,,98797.0
-0504,Chapman University,,California,DPT,88.6,98.68,149.0,31.0,54981.0,,,182193.0
-0505,Loma Linda University,,California,DPT,87.3,99.1,110.0,36.0,54000.0,,,162000.0
-0506,Mount Saint Mary's University,,California,DPT,88.7,100.0,53.0,33.0,55232.0,,,161783.0
-0507,University of CA / San Francisco State University,,California,DPT,85.6,100.0,97.0,36.0,,,,
-0508,University of The Pacific,,California,DPT,79.2,97.22,72.0,25.0,75213.0,,,168113.0
-0509,University of Southern California,,California,DPT,86.6,99.5,202.0,33.0,84023.0,,0.0,235572.0
-0516,Samuel Merritt University,,California,DPT,80.7,98.86,88.0,32.0,65292.0,,,168858.0
-0517,Western University of Health Sciences - California,,California,DPT,77.5,100.0,102.0,32.0,49703.0,,,184844.0
-0521,"California State University, Sacramento",,California,DPT,95.1,98.36,61.0,36.0,46490.0,28980.0,1.0,99176.0
-0522,University of St Augustine for Health Sciences -  California,,California,DPT,76.6,97.83,367.0,28.0,84023.0,,,136226.0
-0523,Azusa Pacific University,,California,DPT,84.2,99.26,133.0,36.0,39975.0,,,119925.0
-0528,University of St Augustine for Health Sciences  ONLINE FLEX EXPANSION PROGRAM in San Diego,,California,DPT,63.2,96.0,95.0,36.0,60000.0,,,180000.0
-0537,San Diego State University,,California,DPT,91.9,98.65,74.0,36.0,47334.0,28434.0,1.0,169105.0
-0540,West Coast University,,California,DPT,77.5,97.5,80.0,36.0,40299.0,,,120897.0
-0548,University of Southern California - Hybrid DPT  Program,,California,DPT,81.3,96.91,96.0,32.0,86125.0,,,232815.0
-0601,University of Colorado,,Colorado,DPT,87.1,99.3,139.0,34.0,29280.0,,,73419.0
-0606,Regis University,,Colorado,DPT,87.7,99.38,162.0,28.0,50102.0,,,132552.0
-0701,Quinnipiac University,,Connecticut,DPT,96.7,100.0,122.0,36.0,52710.0,,,137950.0
-0702,University of Connecticut,,Connecticut,DPT,86.0,100.0,57.0,36.0,65328.0,,,184646.0
-0704,University of Hartford,,Connecticut,DPT,88.1,100.0,67.0,36.0,34045.0,,,102135.0
-0706,Sacred Heart University,,Connecticut,DPT,89.4,100.0,132.0,33.0,39500.0,,,120830.0
-0801,University of Delaware,,Delaware,DPT,95.8,100.0,167.0,30.0,43722.0,,,120284.0
-0901,Howard University,,District of Columbia,DPT,79.2,96.15,24.0,,38454.0,,,151898.0
-0902,George Washington University,,District of Columbia,DPT,96.6,100.0,89.0,36.0,48954.0,,,151370.0
-1001,Florida Agricultural and Mechanical University,,Florida,DPT,73.3,91.11,45.0,36.0,45990.0,18270.0,1.0,111025.0
-1002,Florida International University,,Florida,DPT,79.8,97.48,119.0,36.0,46009.0,25442.0,1.0,146610.0
-1003,University of Florida,,Florida,DPT,89.9,99.32,148.0,36.0,22722.0,,,68165.0
-1004,University of Miami,,Florida,DPT,90.4,98.25,114.0,36.0,44550.0,,,145860.0
-1014,University of North Florida,,Florida,DPT,84.5,98.28,58.0,36.0,62784.0,,,188352.0
-1016,University of Central Florida,,Florida,DPT,97.4,100.0,77.0,36.0,68209.0,,,141072.0
-1017,Nova Southeastern University - Ft Lauderdale,,Florida,DPT,97.7,100.0,86.0,32.0,33465.0,,,127874.0
-1019,University of St Augustine for Health Sciences - Florida,,Florida,DPT,82.4,98.89,261.0,28.0,,,,119899.0
-1029,Florida Gulf Coast University,,Florida,DPT,96.4,100.0,56.0,33.0,,,,
-1030,University of South Florida,,Florida,DPT,96.7,100.0,92.0,,,,,
-1035,Nova Southeastern University - Tampa,,Florida,DPT,94.9,100.0,78.0,36.0,33465.0,,,136868.0
-1036,University of St Augustine for Health Sciences -  ONLINE FLEX EXPANSION PROGRAM in Florida,,Florida,DPT,77.5,93.9,80.0,,,,,
-1052,University of St Augustine for Health Sciences -  EXPANSION PROGRAM in Miami,,Florida,DPT,69.5,95.47,249.0,36.0,48000.0,,,144000.0
-1053,Gannon University - Florida,,Florida,DPT,83.7,98.0,49.0,36.0,53018.0,,,165255.0
-1057,AdventHealth University,,Florida,DPT,83.3,100.0,42.0,,41600.0,,,119215.0
-1060,Florida Southern College,,Florida,DPT,83.1,95.59,65.0,28.0,54036.0,,,157400.0
-1101,Emory University,,Georgia,DPT,94.1,99.15,118.0,36.0,43066.0,,,169127.0
-1102,Georgia State University,,Georgia,DPT,96.4,100.0,83.0,,16447.0,,0.0,19005.0
-1103,Augusta University,,Georgia,DPT,95.8,98.59,71.0,,,,,
-1107,University of North Georgia,,Georgia,DPT,89.8,100.0,59.0,33.0,39705.0,,,120356.0
-1109,Georgia Southern University,,Georgia,DPT,95.6,98.53,68.0,36.0,10000.0,10000.0,0.0,
-1115,Mercer University,,Georgia,DPT,91.9,100.0,74.0,36.0,34974.0,,,109491.0
-1118,Brenau University,,Georgia,DPT,92.4,100.0,79.0,36.0,40240.0,,0.0,139054.0
-1119,Philadelphia College of Osteopathic Medicine,,Georgia,DPT,76.3,100.0,76.0,36.0,38738.0,,,123255.0
-1121,South College - Atlanta,,Georgia,DPT,,,,24.0,47900.0,,,108553.0
-1202,Hawaii Pacific University,,Hawaii,DPT,69.2,,91.0,24.0,59586.0,,,145976.0
-1301,Idaho State University,,Idaho,DPT,88.9,100.0,90.0,32.0,40154.0,13954.0,1.0,152412.0
-1401,Northern Illinois University,,Illinois,DPT,75.5,96.23,53.0,36.0,44280.0,,,132840.0
-1402,Northwestern University,,Illinois,DPT,86.0,98.89,178.0,30.0,56367.0,,,173837.0
-1403,Rosalind Franklin University of Medicine and Science,,Illinois,DPT,82.8,96.63,87.0,29.0,45606.0,,,133146.0
-1405,University of Illinois at Chicago,,Illinois,DPT,91.2,99.12,113.0,33.0,,,,
-1411,Bradley University,,Illinois,DPT,89.1,98.18,55.0,36.0,27000.0,,,81000.0
-1417,Midwestern University - IL,,Illinois,DPT,90.0,98.89,90.0,31.0,50975.0,,,159943.0
-1420,Governors State University,,Illinois,DPT,62.7,94.92,59.0,32.0,,,,
-1429,North Central College,,Illinois,DPT,,,,28.0,35483.0,,,109035.0
-1501,Indiana University,,Indiana,DPT,97.6,100.0,82.0,36.0,32618.0,,,119321.0
-1502,University of Evansville,,Indiana,DPT,93.6,100.0,93.0,36.0,41405.0,,,129864.0
-1507,University of Indianapolis,,Indiana,DPT,88.8,97.75,89.0,32.0,43310.0,,,127294.0
-1513,Trine University,,Indiana,DPT,95.9,100.0,73.0,33.0,42705.0,,,117984.0
-1514,Indiana State University,,Indiana,DPT,94.0,100.0,50.0,,37240.0,,,112842.0
-1516,Hanover College,,Indiana,DPT,53.4,83.54,163.0,24.0,48000.0,,,106174.0
-1517,Indiana Wesleyan University,,Indiana,DPT,68.4,,19.0,33.0,33864.0,,,106362.0
-1601,University of lowa,,Iowa,DPT,97.8,100.0,90.0,36.0,,,,
-1602,Des Moines University - Osteopathic Medical Center,,Iowa,DPT,88.2,100.0,102.0,,,,,
-1605,St Ambrose University,,Iowa,DPT,96.9,100.0,65.0,,,,,
-1608,Clarke University,,Iowa,DPT,100.0,100.0,51.0,36.0,37247.0,,,109940.0
-1612,Briar Cliff University,,Iowa,DPT,76.8,96.43,56.0,30.0,33000.0,,,104030.0
-1613,Allen College,,Iowa,DPT,46.2,100.0,13.0,36.0,31358.0,,0.0,117731.0
-1701,University of Kansas Medical Center,,Kansas,DPT,79.7,99.15,118.0,36.0,45947.0,,,137843.0
-1702,Wichita State University,,Kansas,DPT,94.0,100.0,83.0,30.0,,,,
-1710,University of Saint Mary,,Kansas,DPT,91.4,100.0,70.0,29.0,,,,
-1801,University of Kentucky,,Kentucky,DPT,92.7,100.0,123.0,36.0,22225.0,,,72897.0
-1808,Bellarmine University,,Kentucky,DPT,81.6,99.29,141.0,36.0,44000.0,,,134235.0
-1810,Western Kentucky University,,Kentucky,DPT,93.3,98.33,60.0,28.0,38138.0,,,80758.0
-1813,University of the Cumberlands,,Kentucky,DPT,41.2,,17.0,24.0,,,0.0,80500.0
-1901,Louisiana State Univ Health Sciences Center - New  Orleans,,Louisiana,DPT,90.3,96.83,62.0,36.0,37884.0,,,143437.0
-1905,Louisiana State Univ Health Sciences Center -  Shreveport,,Louisiana,DPT,95.7,100.0,69.0,36.0,32039.0,,,104065.0
-1907,Franciscan Missionaries of Our Lady University,,Louisiana,DPT,76.0,98.67,75.0,32.0,39149.0,,0.0,104766.0
-2001,University of New England,,Maine,DPT,84.8,100.0,112.0,34.0,62490.0,,,195822.0
-2003,Husson University,,Maine,DPT,87.9,97.06,66.0,28.0,36720.0,,,121225.0
-2101,University of Maryland - Baltimore,,Maryland,DPT,78.8,97.08,137.0,29.0,,,,
-2102,University of Maryland - Eastern Shore,,Maryland,DPT,98.3,100.0,57.0,36.0,24576.0,,,94568.0
-2301,Andrews University,,Michigan,DPT,73.9,97.01,65.0,30.0,47613.0,,,130088.0
-2302,Grand Valley State University,,Michigan,DPT,89.3,100.0,112.0,36.0,49068.0,,,129936.0
-2303,Oakland University,,Michigan,DPT,87.8,100.0,74.0,,,,,
-2304,University of Michigan - Flint,,Michigan,DPT,81.8,94.55,110.0,33.0,24307.0,,,68643.0
-2305,Wayne State University,,Michigan,DPT,95.6,100.0,68.0,42.0,32863.0,,,113964.0
-2315,Central Michigan University,,Michigan,DPT,88.6,98.86,88.0,36.0,36979.0,36979.0,0.0,120073.0
-2322,Central Michigan University - EXPANSION PROGRAM  at Michigan Technological University,,Michigan,DPT,77.8,100.0,18.0,,,,,
-2325,Western Michigan University,,Michigan,DPT,78.9,100.0,52.0,36.0,,,,
-2327,Concordia University - Ann Arbor,,Michigan,DPT,,,,,,,,
-2401,College of St Scholastica,,Minnesota,DPT,87.2,97.87,94.0,36.0,,,0.0,121198.0
-2402,Mayo Clinic School of Health Sciences,,Minnesota,DPT,96.3,100.0,54.0,33.0,,,,
-2403,University of Minnesota,,Minnesota,DPT,87.2,100.0,117.0,,,,,82467.0
-2404,St. Catherine University,,Minnesota,DPT,97.1,100.0,69.0,33.0,50106.0,,,111040.0
-2412,Concordia University - Saint Paul,,Minnesota,DPT,87.3,98.41,63.0,36.0,31860.0,,,95580.0
-2501,University of Mississippi at the Medical Center,,Mississippi,DPT,83.5,100.0,85.0,36.0,24205.0,,,77264.0
-2506,William Carey University,,Mississippi,DPT,90.5,100.0,42.0,30.0,36500.0,,,115330.0
-2601,Maryville University of Saint Louis,,Missouri,DPT,98.6,100.0,72.0,42.0,26070.0,,,101984.0
-2602,Rockhurst University,,Missouri,DPT,80.7,94.38,88.0,30.0,44320.0,,,110800.0
-2603,Saint Louis University,,Missouri,DPT,94.3,100.0,157.0,36.0,21000.0,,,119171.0
-2604,University of Missouri,,Missouri,DPT,97.4,99.12,113.0,36.0,,,,
-2605,Washington University in St Louis,,Missouri,DPT,86.7,97.87,188.0,36.0,40724.0,,,126256.0
-2614,Southwest Baptist University,,Missouri,DPT,67.9,97.14,140.0,36.0,36400.0,,,109200.0
-2616,Missouri State University,,Missouri,DPT,86.7,100.0,75.0,36.0,33516.0,16802.0,1.0,117267.0
-2625,Graceland University,,Missouri,DPT,,,,24.0,52920.0,,,123872.0
-2701,University of Montana - Missoula,,Montana,DPT,93.2,98.65,74.0,33.0,40732.0,9242.0,1.0,139514.0
-2801,University of Nebraska Medical Center,,Nebraska,DPT,92.0,99.2,125.0,25.0,41105.0,,,93389.0
-2804,Creighton University,,Nebraska,DPT,85.2,100.0,162.0,,37934.0,,,184066.0
-2809,College of St. Mary,,Nebraska,DPT,52.6,77.08,38.0,31.0,36750.0,,,100400.0
-2901,"University of Nevada, Las Vegas",,Nevada,DPT,93.7,98.95,95.0,27.0,49924.0,,,117755.0
-2902,Touro University - Nevada,,Nevada,DPT,81.1,100.0,74.0,36.0,41010.0,,,129168.0
-3005,Franklin Pierce University - NH,,New Hampshire,DPT,77.9,98.23,113.0,36.0,35880.0,,,117856.0
-3006,Plymouth State University,,New Hampshire,DPT,75.0,100.0,48.0,36.0,32940.0,27870.0,1.0,107787.0
-3101,"Rutgers, The State University of New Jersey",,New Jersey,DPT,88.2,99.22,127.0,28.0,42596.0,,,124521.0
-3107,Stockton University,,New Jersey,DPT,82.0,96.72,61.0,31.0,38244.0,24940.0,1.0,111847.0
-3110,Seton Hall University,,New Jersey,DPT,89.2,100.0,74.0,35.0,,,,
-3111,Kean University,,New Jersey,DPT,91.7,100.0,36.0,36.0,38565.0,28060.0,1.0,108131.0
-3201,University of New Mexico,,New Mexico,DPT,98.0,100.0,50.0,33.0,,,,
-3301,University of Alabama at Birmingham,,Alabama,DPT,89.2,98.06,102.0,32.0,68400.0,27720.0,1.0,196428.0
-3302,University of South Alabama,,Alabama,DPT,97.4,98.7,77.0,36.0,55272.0,23735.0,1.0,142296.0
-3310,Alabama State University,,Alabama,DPT,55.3,89.36,47.0,36.0,32960.0,,,93936.0
-3315,Samford University,,Alabama,DPT,86.3,100.0,73.0,27.0,41462.0,,,123042.0
-3317,Faulkner University,,Alabama,DPT,53.6,,28.0,,38250.0,,,94100.0
-3401,Duke University,,North Carolina,DPT,82.6,98.91,184.0,,,,,
-3402,East Carolina University,,North Carolina,DPT,93.7,100.0,63.0,,,,,
-3403,University of North Carolina at Chapel Hill,,North Carolina,DPT,94.9,100.0,59.0,32.0,25448.0,,,138663.0
-3411,Winston-Salem State University,,North Carolina,DPT,78.9,96.23,52.0,36.0,16407.0,,,72288.0
-3412,Western Carolina University,,North Carolina,DPT,85.0,97.85,93.0,36.0,26239.0,9959.0,1.0,90431.0
-3414,Elon University,,North Carolina,DPT,88.9,97.65,81.0,36.0,80472.0,,,241416.0
-3418,Campbell University,,North Carolina,DPT,90.4,98.81,83.0,36.0,40093.0,,,133765.0
-3419,Wingate University,,North Carolina,DPT,96.1,100.0,76.0,36.0,38850.0,,,118694.0
-3421,High Point University,,North Carolina,DPT,77.4,98.39,124.0,36.0,53010.0,,,191083.0
-3422,Methodist University,,North Carolina,DPT,78.1,98.63,73.0,36.0,,,,
-3501,University of North Dakota,,North Dakota,DPT,85.7,100.0,91.0,28.0,34051.0,,,73707.0
-3503,University of Mary,,North Dakota,DPT,77.3,98.86,88.0,30.0,34307.0,,,104231.0
-3504,University of Jamestown,,North Dakota,DPT,88.9,100.0,54.0,,,,,
-3601,Cleveland State University,,Ohio,DPT,92.9,98.61,70.0,,,,,
-3602,University of Toledo,,Ohio,DPT,89.0,97.59,82.0,26.0,39746.0,,0.0,114409.0
-3603,Ohio University,,Ohio,DPT,93.8,100.0,97.0,36.0,24270.0,12282.0,1.0,89011.0
-3604,Ohio State University,,Ohio,DPT,97.9,100.0,96.0,36.0,,,,
-3617,University of Findlay - Weekend,,Ohio,DPT,93.7,98.46,63.0,34.0,35353.0,,,104475.0
-3618,University of Cincinnati,,Ohio,DPT,94.6,98.65,74.0,36.0,26376.0,,,79128.0
-3619,Youngstown State University,,Ohio,DPT,76.0,94.87,75.0,30.0,,,,
-3624,Mount St Joseph University,,Ohio,DPT,91.6,98.59,71.0,36.0,22500.0,,,67500.0
-3627,Walsh University,,Ohio,DPT,85.5,100.0,69.0,29.0,23000.0,,,98995.0
-3628,University of Findlay - Traditional,,Ohio,DPT,83.3,100.0,60.0,34.0,40275.0,,,121108.0
-3630,University of Dayton,,Ohio,DPT,82.6,98.55,69.0,36.0,,,,
-3641,University of Mount Union,,Ohio,DPT,67.8,98.31,59.0,34.0,43514.0,,,101200.0
-3644,Bowling Green State University,,Ohio,DPT,43.9,,82.0,24.0,49878.0,,,99756.0
-3701,Langston University,,Oklahoma,DPT,60.0,92.0,25.0,36.0,28628.0,,,87072.0
-3702,University of Oklahoma Health Sciences Center,,Oklahoma,DPT,80.2,94.66,131.0,34.0,60000.0,,,180000.0
-3712,Oklahoma City University,,Oklahoma,DPT,69.1,90.74,42.0,33.0,26847.0,,,101175.0
-3801,Pacific University,,Oregon,DPT,88.1,100.0,101.0,35.0,46317.0,,,138952.0
-3805,George Fox University,,Oregon,DPT,83.3,100.0,90.0,30.0,40555.0,,,101388.0
-3806,Western University of Health Sciences - Oregon,,Oregon,DPT,63.6,,44.0,33.0,51816.0,,,191183.0
-3807,Oregon State University - Cascades,,Oregon,DPT,95.5,,44.0,36.0,31483.0,,,94450.0
-3901,Arcadia University,,Pennsylvania,DPT,85.3,100.0,129.0,25.0,40360.0,,,122646.0
-3902,Drexel University,,Pennsylvania,DPT,89.3,100.0,121.0,30.0,62212.0,,0.0,151456.0
-3903,Saint Joseph's University,,Pennsylvania,DPT,79.6,97.73,132.0,31.0,47598.0,,,126928.0
-3904,Temple University,,Pennsylvania,DPT,83.5,99.08,109.0,29.0,64311.0,46956.0,1.0,146244.0
-3905,Thomas Jefferson University,,Pennsylvania,DPT,92.2,99.03,103.0,,,,,42803.0
-3906,University of Pittsburgh,,Pennsylvania,DPT,82.0,96.98,256.0,25.0,55392.0,,,137718.0
-3907,University of Scranton,,Pennsylvania,DPT,93.5,98.7,77.0,36.0,,,0.0,
-3916,Slippery Rock University of Pennsylvania,,Pennsylvania,DPT,84.9,97.98,99.0,32.0,38448.0,25632.0,1.0,83470.0
-3917,Duquesne University,,Pennsylvania,DPT,91.6,98.61,71.0,,,,,210597.0
-3918,Gannon University - Pennsylvania,,Pennsylvania,DPT,82.1,100.0,84.0,36.0,23000.0,,,99053.0
-3920,Misericordia University,,Pennsylvania,DPT,93.9,96.43,82.0,36.0,69000.0,,,207000.0
-3921,Chatham University,,Pennsylvania,DPT,80.0,100.0,70.0,28.0,43248.0,,,118751.0
-3922,Widener University,,Pennsylvania,DPT,92.1,98.68,76.0,33.0,49200.0,,,158608.0
-3929,Neumann University,,Pennsylvania,DPT,70.3,95.31,64.0,36.0,62700.0,,,188100.0
-3930,Saint Francis University,,Pennsylvania,DPT,100.0,100.0,45.0,35.0,31475.0,,0.0,128695.0
-3932,Lebanon Valley College,,Pennsylvania,DPT,85.3,100.0,102.0,28.0,60000.0,,,168000.0
-3941,Alvernia University,,Pennsylvania,DPT,78.6,96.43,56.0,32.0,54500.0,,,148024.0
-3942,DeSales University,,Pennsylvania,DPT,88.7,100.0,53.0,34.0,34650.0,,,117810.0
-3944,Messiah University,,Pennsylvania,DPT,82.0,93.44,61.0,32.0,43312.0,,,115500.0
-3945,Arcadia University - Online Hybrid DPT Program,,Pennsylvania,DPT,74.8,96.0,99.0,,,,,
-3946,Moravian University,,Pennsylvania,DPT,65.1,89.36,43.0,32.0,40950.0,,,118510.0
-3947,Seton Hill University,,Pennsylvania,DPT,38.9,,18.0,36.0,,,0.0,
-3949,University of Pittsburgh - Expansion Program,,Pennsylvania,DPT,,,,25.0,44400.0,,,109649.0
-4001,University of Rhode Island,,Rhode Island,DPT,85.0,96.67,60.0,30.0,42436.0,,,111936.0
-4101,Medical University of South Carolina,,South Carolina,DPT,90.8,99.24,131.0,35.0,36840.0,,,120089.0
-4106,University of South Carolina - Columbia,,South Carolina,DPT,89.6,100.0,48.0,32.0,15471.0,,,41772.0
-4112,Anderson University,,South Carolina,DPT,92.4,98.73,79.0,36.0,33125.0,,0.0,99375.0
-4113,Charleston Southern University,,South Carolina,DPT,65.1,,43.0,36.0,35300.0,,,127800.0
-4201,University of South Dakota,,South Dakota,DPT,89.1,95.31,64.0,32.0,45452.0,,,136324.0
-4203,Augustana University,,South Dakota,DPT,,,,24.0,51500.0,,,110555.0
-4301,University of Tennessee Health Science Center,,Tennessee,DPT,79.2,99.17,120.0,,34536.0,,,124400.0
-4307,Tennessee State University,,Tennessee,DPT,90.9,98.48,66.0,35.0,34912.0,15393.0,1.0,104076.0
-4308,University of Tennessee Chattanooga,,Tennessee,DPT,96.9,100.0,65.0,,,,,
-4310,East Tennessee State University,,Tennessee,DPT,93.2,100.0,74.0,,49447.0,,,155058.0
-4312,Belmont University,,Tennessee,DPT,83.8,98.21,111.0,36.0,,,,
-4315,South College - Knoxville,,Tennessee,DPT,80.2,96.99,353.0,24.0,47900.0,,,108553.0
-4319,Lincoln Memorial University,,Tennessee,DPT,64.9,,57.0,36.0,40280.0,,,120840.0
-4401,Texas State University,,Texas,DPT,89.4,98.82,85.0,36.0,,,,
-4402,Texas Tech University Health Sciences Center,,Texas,DPT,94.9,100.0,136.0,36.0,28092.0,,,51483.0
-4403,Texas Woman's University - EXPANSION PROGRAM  in Houston,,Texas,DPT,98.2,100.0,110.0,33.0,15518.0,,,51480.0
-4405,University of Texas Health Science Center at San  Antonio,,Texas,DPT,95.6,100.0,90.0,36.0,,,,
-4406,University of Texas Medical Branch at Galveston,,Texas,DPT,99.0,100.0,99.0,36.0,,,,
-4407,Army - Baylor University,,Texas,DPT,98.3,100.0,58.0,23.0,58500.0,,,124345.0
-4421,University of Texas Southwestern Medical Center,,Texas,DPT,95.7,100.0,69.0,31.0,,,0.0,
-4422,Hardin-Simmons University,,Texas,DPT,93.2,100.0,74.0,27.0,39524.0,,,102414.0
-4423,University of Texas at El Paso,,Texas,DPT,95.5,100.0,66.0,36.0,,,,
-4430,Angelo State University,,Texas,DPT,92.7,100.0,55.0,33.0,16930.0,6170.0,1.0,64950.0
-4432,University of St Augustine for Health Sciences - Austin,,Texas,DPT,74.8,97.83,317.0,28.0,54600.0,,,119899.0
-4433,Texas Woman's University,,Texas,DPT,95.9,100.0,97.0,,32123.0,,,75216.0
-4436,University of North Texas Health Science Center - Fort  Worth,,Texas,DPT,83.2,98.88,89.0,33.0,26640.0,,,73512.0
-4441,University of St Augustine for Health Sciences -  ONLINE FLEX EXPANSION PROGRAM in Austin,,Texas,DPT,75.0,94.32,88.0,,,,,
-4442,University of Texas Medical Branch at Galveston -  BRIDGE PROGRAM FOR PTAS,,Texas,DPT,88.2,100.0,68.0,,,,,
-4444,University of the Incarnate Word,,Texas,DPT,87.4,97.87,87.0,36.0,36260.0,,,118130.0
-4449,University of Mary Hardin-Baylor,,Texas,DPT,89.2,98.48,65.0,28.0,,,,
-4451,Baylor University,,Texas,DPT,90.8,98.42,173.0,,58500.0,,,124345.0
-4452,University of St. Augustine - Dallas,,Texas,DPT,73.4,100.0,94.0,,,,,
-4453,University of Texas Medical Branch at Galveston -  Hybrid Expansion Program,,Texas,DPT,88.5,,26.0,,,,,
-4501,University of Utah,,Utah,DPT,82.5,100.0,97.0,33.0,13440.0,,,120670.0
-4505,Rocky Mountain University of Health Professions,,Utah,DPT,89.3,98.49,197.0,32.0,46534.0,,,125134.0
-4506,University of Utah - Expansion Program One,,Utah,DPT,,,,36.0,36000.0,,,108000.0
-4601,University of Vermont,,Vermont,DPT,73.5,100.0,68.0,30.0,57540.0,,,146655.0
-4801,Eastern Washington University,,Washington,DPT,94.7,100.0,76.0,36.0,28164.0,,,153720.0
-4802,University of Puget Sound,,Washington,DPT,85.1,98.51,67.0,36.0,60000.0,,,180000.0
-4803,University of Washington,,Washington,DPT,82.6,100.0,92.0,36.0,,,,
-4811,Pacific Northwest University of Health Sciences,,Washington,DPT,,,,34.0,42539.0,,0.0,144832.0
-4812,Whitworth University,,Washington,DPT,,,,36.0,,,,134040.0
-4902,West Virginia University,,West Virginia,DPT,96.1,100.0,77.0,,44668.0,,,151037.0
-4903,Wheeling University,,West Virginia,DPT,79.4,94.74,34.0,32.0,26872.0,,,88740.0
-4908,Marshall University,,West Virginia,DPT,96.8,100.0,63.0,29.0,33558.0,,,113583.0
-4996,Concordia University Wisconsin - Expansion Program,,Wisconsin,DPT,83.3,,6.0,34.0,,,,
-4997,Bellin College,,Wisconsin,DPT,,,,28.0,41748.0,,,103784.0
-5000,University of Wisconsin-Stevens Point,,Wisconsin,DPT,79.2,,24.0,30.0,20906.0,,0.0,62720.0
-5001,Marquette University,,Wisconsin,DPT,89.4,100.0,132.0,28.0,51355.0,,,154668.0
-5002,University of Wisconsin - Lacrosse,,Wisconsin,DPT,94.1,100.0,84.0,36.0,,,,
-5003,University of Wisconsin - Madison,,Wisconsin,DPT,98.7,100.0,78.0,35.0,42267.0,19785.0,1.0,147717.0
-5008,Concordia University Wisconsin,,Wisconsin,DPT,93.6,100.0,47.0,30.0,42000.0,,,107822.0
-5011,Carroll University,,Wisconsin,DPT,85.8,98.65,148.0,36.0,34945.0,,,122943.0
-5013,University of Wisconsin - Milwaukee,,Wisconsin,DPT,96.0,100.0,50.0,36.0,26410.0,,,68642.0
-5201,University of Puerto Rico - Medical Sciences Campus,,Puerto Rico,DPT,77.8,92.11,36.0,32.0,,,,
-6231,Robert Gordon University - DPT,,,DPT,50.0,,2.0,,,,,
+school_code,school_name,city,state,degree_type,board_pass_rate_first_time_2yr,board_pass_rate_ultimate_2yr,graduates_tested,program_length_months,tuition_per_year,tuition_instate,tuition_is_oos,total_program_cost,total_program_cost_instate,cost_source_url
+0001,Old Dominion University,,Virginia,DPT,91.6,97.59,83.0,35.0,67747.0,,,176804.0,,https://www.odu.edu/sites/default/files/2024/documents/dpt-student-financial-fact-sheet-2024.pdf
+0002,Virginia Commonwealth University,,Virginia,DPT,93.9,98.26,115.0,35.0,39907.0,20134.0,1.0,108550.0,58724.166666666664,https://pt.chp.vcu.edu/media/chp-college-of-health-professions/physical-therapy/docs/2025DPTStudentFinancialFactSheet.pdf
+0008,Shenandoah University,,Virginia,DPT,86.1,100.0,79.0,32.0,,,,,,
+0010,Marymount University,,Virginia,DPT,83.6,98.63,73.0,,,,,,,
+0011,Hampton University,,Virginia,DPT,78.3,95.65,23.0,28.0,32724.0,,,117935.0,,https://home.hamptonu.edu/science/wp-content/uploads/sites/47/2024/10/DPT-Financial-Fact-Sheet-2024.pdf
+0014,University of Lynchburg,,Virginia,DPT,83.7,100.0,92.0,30.0,42370.0,,,113165.0,,https://www.lynchburg.edu/wp-content/uploads/2024/01/Doctor-of-Physical-Therapy-Financial-Fact-Sheet-2023-24-1.pdf
+0015,Radford University,,Virginia,DPT,94.4,98.15,54.0,30.0,51744.0,25676.0,1.0,144317.0,64190.0,https://www.radford.edu/waldron-college-health-human-services/physical-therapy-department/_documents/dpt-student-financial-fact-sheet.pdf
+0017,Shenandoah University - EXPANSION PROGRAM at  Northern Virginia Campus,,Virginia,DPT,100.0,100.0,36.0,33.0,33075.0,,,129595.0,,https://www.su.edu/physical-therapy/wp-content/uploads/sites/15/2025/10/2025-dpt-student-financial-fact-sheet-Winchester.pdf
+0020,Mary Baldwin University,,Virginia,DPT,82.5,98.25,57.0,33.0,35536.0,,,125715.0,,https://marybaldwin.edu/wp-content/uploads/2025/11/2025-dpt-student-financial-fact-sheet-1.docx.pdf
+0021,Emory and Henry College,,Virginia,DPT,84.8,96.61,59.0,33.0,37896.0,,,122295.0,,https://www.emoryhenry.edu/live/blurbs/1791-financial-fact-sheet
+0101,Columbia University,,New York,DPT,92.3,100.0,143.0,32.0,40978.0,,,153055.0,,https://www.vagelos.columbia.edu/education/academic-programs/programs-physical-therapy/doctor-physical-therapy/financial-fact-sheet
+0102,Daemen University,,New York,DPT,94.5,98.43,127.0,32.0,42735.0,,,128787.0,,https://daemen.edu/sites/daemen/files/documents/dpt-student-financial-fact-sheet.pdf
+0103,Hunter College (CUNY),,New York,DPT,87.5,100.0,56.0,36.0,40850.0,17300.0,1.0,111654.0,51900.0,https://www2.hunter.cuny.edu/pending-migration/pt/2022-2023-hunter-college-dpt-financial-fact-sheet.pdf
+0104,Ithaca College,,New York,DPT,90.4,99.26,135.0,28.0,54556.0,,,184047.0,,https://www.ithaca.edu/sites/default/files/2025-09/2025-dpt-student-financial-fact-sheet.pdf
+0105,Long Island University - Brooklyn Campus,,New York,DPT,71.6,97.3,74.0,29.0,,,,,,
+0106,New York University,,New York,DPT,70.1,93.59,77.0,36.0,56712.0,,,189040.0,,https://steinhardt.nyu.edu/degree/doctor-physical-therapy/tuition-fees-and-financial-aid
+0107,Russell Sage College,,New York,DPT,78.4,97.3,74.0,,,,,,,
+0108,"University at Buffalo, State University of New York",,New York,DPT,88.0,97.59,83.0,36.0,24390.0,,,93108.0,,http://sphhp.buffalo.edu/rs/dpt/
+0109,SUNY (State University of NY) Downstate Health  Sciences University,,New York,DPT,89.7,100.0,39.0,36.0,24820.0,,,86966.0,,https://www.downstate.edu/education-training/school-of-health-professions/programs/physical-therapy/_documents/2023_financial_fact_sheet.pdf
+0110,Stony Brook University,,New York,DPT,82.1,100.0,95.0,,32518.0,,,112937.0,,https://healthprofessions.stonybrookmedicine.edu/programs/pt
+0111,State University of NY Upstate Medical University,,New York,DPT,82.2,100.0,73.0,33.0,,,,,,
+0112,Touro University,,New York,DPT,78.7,100.0,61.0,36.0,22388.0,,,107937.0,,https://shs.touro.edu/programs/doctor-of-physical-therapy/
+0121,D'youville College,,New York,DPT,71.1,96.39,83.0,33.0,40250.0,,,129395.0,,https://www.dyu.edu/sites/default/files/2025-07/Financial%20Fact%20Sheet%202025%20final%207_24.pdf
+0125,The College of Staten Island,,New York,DPT,85.7,100.0,42.0,36.0,,,,,,https://www.csi.cuny.edu/academics-and-research/departments-programs/physical-therapy
+0126,Mercy University,,New York,DPT,79.8,96.3,79.0,40.0,60000.0,,,198000.0,,https://www.mercy.edu/media/2025-dpt-student-financial-fact-sheet-mercy-university
+0127,New York Medical College,,New York,DPT,72.4,95.4,87.0,36.0,38825.0,,,126979.0,,https://www.nymc.edu/shsp/tuition--aid/capte-financial-fact-sheet/
+0128,Utica University,,New York,DPT,77.3,96.97,66.0,,46468.0,,,169068.0,,https://www.utica.edu/tuition-and-financial-aid/tuition-and-fees/tuition-and-fees-utica-campus
+0136,New York Institute of Technology,,New York,DPT,78.8,96.97,66.0,36.0,62580.0,,,165347.0,,https://files.nyit.edu/files/health_professions/DPT_StudentFinancialFactSheet25.pdf
+0137,Clarkson University,,New York,DPT,69.7,94.12,33.0,36.0,25438.0,,,101752.0,,https://www.clarkson.edu/academics/schools-colleges/health/physical-therapy-department
+0138,Nazareth University,,New York,DPT,88.9,100.0,99.0,36.0,66333.0,,,206810.0,,https://www2.naz.edu/download_file/view/20832/1704/
+0139,Dominican University New York,,New York,DPT,90.5,100.0,42.0,35.0,39200.0,,,129639.0,,https://www.duny.edu/wp-content/uploads/2021/06/PT-Financial-Fact-Sheet-2025.pdf
+0140,Touro University - EXPANSION PROGRAM at NYC,,New York,DPT,83.3,96.77,60.0,,,,,,,
+0141,Stony Brook University - Expansion Program at  Southampton Campus,,New York,DPT,76.7,100.0,60.0,35.0,43219.0,32518.0,1.0,129657.0,94844.16666666666,https://healthprofessions.stonybrookmedicine.edu/sites/default/files/Financial%20Fact%20Sheet%202024.docx%20%281%29.pdf
+0144,Marist College,,New York,DPT,86.5,100.0,37.0,36.0,,,,,,
+0201,Boston University,,Massachusetts,DPT,83.3,98.55,138.0,36.0,79650.0,,,210490.0,,https://www.bu.edu/sargent/files/2024/11/2024-dpt-student-financial-fact-sheet.pdf
+0202,Northeastern University,,Massachusetts,DPT,84.4,97.93,192.0,,,,,,,https://bouve.northeastern.edu/wp-content/uploads/2024/10/mgh-nu-financial-fact-sheet-2024.pdf
+0203,Simmons University,,Massachusetts,DPT,85.1,97.3,74.0,36.0,58835.0,,,171851.0,,https://www.simmons.edu/sites/default/files/2025-09/2025-dpt-student-financial-fact-sheet-simmons.pdf
+0204,Springfield College,,Massachusetts,DPT,91.1,97.47,79.0,35.0,58176.0,,,152345.0,,https://springfield.edu/sites/default/files/capte-financial-fact-sheet-2025-2026.pdf
+0205,University of Massachusetts Lowell,,Massachusetts,DPT,86.6,100.0,67.0,36.0,45794.0,,,138000.0,,https://www.uml.edu/health-sciences/pt/graduate/financial-fact-sheet.aspx
+0219,MGH Institute of Health Professions,,Massachusetts,DPT,83.8,99.26,136.0,,,,,,,
+0220,American International College,,Massachusetts,DPT,78.9,96.15,52.0,36.0,,,,,,https://www.aic.edu/school-of-health-sciences/program/physical-therapy/
+0222,MCPHS University,,Massachusetts,DPT,82.6,98.55,69.0,32.0,60600.0,,,151500.0,,https://www.mcphs.edu/admission-and-aid/cost-and-aid/tuition-and-fees
+0225,Tufts University,,Massachusetts,DPT,68.8,,80.0,33.0,,,,,,
+0301,Northern Arizona University,,Arizona,DPT,81.1,98.9,90.0,25.0,20495.0,,,65950.0,,http://nau.edu/chhs/physical-therapy/
+0303,A.T. Still University of Health Sciences,,Arizona,DPT,83.3,100.0,120.0,30.0,44330.0,,,129940.0,,https://www.atsu.edu/pdf/2026-December_grads-dpt-student-financial-fact-sheet.pdf
+0307,Franklin Pierce University - AZ,,Arizona,DPT,63.5,92.86,126.0,36.0,54156.0,,,112952.0,,https://franklinpierce.edu/academics/programs/physical-therapy/2024-2025-dpt-FPU-AZ-student-financial-fact-sheet.pdf
+0310,Northern Arizona University - EXPANSION PROGRAM  in PHOENIX,,Arizona,DPT,88.4,100.0,95.0,33.0,21696.0,,,100559.0,,https://healthprofessions.publichealth.arizona.edu/academics/physical-therapy-program/admissions/financial-fact-sheet
+0312,Midwestern University - AZ,,Arizona,DPT,79.8,96.97,99.0,30.0,48490.0,,,128048.0,,https://www.midwestern.edu/documents/dpt-az-student-financial-fact-sheet
+0313,Creighton University-Arizona Health Education Alliance,,Arizona,DPT,,,,33.0,37934.0,,,184066.0,,https://www.creighton.edu/sites/default/files/PHX-2025-dpt-student-financial-fact-sheet.pdf
+0314,Tufts University - Phoenix,,Arizona,DPT,51.7,,58.0,,84000.0,,,252000.0,,https://medicine.tufts.edu/admissions-financial-aid/admission-program/doctor-physical-therapy/dpt-phoenix
+0316,Northern Arizona University - Hybrid Expansion Program,,Arizona,DPT,,,,32.0,35033.0,17540.0,1.0,105066.0,46773.33333333333,https://legacy.nau.edu/wp-content/uploads/sites/147/10.2023-Hybrid_dpt-student-financial-fact-sheet_Hybrid.pdf
+0401,University of Central Arkansas,,Arkansas,DPT,92.9,100.0,113.0,36.0,26939.0,,,62205.0,,https://uca.edu/pt/files/2026/01/2025-UCA-dpt-student-financial-fact-sheet-v2-1.pdf
+0405,Arkansas State University,,Arkansas,DPT,86.8,100.0,53.0,36.0,13356.0,,0.0,40068.0,,https://www.astate.edu/programs/dpt-in-physical-therapy.html
+0409,Harding University,,Arkansas,DPT,96.3,100.0,54.0,32.0,46590.0,,,143844.0,,https://www.harding.edu/allied-health/physical-therapy/
+0410,University of Arkansas for Medical Sciences,,Arkansas,DPT,100.0,100.0,45.0,34.0,20000.0,,,79364.0,,https://healthprofessions.uams.edu/programs/physical-therapy
+0413,Arkansas Colleges of Health Education,,Arkansas,DPT,42.9,,28.0,36.0,33000.0,,,109959.0,,https://physicaltherapy.achehealth.edu/wp-content/uploads/sites/5/2025/03/2025-2026-dpt-student-financial-fact-sheet.pdf
+0501,"California State University, Fresno",,California,DPT,89.1,100.0,64.0,,25835.0,,,79868.0,,http://fresnostate.edu/chhs/physical-therapy/index.html
+0502,"California State University, Long Beach",,California,DPT,98.6,100.0,71.0,36.0,21212.0,,,127272.0,,https://www.csulb.edu/student-records/tuition-and-fees
+0503,"California State University, Northridge",,California,DPT,94.9,98.31,59.0,30.0,28980.0,,,98797.0,,https://www.csun.edu/health-human-development/physical-therapy
+0504,Chapman University,,California,DPT,88.6,98.68,149.0,31.0,54981.0,,,182193.0,,https://www.chapman.edu/crean/academic-programs/graduate-programs/physical-therapy/_files/dpt_fact-sheet-2023_2024.pdf
+0505,Loma Linda University,,California,DPT,87.3,99.1,110.0,36.0,54000.0,,,162000.0,,https://alliedhealth.llu.edu/academics/physical-therapy/entry-level-doctor-physical-therapy-dpt
+0506,Mount Saint Mary's University,,California,DPT,88.7,100.0,53.0,33.0,55232.0,,,161783.0,,https://www.msmu.edu/media/website/academics/departments/physical-therapy/2025-dpt-student-financial-fact-sheet.pdf
+0507,University of CA / San Francisco State University,,California,DPT,85.6,100.0,97.0,36.0,,,,,,https://ptrehab.ucsf.edu/dpt-program
+0508,University of The Pacific,,California,DPT,79.2,97.22,72.0,25.0,75213.0,,,168113.0,,https://healthsciences.pacific.edu/sites/default/files/users/user815/2022-2023-University%20of%20the%20Pacific%20student-financial-fact-sheet.pdf
+0509,University of Southern California,,California,DPT,86.6,99.5,202.0,33.0,84023.0,,0.0,235572.0,,https://pt.usc.edu/programs/doctor-of-physical-therapy-dpt/
+0516,Samuel Merritt University,,California,DPT,80.7,98.86,88.0,32.0,65292.0,,,168858.0,,https://www.samuelmerritt.edu/sites/default/files/2025-11/2025-dpt-student-financial-fact-sheet.pdf
+0517,Western University of Health Sciences - California,,California,DPT,77.5,100.0,102.0,32.0,49703.0,,,184844.0,,
+0521,"California State University, Sacramento",,California,DPT,95.1,98.36,61.0,36.0,46490.0,28980.0,1.0,99176.0,86940.0,https://www.csus.edu/college/health-human-services/physical-therapy/_internal/documents/2025-dpt-student-financial-fact-sheet1.pdf
+0522,University of St Augustine for Health Sciences -  California,,California,DPT,76.6,97.83,367.0,28.0,84023.0,,,136226.0,,https://www.usa.edu/college-of-rehabilitative-sciences/doctor-physical-therapy/dpt-tuition-fees/
+0523,Azusa Pacific University,,California,DPT,84.2,99.26,133.0,36.0,39975.0,,0.0,119925.0,,https://www.apu.edu/programs/dpt/
+0528,University of St Augustine for Health Sciences  ONLINE FLEX EXPANSION PROGRAM in San Diego,,California,DPT,63.2,96.0,95.0,36.0,60000.0,,,180000.0,,https://www.capteonline.org/globalassets/capte-docs/2024-dpt-student-financial-fact-sheet-revised-9.3.2024.docx
+0537,San Diego State University,,California,DPT,91.9,98.65,74.0,36.0,47334.0,28434.0,1.0,169105.0,85302.0,https://physicaltherapy.sdsu.edu/prospective/tuition
+0540,West Coast University,,California,DPT,77.5,97.5,80.0,36.0,40299.0,,,120897.0,,https://westcoastuniversity.edu/programs/doctor-physical-therapy
+0548,University of Southern California - Hybrid DPT  Program,,California,DPT,81.3,96.91,96.0,32.0,86125.0,,,232815.0,,https://pt.usc.edu/wp-content/uploads/2025-dpt-student-financial-fact-sheet-hybrid-pathway-2.pdf
+0601,University of Colorado,,Colorado,DPT,87.1,99.3,139.0,34.0,29280.0,,,73419.0,,https://medschool.cuanschutz.edu/physical-therapy-program/education-programs/doctor-of-physical-therapy/about-our-program/tuition-fees
+0606,Regis University,,Colorado,DPT,87.7,99.38,162.0,28.0,50102.0,,,132552.0,,https://www.regis.edu/_documents/academics/colleges-and-schools/physical-therapy/dpt-financial-fs-form.pdf
+0701,Quinnipiac University,,Connecticut,DPT,96.7,100.0,122.0,36.0,52710.0,,,137950.0,,https://www.qu.edu/48fefa/globalassets/global/media/qu/documents/academics/school-of-health-sciences/programs/pa-2025/2025-dpt-student-financial-fact-sheet.pdf
+0702,University of Connecticut,,Connecticut,DPT,86.0,100.0,57.0,36.0,65328.0,,,184646.0,,https://physicaltherapy.cahnr.uconn.edu/costs/
+0704,University of Hartford,,Connecticut,DPT,88.1,100.0,67.0,36.0,34045.0,,,102135.0,,https://www.hartford.edu/academics/schools-colleges/enhp/academics/department-of-rehabilitation-sciences/doctor-of-physical-therapy.aspx
+0706,Sacred Heart University,,Connecticut,DPT,89.4,100.0,132.0,33.0,39500.0,,,120830.0,,https://www.sacredheart.edu/media/shu-media/physical-therapy/2025-SHU-DPT-Student-Financial-Fact-Sheet_ADA.pdf
+0801,University of Delaware,,Delaware,DPT,95.8,100.0,167.0,30.0,43722.0,,,120284.0,,https://www.udel.edu/content/dam/udelImages/chs/Documents/PT/2025-dpt-student-financial-fact-sheet.pdf
+0901,Howard University,,District of Columbia,DPT,79.2,96.15,24.0,,38454.0,,,151898.0,,https://cnahs.howard.edu/sites/cnahs.howard.edu/files/2025-07/HU%20DPT%20Finananical%20Fact%20Sheet%202025-2026Final%5B96%5D.pdf
+0902,George Washington University,,District of Columbia,DPT,96.6,100.0,89.0,36.0,48954.0,,,151370.0,,https://physicaltherapy.smhs.gwu.edu/financial-fact-sheet
+1001,Florida Agricultural and Mechanical University,,Florida,DPT,73.3,91.11,45.0,36.0,45990.0,18270.0,1.0,111025.0,54810.0,https://www.famu.edu/academics/all-programs/ahealth/pdf/DPT%20Financial%20fact%20sheet%202024-2025.pdf
+1002,Florida International University,,Florida,DPT,79.8,97.48,119.0,36.0,46009.0,25442.0,1.0,146610.0,76326.0,https://cnhs.fiu.edu/_assets/docs/resources/physical-therapy/financial-fact-sheet-2025-2026.pdf
+1003,University of Florida,,Florida,DPT,89.9,99.32,148.0,36.0,22722.0,,,68165.0,,https://phhp.ufl.edu/academics/phd-and-professional-programs/physical-therapy-doctorate/admissions/student-financial-fact-sheet/
+1004,University of Miami,,Florida,DPT,90.4,98.25,114.0,36.0,44550.0,,,145860.0,,https://med.miami.edu/-/media/millerschool/departments/physical-therapy/pdfs/2025-dpt-student-financial-fact-sheet.ashx?rev=1c5f3638fce64cb19bc0ef7133b7d8f0&hash=6985CDC826FA16007A3F3054DAF06073
+1014,University of North Florida,,Florida,DPT,84.5,98.28,58.0,36.0,62784.0,,,188352.0,,https://www.unf.edu/controller/student-financial-services/dpt-tuition.html
+1016,University of Central Florida,,Florida,DPT,97.4,100.0,77.0,36.0,68209.0,,,141072.0,,https://healthprofessions.ucf.edu/physicaltherapy/admissions/
+1017,Nova Southeastern University - Ft Lauderdale,,Florida,DPT,97.7,100.0,86.0,32.0,33465.0,,,127874.0,,https://osteopathic.nova.edu/documents/physical-therapy/fort-lauderdale-dpt-student-financial-fact-sheet.pdf
+1019,University of St Augustine for Health Sciences - Florida,,Florida,DPT,82.4,98.89,261.0,28.0,,,,119899.0,,https://www.usa.edu/college-of-rehabilitative-sciences/doctor-physical-therapy/dpt-tuition-fees/
+1029,Florida Gulf Coast University,,Florida,DPT,96.4,100.0,56.0,33.0,,,,,,https://www.fgcu.edu/mariebcollege/rehabilitationsciences/physicaltherapy/doctorofphysicaltherapy-dpt
+1030,University of South Florida,,Florida,DPT,96.7,100.0,92.0,,,,,,,
+1035,Nova Southeastern University - Tampa,,Florida,DPT,94.9,100.0,78.0,36.0,33465.0,,,136868.0,,https://osteopathic.nova.edu/documents/physical-therapy/2025-tampa-dpt-student-financial-fact-sheet.pdf
+1036,University of St Augustine for Health Sciences -  ONLINE FLEX EXPANSION PROGRAM in Florida,,Florida,DPT,77.5,93.9,80.0,36.0,,,,,,
+1052,University of St Augustine for Health Sciences -  EXPANSION PROGRAM in Miami,,Florida,DPT,69.5,95.47,249.0,36.0,48000.0,,,144000.0,,https://www.unf.edu/brooks/physical-therapy/files/certified.rf.2025-2026-dpt-student-financial-fact-sheet.docx
+1053,Gannon University - Florida,,Florida,DPT,83.7,98.0,49.0,36.0,53018.0,,,165255.0,,https://www.gannon.edu/media/gannon-university/content-assets/documents/programs/GannonUniversity-dpt-ruskin-student-financial-fact-sheet.pdf
+1057,AdventHealth University,,Florida,DPT,83.3,100.0,42.0,,41600.0,,,119215.0,,https://www.ahu.edu/programs/doctor-of-physical-therapy/tuition-and-fees
+1060,Florida Southern College,,Florida,DPT,83.1,95.59,65.0,28.0,54036.0,,,157400.0,,https://www.flsouthern.edu/getmedia/abf7b447-5814-452d-9bea-4e8df69c3b77/FSC-CAPTE-Student-Financial-Fact-Sheet.pdf
+1101,Emory University,,Georgia,DPT,94.1,99.15,118.0,36.0,43066.0,,,169127.0,,https://med.emory.edu/departments/rehabilitation-medicine/_documents/dpt-student-financial-fact-sheet_dectwentyfive.pdf
+1102,Georgia State University,,Georgia,DPT,96.4,100.0,83.0,,16447.0,,0.0,19005.0,,https://lewis.gsu.edu/files/2024/10/FactSheet24-25.pdf
+1103,Augusta University,,Georgia,DPT,95.8,98.59,71.0,,,,,,,https://www.augusta.edu/alliedhealth/physical-therapy/
+1107,University of North Georgia,,Georgia,DPT,89.8,100.0,59.0,33.0,39705.0,,,120356.0,,https://ung.edu/physical-therapy/_uploads/files/2025-2026-financial-fact-sheet.pdf
+1109,Georgia Southern University,,Georgia,DPT,95.6,98.53,68.0,36.0,10000.0,10000.0,0.0,,30000.0,https://chp.georgiasouthern.edu/rehabilitation/graduate-programs/doctor-of-physical-therapy/
+1115,Mercer University,,Georgia,DPT,91.9,100.0,74.0,36.0,34974.0,,,109491.0,,https://chp.mercer.edu/wp-content/uploads/sites/66/2025/11/2025-Mercer-DPT-Student-Financial-Fact-Sheet.pdf
+1118,Brenau University,,Georgia,DPT,92.4,100.0,79.0,36.0,40240.0,,0.0,139054.0,,
+1119,Philadelphia College of Osteopathic Medicine,,Georgia,DPT,76.3,100.0,76.0,36.0,38738.0,,,123255.0,,https://www.pcom.edu/academics/programs-and-degrees/physical-therapy/financial-fact-sheet.html
+1121,South College - Atlanta,,Georgia,DPT,,,,24.0,47900.0,,,108553.0,,https://www.south.edu/wp-content/uploads/2024/08/2023-dpt-student-financial-fact-sheet32_a11y.pdf
+1202,Hawaii Pacific University,,Hawaii,DPT,69.2,,91.0,24.0,59586.0,,,145976.0,,https://www.hpu.edu/gchs/dpt/las-vegas/dpt-lv-financial-fact-sheet.pdf
+1301,Idaho State University,,Idaho,DPT,88.9,100.0,90.0,32.0,40154.0,13954.0,1.0,152412.0,37210.666666666664,https://www.isu.edu/media/libraries/physical-therapy/Financial-fact-sheet-2025_2026-Final.pdf
+1401,Northern Illinois University,,Illinois,DPT,75.5,96.23,53.0,36.0,44280.0,,,132840.0,,https://www.chhs.niu.edu/ahcd/_pdf/dpt-student-financial-fact-sheet.docx
+1402,Northwestern University,,Illinois,DPT,86.0,98.89,178.0,30.0,56367.0,,,173837.0,,https://www.feinberg.northwestern.edu/sites/pthms/education/dpt/admissions/2025-student-financial-fact-sheet.pdf
+1403,Rosalind Franklin University of Medicine and Science,,Illinois,DPT,82.8,96.63,87.0,29.0,47076.0,,,115753.0,,https://www.rosalindfranklin.edu/admission-aid/financial-services/tuition-fees/physical-therapy/
+1405,University of Illinois at Chicago,,Illinois,DPT,91.2,99.12,113.0,33.0,,,,,,https://ahs.uic.edu/physical-therapy/admissions-and-programs/doctor-of-physical-therapy/
+1411,Bradley University,,Illinois,DPT,89.1,98.18,55.0,36.0,27000.0,,,81000.0,,https://www.bradley.edu/academics/programs/doctor-of-physical-therapy/
+1417,Midwestern University - IL,,Illinois,DPT,90.0,98.89,90.0,31.0,50975.0,,,159943.0,,https://www.midwestern.edu/documents/dpt-il-student-financial-fact-sheet
+1420,Governors State University,,Illinois,DPT,62.7,94.92,59.0,32.0,,,,,,https://www.govst.edu/uploadedFiles/Academics/Colleges_and_Programs/CHHS/Departments/Physical_Therapy/RN_to_BN_Completion/2025-dpt-student-financial-fact-sheet.pdf
+1429,North Central College,,Illinois,DPT,,,,28.0,35483.0,,,109035.0,,https://www.northcentralcollege.edu/sites/default/files/documents/2024-11/2024-dpt-student-financial-fact-sheet.pdf
+1501,Indiana University,,Indiana,DPT,97.6,100.0,82.0,36.0,32618.0,,,119321.0,,https://shhs.indianapolis.iu.edu/admissions/financial-aid/mpas.html
+1502,University of Evansville,,Indiana,DPT,93.6,100.0,93.0,36.0,41405.0,,,129864.0,,https://www.evansville.edu/majors/physicaltherapy/downloads/dpt/dpt-financial-fact-sheet-2025.pdf
+1507,University of Indianapolis,,Indiana,DPT,88.8,97.75,89.0,32.0,43310.0,,,127294.0,,https://uindy.edu/health-sciences/pt/files/dpt-student-financial-fact-sheet.pdf
+1513,Trine University,,Indiana,DPT,95.9,100.0,73.0,33.0,42705.0,,,117984.0,,https://www.trine.edu/academics/majors-degrees/graduate/doctor-physical-therapy/2025-dpt-student-financial-fact-sheet.pdf
+1514,Indiana State University,,Indiana,DPT,94.0,100.0,50.0,,37240.0,,,112842.0,,https://indianastate.edu/media/3139/download?inline
+1516,Hanover College,,Indiana,DPT,53.4,83.54,163.0,24.0,48000.0,,,106174.0,,https://dptprogram.hanover.edu/wp-content/uploads/2023/11/Hanover-DPT-Financial-Fact-Sheet-AY23_24.pdf
+1517,Indiana Wesleyan University,,Indiana,DPT,68.4,,19.0,33.0,33864.0,,,106362.0,,https://www.indwes.edu/program/doctor-of-physical-therapy/
+1601,University of lowa,,Iowa,DPT,97.8,100.0,90.0,36.0,,,,,,
+1602,Des Moines University - Osteopathic Medical Center,,Iowa,DPT,88.2,100.0,102.0,,,,,,,
+1605,St Ambrose University,,Iowa,DPT,96.9,100.0,65.0,,,,,,,
+1608,Clarke University,,Iowa,DPT,100.0,100.0,51.0,36.0,37247.0,,,109940.0,,https://clarke.edu/wp-content/uploads/2025/12/Clarke-University-2024-2025-DPT-Student-Financial-Fact-Sheet-1-1.pdf
+1612,Briar Cliff University,,Iowa,DPT,76.8,96.43,56.0,30.0,33000.0,,,104030.0,,https://www.briarcliff.edu/filesimages/Current%20Chargers/Academics/Graduate%20Programs/Doctor%20of%20Physical%20Therapy/2025-dpt-student-financial-fact-sheet.pdf
+1613,Allen College,,Iowa,DPT,46.2,100.0,13.0,36.0,31358.0,,0.0,117731.0,,https://www.allencollege.edu/filesimages/PagePDFs/Fin%20Aid/DPT%20Financial%20Fact%20Sheet.pdf
+1701,University of Kansas Medical Center,,Kansas,DPT,79.7,99.15,118.0,36.0,45948.0,,,137843.0,,https://www.kumc.edu/school-of-health-professions/academics/departments/physical-therapy-rehabilitation-science-and-athletic-training/academics/doctor-of-physical-therapy-on-campus-pathway/costs-and-financial-aid.html
+1702,Wichita State University,,Kansas,DPT,94.0,100.0,83.0,30.0,,,,,,https://www.wichita.edu/pt
+1710,University of Saint Mary,,Kansas,DPT,91.4,100.0,70.0,29.0,,,,,,http://www.stmary.edu/dpt
+1801,University of Kentucky,,Kentucky,DPT,92.7,100.0,123.0,36.0,47595.0,22225.0,1.0,149007.0,66675.0,https://chs.uky.edu/sites/default/files/2024-08/2023-2024-dpt-student-financial-fact-sheet.pdf
+1808,Bellarmine University,,Kentucky,DPT,81.6,99.29,141.0,36.0,44000.0,,,134235.0,,https://www.bellarmine.edu/docs/default-source/pt-docs/dpt-student-financial-fact-sheet.pdf?sfvrsn=c56e4180_2
+1810,Western Kentucky University,,Kentucky,DPT,93.3,98.33,60.0,28.0,38138.0,,,80758.0,,https://www.wku.edu/physicaltherapy/2024-dpt-student-financial-fact-sheet.pdf
+1813,University of the Cumberlands,,Kentucky,DPT,41.2,,17.0,24.0,40250.0,,0.0,80500.0,,https://www.ucumberlands.edu/academics/graduate/doctor-physical-therapy-dpt
+1901,Louisiana State Univ Health Sciences Center - New  Orleans,,Louisiana,DPT,90.3,96.83,62.0,36.0,37884.0,,,143437.0,,https://alliedhealth.lsuhsc.edu/pt/docs/dptstudentfinancialfactsheet.pdf
+1905,Louisiana State Univ Health Sciences Center -  Shreveport,,Louisiana,DPT,95.7,100.0,69.0,36.0,32039.0,,,104065.0,,https://shps.lsuhs.edu/academics/graduate-programs/doctor-physical-therapy/admissions/financial-fact-sheet
+1907,Franciscan Missionaries of Our Lady University,,Louisiana,DPT,76.0,98.67,75.0,32.0,39149.0,,0.0,104766.0,,https://franu.edu/academics/programs/dpt/index.html
+2001,University of New England,,Maine,DPT,84.8,100.0,112.0,34.0,62490.0,,,195822.0,,https://www.une.edu/sites/default/files/2025-10/2025-dpt-student-financial-fact-sheet.pdf
+2003,Husson University,,Maine,DPT,87.9,97.06,66.0,28.0,36720.0,,,121225.0,,https://www.husson.edu/college-of-health/assets/2025-Husson-University_DPT_Financial_Fact_Sheet.pdf
+2101,University of Maryland - Baltimore,,Maryland,DPT,78.8,97.08,137.0,29.0,,,,,,http://pt.umaryland.edu
+2102,University of Maryland - Eastern Shore,,Maryland,DPT,98.3,100.0,57.0,36.0,24576.0,,,94568.0,,https://wwwcp.umes.edu/pt/admissions/estimated-costs/
+2301,Andrews University,,Michigan,DPT,73.9,97.01,65.0,30.0,47613.0,,,130088.0,,https://www.andrews.edu/chhs/srs/zzz-pdf/2025-dpt-student-financial-fact-sheet.pdf
+2302,Grand Valley State University,,Michigan,DPT,89.3,100.0,112.0,36.0,49068.0,,,129936.0,,https://www.gvsu.edu/cms4/asset/8D477B3A-B7DC-AD72-BB198B341CA03C3E/2024-dpt-student-financial-fact-sheet-revised.pdf
+2303,Oakland University,,Michigan,DPT,87.8,100.0,74.0,36.0,,,,,,
+2304,University of Michigan - Flint,,Michigan,DPT,81.8,94.55,110.0,33.0,24307.0,,,68643.0,,
+2305,Wayne State University,,Michigan,DPT,95.6,100.0,68.0,42.0,32863.0,,,116744.0,,https://applebaum.wayne.edu/physical-therapy/cost
+2315,Central Michigan University,,Michigan,DPT,88.6,98.86,88.0,36.0,36979.0,36979.0,0.0,120073.0,110937.0,https://www.cmich.edu/docs/default-source/colleges/college-of-health-professions/physical-therapy/20220708-doctorofphysicaltherapyfinancialfactsheet-001.pdf?sfvrsn=bac82023_6
+2322,Central Michigan University - EXPANSION PROGRAM  at Michigan Technological University,,Michigan,DPT,77.8,100.0,18.0,,,,,,,
+2325,Western Michigan University,,Michigan,DPT,78.9,100.0,52.0,36.0,,,,,,https://wmich.edu/physicaltherapy
+2327,Concordia University - Ann Arbor,,Michigan,DPT,,,,,,,,,,
+2401,College of St Scholastica,,Minnesota,DPT,87.2,97.87,94.0,36.0,,,0.0,121198.0,,https://www.css.edu/academics/programs/doctorate/doctor-of-physical-therapy-dpt/
+2402,Mayo Clinic School of Health Sciences,,Minnesota,DPT,96.3,100.0,54.0,33.0,,,,,,https://college.mayo.edu/media/mccms/content-assets/academics/health-sciences-training/physical-therapy-doctoral-program-minnesota/2025-dpt-student-financial-fact-sheet-Mayo_accessible.pdf
+2403,University of Minnesota,,Minnesota,DPT,87.2,100.0,117.0,,,,,82467.0,,https://med.umn.edu/rehabmedicine/about/divisions/physical-therapy/doctor-physical-therapy/tuition
+2404,St. Catherine University,,Minnesota,DPT,97.1,100.0,69.0,33.0,50106.0,,,111040.0,,https://www.stkate.edu/academics/academic-programs/gc-physical-therapy
+2412,Concordia University - Saint Paul,,Minnesota,DPT,87.3,98.41,63.0,36.0,31860.0,,,95580.0,,https://www.csp.edu/tuition-and-financial-aid/
+2501,University of Mississippi at the Medical Center,,Mississippi,DPT,83.5,100.0,85.0,36.0,24205.0,,,77264.0,,https://umc.edu/shrp/Physical%20Therapy/Doctoral%20PT%20Degree/CAPTE.html
+2506,William Carey University,,Mississippi,DPT,90.5,100.0,42.0,30.0,36500.0,,,115330.0,,https://www.wmcarey.edu/_assets/documents/cohs/dpt-student-financial-fact-sheet.pdf
+2601,Maryville University of Saint Louis,,Missouri,DPT,98.6,100.0,72.0,42.0,26070.0,,,101984.0,,https://www.maryville.edu/hp/wp-content/uploads/sites/12/2025/11/2025-dpt-student-financial-fact-sheet-1.pdf
+2602,Rockhurst University,,Missouri,DPT,80.7,94.38,88.0,30.0,44320.0,,,110800.0,,https://www.rockhurst.edu/graduate-tuition-fees/slcnhs
+2603,Saint Louis University,,Missouri,DPT,94.3,100.0,157.0,36.0,21000.0,,,119171.0,,https://www.slu.edu/doisy/degrees/-pdf/pt-financial-factsheet.pdf
+2604,University of Missouri,,Missouri,DPT,97.4,99.12,113.0,36.0,,,,,,https://healthsciences.missouri.edu/physical-therapy/doctor-of-physical-therapy/
+2605,Washington University in St Louis,,Missouri,DPT,86.7,97.87,188.0,36.0,40724.0,,,126256.0,,https://pt.wustl.edu/app/uploads/2023/01/2022-2023-dpt-student-financial-fact-sheet.pdf
+2614,Southwest Baptist University,,Missouri,DPT,67.9,97.14,140.0,36.0,36400.0,,,109200.0,,https://www.sbuniv.edu/academics/programs/physical-therapy.php
+2616,Missouri State University,,Missouri,DPT,86.7,100.0,75.0,36.0,33516.0,16802.0,1.0,117267.0,50406.0,https://www.missouristate.edu/SHCP/PhysicalTherapy/_Files/Missouri-State-2025-Financial-Fact-Sheet-2025.pdf
+2625,Graceland University,,Missouri,DPT,,,,24.0,52920.0,,,123872.0,,https://www.graceland.edu/wp-content/uploads/2024/11/2025-dpt-student-financial-fact-sheet.pdf
+2701,University of Montana - Missoula,,Montana,DPT,93.2,98.65,74.0,33.0,40732.0,9242.0,1.0,139514.0,25415.5,https://www.umt.edu/physical-therapy/tuition-fees1/umpt-financial-fact-sheet-2024-2025.pdf
+2801,University of Nebraska Medical Center,,Nebraska,DPT,92.0,99.2,125.0,25.0,41105.0,,,93389.0,,https://www.unmc.edu/alliedhealth/_documents/dpt-student-financial-fact-sheet.pdf
+2804,Creighton University,,Nebraska,DPT,85.2,100.0,162.0,,37934.0,,,184066.0,,https://www.creighton.edu/sites/default/files/OMA-2025-dpt-student-financial-fact-sheet.pdf
+2809,College of St. Mary,,Nebraska,DPT,52.6,77.08,38.0,31.0,36750.0,,,100400.0,,https://www.csm.edu/sites/default/files/2024-dpt-student-financial-fact-sheet-revised-9.3.2024%20CSM.pdf
+2901,"University of Nevada, Las Vegas",,Nevada,DPT,93.7,98.95,95.0,27.0,49924.0,,,117755.0,,https://www.unlv.edu/sites/default/files/media/document/2025-10/UNLVPT_Program_Cost_Estimates_for_student_starting_in_2025_26.pdf
+2902,Touro University - Nevada,,Nevada,DPT,81.1,100.0,74.0,36.0,41010.0,,,129168.0,,https://tun.touro.edu/media/schools-and-colleges/tun/documents/2024-DPT-Student-Financial-Fact-Sheet_ADA.pdf
+3005,Franklin Pierce University - NH,,New Hampshire,DPT,77.9,98.23,113.0,36.0,35880.0,,,117856.0,,https://www.franklinpierce.edu/academics/programs/physical-therapy/index.html
+3006,Plymouth State University,,New Hampshire,DPT,75.0,100.0,48.0,36.0,32940.0,27870.0,1.0,107787.0,83610.0,https://www.plymouth.edu/sites/default/files/media/2025-10/2024-2025-dpt-student-financial-fact-sheet-PSU.pdf
+3101,"Rutgers, The State University of New Jersey",,New Jersey,DPT,88.2,99.22,127.0,28.0,42596.0,,,124521.0,,https://shp.rutgers.edu/wp-content/uploads/Rutgers-DPT-Program-2025-DPT-Student-Financial-Fact-Sheet-by-Majsak-for-Webpage-Posting-10-13-25.pdf
+3107,Stockton University,,New Jersey,DPT,82.0,96.72,61.0,31.0,38244.0,24940.0,1.0,111847.0,64428.333333333336,https://stockton.edu/graduate/documents/Stocktondptstudentfinancialfactsheet.pdf
+3110,Seton Hall University,,New Jersey,DPT,89.2,100.0,74.0,34.0,,,,,,http://www.shu.edu/bursar/tuition-and-fees.html
+3111,Kean University,,New Jersey,DPT,91.7,100.0,36.0,36.0,,,,,,
+3201,University of New Mexico,,New Mexico,DPT,98.0,100.0,50.0,33.0,,,,,,https://hsc.unm.edu/medicine/departments/ortho-rehab/physical-therapy/
+3301,University of Alabama at Birmingham,,Alabama,DPT,89.2,98.06,102.0,32.0,68400.0,27720.0,1.0,196428.0,73920.0,https://www.uab.edu/shp/pt/images/documents/dpt/dpt-student-financial-fact-sheet.pdf
+3302,University of South Alabama,,Alabama,DPT,97.4,98.7,77.0,36.0,55272.0,23735.0,1.0,142296.0,71205.0,https://www.southalabama.edu/colleges/alliedhealth/pt/resources/dptstudentfinancialfactsheet.pdf
+3310,Alabama State University,,Alabama,DPT,55.3,89.36,47.0,36.0,,,,,,
+3315,Samford University,,Alabama,DPT,86.3,100.0,73.0,27.0,41462.0,,,123042.0,,https://cascp-web1.samford.edu/healthprofessions/files/2025-dpt-student-financial-fact-sheet.pdf
+3317,Faulkner University,,Alabama,DPT,53.6,,28.0,32.0,38250.0,,,94100.0,,https://www.faulkner.edu/wp-content/uploads/2025-dpt-student-financial-fact-sheet.pdf
+3401,Duke University,,North Carolina,DPT,82.6,98.91,184.0,,,,,,,https://medschool.duke.edu/education/health-professions-education-programs/doctor-physical-therapy-program/admissions/tuition
+3402,East Carolina University,,North Carolina,DPT,93.7,100.0,63.0,,,,,,,
+3403,University of North Carolina at Chapel Hill,,North Carolina,DPT,94.9,100.0,59.0,32.0,25448.0,,,138663.0,,https://www.med.unc.edu/healthsciences/physical/wp-content/uploads/sites/583/2023/01/2023-dpt-student-financial-fact-sheet.pdf
+3411,Winston-Salem State University,,North Carolina,DPT,78.9,96.23,52.0,36.0,16407.0,,,72288.0,,https://www.wssu.edu/academics/colleges-and-departments/school-of-health-sciences/department-of-physical-therapy/_Files/documents/dpt-financial-sheet.pdf
+3412,Western Carolina University,,North Carolina,DPT,85.0,97.85,93.0,36.0,27877.0,9959.0,1.0,87439.0,29877.0,https://www.wcu.edu/learn/departments-schools-colleges/HHS/pt/resources/2025-2026_Expenses-2.pdf
+3414,Elon University,,North Carolina,DPT,88.9,97.65,81.0,36.0,80472.0,,,241416.0,,https://www.elon.edu/u/academics/health-sciences/dpt/apply/financial-aid/
+3418,Campbell University,,North Carolina,DPT,90.4,98.81,83.0,36.0,40093.0,,,133765.0,,https://cphs.campbell.edu/academic-programs/physical-therapy/doctor-of-physical-therapy/
+3419,Wingate University,,North Carolina,DPT,96.1,100.0,76.0,36.0,40800.0,,0.0,122400.0,,https://www.wingate.edu/academics/graduate/physical-therapy
+3421,High Point University,,North Carolina,DPT,77.4,98.39,124.0,36.0,53010.0,,,191083.0,,https://www.highpoint.edu/physicaltherapy/files/2023/08/2025-DPT-Student-Financial-Fact-Sheet.pdf
+3422,Methodist University,,North Carolina,DPT,78.1,98.63,73.0,36.0,,,,,,
+3501,University of North Dakota,,North Dakota,DPT,85.7,100.0,91.0,28.0,34051.0,,,73707.0,,https://med.und.edu/education-training/physical-therapy/_files/home-page/2025-dpt-student-financial-fact-sheet-updated-20251105_accessible.pdf
+3503,University of Mary,,North Dakota,DPT,77.3,98.86,88.0,30.0,34307.0,,,104231.0,,https://www.umary.edu/sites/default/files/2022-07/DPT-student-financial-fact-sheet.pdf
+3504,University of Jamestown,,North Dakota,DPT,88.9,100.0,54.0,36.0,,,,,,
+3601,Cleveland State University,,Ohio,DPT,92.9,98.61,70.0,,,,,,,
+3602,University of Toledo,,Ohio,DPT,89.0,97.59,82.0,26.0,39746.0,,0.0,114409.0,,http://www.utoledo.edu/hhs/pt/pdfs/dpt-student-financial-fact-sheet.pdf
+3603,Ohio University,,Ohio,DPT,93.8,100.0,97.0,36.0,24270.0,12282.0,1.0,89011.0,36846.0,https://www.ohio.edu/chsp/physical-therapy/graduate/doctor-physical-therapy-financial-fact-sheet
+3604,Ohio State University,,Ohio,DPT,97.9,100.0,96.0,36.0,,,,,,https://hrs.osu.edu/academics/graduate-programs/clinical-doctorate-in-physical-therapy
+3617,University of Findlay - Weekend,,Ohio,DPT,93.7,98.46,63.0,34.0,35353.0,,,104475.0,,https://www.findlay.edu/health-professions/physical-therapy/SiteAssets/Pages/weekend-pta-to-dpt-bridge-program/2025-dpt-student-financial-fact-sheet%20WEC.pdf
+3618,University of Cincinnati,,Ohio,DPT,94.6,98.65,74.0,36.0,26502.0,,,79506.0,,https://cahs.uc.edu/academic-programs/graduate-programs/audiology/costs.html
+3619,Youngstown State University,,Ohio,DPT,76.0,94.87,75.0,30.0,,,,,,https://explore.ysu.edu/bitonte-college-of-health-human-services/doctor-of-physical-therapy/
+3624,Mount St Joseph University,,Ohio,DPT,91.6,98.59,71.0,36.0,22500.0,,,67500.0,,https://www.msj.edu/tuition-aid/tuition-costs/graduate-tuition/
+3627,Walsh University,,Ohio,DPT,85.5,100.0,69.0,29.0,23000.0,,,98995.0,,https://www.walsh.edu/_files/walsh-dpt-student-financial-fact-sheet_25.pdf
+3628,University of Findlay - Traditional,,Ohio,DPT,83.3,100.0,60.0,34.0,40275.0,,,121108.0,,https://www.findlay.edu/health-professions/physical-therapy/SiteAssets/Pages/Traditional-Program-Fact-Sheet/2025-dpt-student-financial-fact-sheet%20Traditional.pdf
+3630,University of Dayton,,Ohio,DPT,82.6,98.55,69.0,36.0,39960.0,,,239760.0,,https://udayton.edu/tuition-aid/graduate/tuition-cost.php
+3641,University of Mount Union,,Ohio,DPT,67.8,98.31,59.0,34.0,43514.0,,,101200.0,,https://www.mountunion.edu/academics/graduate-degrees/physical-therapy
+3644,Bowling Green State University,,Ohio,DPT,43.9,,82.0,24.0,49878.0,,,99756.0,,https://www.bgsu.edu/health-and-human-services/programs/school-of-physical-and-occupational-therapy/doctor-of-physical-therapy/dpt-fact-sheet.html
+3701,Langston University,,Oklahoma,DPT,60.0,92.0,25.0,36.0,28628.0,,,87072.0,,https://langston.edu/popups/pt-program-costs/
+3702,University of Oklahoma Health Sciences Center,,Oklahoma,DPT,80.2,94.66,131.0,34.0,60000.0,,,180000.0,,
+3712,Oklahoma City University,,Oklahoma,DPT,69.1,90.74,42.0,33.0,26847.0,,,101175.0,,
+3801,Pacific University,,Oregon,DPT,88.1,100.0,101.0,35.0,46317.0,,,138952.0,,https://www.pacificu.edu/physical-therapy-dpt/tuition-financial-aid
+3805,George Fox University,,Oregon,DPT,83.3,100.0,90.0,30.0,40555.0,,,101388.0,,http://www.georgefox.edu/physical-therapy/index.html
+3806,Western University of Health Sciences - Oregon,,Oregon,DPT,63.6,,44.0,33.0,51816.0,,,191183.0,,
+3807,Oregon State University - Cascades,,Oregon,DPT,95.5,,44.0,36.0,31483.0,,,94450.0,,https://osucascades.edu/academics/physical-therapy/tuition-fees
+3901,Arcadia University,,Pennsylvania,DPT,85.3,100.0,129.0,25.0,40360.0,,,122646.0,,https://www.arcadia.edu/wp-content/uploads/2025/11/RES_2025-dpt-student-financial-fact-sheet.pdf
+3902,Drexel University,,Pennsylvania,DPT,89.3,100.0,121.0,30.0,62212.0,,0.0,151456.0,,https://drexel.edu/cnhp/academics/doctoral/DPT-Doctor-Physical-Therapy/
+3903,Saint Joseph's University,,Pennsylvania,DPT,79.6,97.73,132.0,31.0,47598.0,,,126928.0,,https://www.sju.edu/degree-programs/doctor-physical-therapy-dpt
+3904,Temple University,,Pennsylvania,DPT,83.5,99.08,109.0,29.0,64311.0,46956.0,1.0,146244.0,113477.0,https://www.temple.edu/sites/www/files/images/2025-dpt-student-financial-fact-sheet%20final_Temple.pdf
+3905,Thomas Jefferson University,,Pennsylvania,DPT,92.2,99.03,103.0,,,,,42803.0,,https://www.jefferson.edu/tuition-and-financial-aid/tuition-information.html
+3906,University of Pittsburgh,,Pennsylvania,DPT,82.0,96.98,256.0,25.0,55392.0,,,137718.0,,https://www.shrs.pitt.edu/wp-content/uploads/Pitt-DPT-Financial-Fact-Sheet-2024.pdf
+3907,University of Scranton,,Pennsylvania,DPT,93.5,98.7,77.0,36.0,,,0.0,,,http://www.scranton.edu/academics/pcps/physicaltherapy/
+3916,Slippery Rock University of Pennsylvania,,Pennsylvania,DPT,84.9,97.98,99.0,32.0,38448.0,25632.0,1.0,83470.0,68352.0,https://www.sru.edu/documents/academics/departments/physical-therapy/2025-DPT-Student-Financial-Fact-Sheet.pdf
+3917,Duquesne University,,Pennsylvania,DPT,91.6,98.61,71.0,66.0,,,,210597.0,,https://www.duq.edu/documents/academics/colleges-and-schools/health-sciences/physical-therapy/2024-2025-dpt-financial-factsheet.pdf
+3918,Gannon University - Pennsylvania,,Pennsylvania,DPT,82.1,100.0,84.0,36.0,23000.0,,,99053.0,,https://www.gannon.edu/media/gannon-university/content-assets/documents/programs/GannonUniversity-dpt-ruskin-student-financial-fact-sheet.pdf
+3920,Misericordia University,,Pennsylvania,DPT,93.9,96.43,82.0,36.0,69000.0,,,207000.0,,http://www.misericordia.edu/financial-aid/tuition-and-fees
+3921,Chatham University,,Pennsylvania,DPT,80.0,100.0,70.0,28.0,43248.0,,,118751.0,,https://www.chatham.edu/academics/graduate/physical-therapy/pdfs/physical-therapy-financial-fact-sheet-2022-2023.pdf
+3922,Widener University,,Pennsylvania,DPT,92.1,98.68,76.0,33.0,49200.0,,,158608.0,,https://www.widener.edu/sites/default/files/2025-10/2025-Widener-dpt-student-financial-fact-sheet.pdf
+3929,Neumann University,,Pennsylvania,DPT,70.3,95.31,64.0,36.0,62700.0,,,188100.0,,https://www.neumann.edu/academics/grad/therapy/index.asp?hsCtaTracking=bd276a44-4942-47d1-b016-6f145819939c%7C3d68f176-1130-4dc2-853e-f600fd43fdd3
+3930,Saint Francis University,,Pennsylvania,DPT,100.0,100.0,45.0,35.0,31475.0,,0.0,128695.0,,https://www.francis.edu/sites/default/files/uploadedfiles/Content/Academics/School_of_Health_Sciences/Physical_Therapy/2024-dpt-student-financial-fact-sheet.pdf
+3932,Lebanon Valley College,,Pennsylvania,DPT,85.3,100.0,102.0,28.0,50000.0,,,115000.0,,https://www.lvc.edu/pt-financial-fact-sheet
+3941,Alvernia University,,Pennsylvania,DPT,78.6,96.43,56.0,32.0,54500.0,,,148024.0,,https://www.alvernia.edu/sites/default/files/documents/2024-AlverniaDPT-student-financial-fact-sheet%20FINAL.pdf
+3942,DeSales University,,Pennsylvania,DPT,88.7,100.0,53.0,34.0,34650.0,,,117810.0,,https://www.desales.edu/_files/pdfs/financial-aid/grad/2023-dpt-student-financial-fact-sheet.pdf
+3944,Messiah University,,Pennsylvania,DPT,82.0,93.44,61.0,32.0,43312.0,,,115500.0,,https://www.messiah.edu/graduate/doctor-physical-therapy
+3945,Arcadia University - Online Hybrid DPT Program,,Pennsylvania,DPT,74.8,96.0,99.0,,,,,,,
+3946,Moravian University,,Pennsylvania,DPT,65.1,89.36,43.0,32.0,40950.0,,,118510.0,,https://www.moravian.edu/rehab/physical-therapy-dpt/financial-fact-sheet
+3947,Seton Hill University,,Pennsylvania,DPT,38.9,,18.0,36.0,,,0.0,,,https://www.setonhill.edu/academics/degrees-programs/graduate-programs/physical-therapy-dpt/index.html
+3949,University of Pittsburgh - Expansion Program,,Pennsylvania,DPT,,,,25.0,53268.0,44400.0,1.0,130341.0,92500.0,https://www.shrs.pitt.edu/wp-content/uploads/Pitt-DPT-Financial-Fact-Sheet-2024.pdf
+4001,University of Rhode Island,,Rhode Island,DPT,85.0,96.67,60.0,30.0,42436.0,,,111936.0,,https://web.uri.edu/physical-therapy/home/physical-therapy-school-costs/
+4101,Medical University of South Carolina,,South Carolina,DPT,90.8,99.24,131.0,35.0,36840.0,,,120089.0,,https://chp.musc.edu/-/sm/health-professions/academics/physical-therapy/f/2025-dpt-financial-fact-sheet-hybrid.pdf
+4106,University of South Carolina - Columbia,,South Carolina,DPT,89.6,100.0,48.0,32.0,15471.0,,,41772.0,,https://www.sc.edu/study/colleges_schools/public_health/apply/graduate_applicants/tuition_fees/index.php
+4112,Anderson University,,South Carolina,DPT,92.4,98.73,79.0,36.0,33125.0,,0.0,99375.0,,https://andersonuniversity.edu/college-of-health-professions/doctorate-degree-offerings/the-school-of-physical-therapy/
+4113,Charleston Southern University,,South Carolina,DPT,65.1,,43.0,36.0,35300.0,,,127800.0,,https://www.charlestonsouthern.edu/wp-content/uploads/2023-dpt-student-financial-fact-sheet.pdf
+4201,University of South Dakota,,South Dakota,DPT,89.1,95.31,64.0,32.0,45452.0,,,136324.0,,https://www.usd.edu/-/media/Project/USD/DotEdu/Academics/Colleges-and-Schools/Health-Sciences/Physical-Therapy/CAPTE-Financial-Fact-Sheet.pdf?rev=8e9a9efd5deb4bdb8b9c7e41ab955a7a&hash=1FBDC1283F7FF810128A7511C77572B0
+4203,Augustana University,,South Dakota,DPT,,,,24.0,51500.0,,,110555.0,,https://www.augie.edu/sites/default/files/documents/2025-12/2025-dpt-student-financial-fact-sheet.pdf
+4301,University of Tennessee Health Science Center,,Tennessee,DPT,79.2,99.17,120.0,,34536.0,,,124400.0,,https://www.uthsc.edu/health-professions/physical-therapy/dpt/documents/dpt-student-financial-fact-sheet.pdf
+4307,Tennessee State University,,Tennessee,DPT,90.9,98.48,66.0,35.0,34912.0,15393.0,1.0,104076.0,44896.25,https://www.tnstate.edu/pt/2024-dpt-student-financial-fact-sheet%20-%20Copy.pdf
+4308,University of Tennessee Chattanooga,,Tennessee,DPT,96.9,100.0,65.0,,,,,,,
+4310,East Tennessee State University,,Tennessee,DPT,93.2,100.0,74.0,,49447.0,,,155058.0,,https://www.etsu.edu/chs/rehabilitation/physical-therapy/admissions/cost.php
+4312,Belmont University,,Tennessee,DPT,83.8,98.21,111.0,36.0,,,,,,https://www.belmont.edu/health-sciences/graduate/doctorate-physical-therapy/index.html
+4315,South College - Knoxville,,Tennessee,DPT,80.2,96.99,353.0,24.0,47900.0,,,108553.0,,https://www.south.edu/wp-content/uploads/2024/08/2023-dpt-student-financial-fact-sheet32_a11y.pdf
+4319,Lincoln Memorial University,,Tennessee,DPT,64.9,,57.0,36.0,40280.0,,,120840.0,,https://www.lmunet.edu/cmsh/dpt/cost.php
+4401,Texas State University,,Texas,DPT,89.4,98.82,85.0,36.0,,,,,,http://www.health.txst.edu/pt
+4402,Texas Tech University Health Sciences Center,,Texas,DPT,94.9,100.0,136.0,36.0,28092.0,,,51483.0,,https://www.ttuhsc.edu/health-professions/documents/doctor-physical-therapy/DPT_Financial-Fact-Sheet_Fa2025.pdf
+4403,Texas Woman's University - EXPANSION PROGRAM  in Houston,,Texas,DPT,98.2,100.0,110.0,33.0,15518.0,,,51480.0,,https://twu.edu/media/documents/physical-therapy/2025-dpt-student-financial-fact-sheet-TWU-10-13-2025-Houston.pdf
+4405,University of Texas Health Science Center at San  Antonio,,Texas,DPT,95.6,100.0,90.0,36.0,,,,,,
+4406,University of Texas Medical Branch at Galveston,,Texas,DPT,99.0,100.0,99.0,36.0,,,,,,https://www.utmb.edu/shp/phyt
+4407,Army - Baylor University,,Texas,DPT,98.3,100.0,58.0,23.0,58500.0,,,124345.0,,https://physicaltherapy.robbins.baylor.edu/sites/g/files/ecbvkj1266/files/2025-10/2025-dpt-student-financial-fact-sheet.pdf
+4421,University of Texas Southwestern Medical Center,,Texas,DPT,95.7,100.0,69.0,31.0,,,0.0,,,http://www.utsouthwestern.edu/pt
+4422,Hardin-Simmons University,,Texas,DPT,93.2,100.0,74.0,27.0,39524.0,,,102414.0,,https://www.hsutx.edu/wp-content/uploads/2024/11/2024-2025-HSU-DPT-Financial-Fact-Sheet.pdf
+4423,University of Texas at El Paso,,Texas,DPT,95.5,100.0,66.0,36.0,,,,,,https://www.utep.edu/chs/pt/
+4430,Angelo State University,,Texas,DPT,92.7,100.0,55.0,33.0,16930.0,6170.0,1.0,64950.0,16967.5,https://www.angelo.edu/live/files/28742-doctor-of-physical-therapy-program-financial-fact
+4432,University of St Augustine for Health Sciences - Austin,,Texas,DPT,74.8,97.83,317.0,28.0,54600.0,,,119899.0,,https://www.usa.edu/college-of-rehabilitative-sciences/doctor-physical-therapy/dpt-tuition-fees/
+4433,Texas Woman's University,,Texas,DPT,95.9,100.0,97.0,,32123.0,,,75216.0,,https://twu.edu/media/documents/physical-therapy/2025-dpt-student-financial-fact-sheet-TWU-10-13-2025-Houston.pdf
+4436,University of North Texas Health Science Center - Fort  Worth,,Texas,DPT,83.2,98.88,89.0,33.0,26640.0,,,73512.0,,https://www.unthsc.edu/school-of-health-professions/physical-therapy/
+4441,University of St Augustine for Health Sciences -  ONLINE FLEX EXPANSION PROGRAM in Austin,,Texas,DPT,75.0,94.32,88.0,36.0,,,,,,
+4442,University of Texas Medical Branch at Galveston -  BRIDGE PROGRAM FOR PTAS,,Texas,DPT,88.2,100.0,68.0,,,,,,,
+4444,University of the Incarnate Word,,Texas,DPT,87.4,97.87,87.0,36.0,36260.0,,,118130.0,,https://rehab-sciences.uiw.edu/admissions/financial-assistance-and-scholarships.html
+4449,University of Mary Hardin-Baylor,,Texas,DPT,89.2,98.48,65.0,28.0,,,,,,https://go.umhb.edu/graduate/physical-therapy/home
+4451,Baylor University,,Texas,DPT,90.8,98.42,173.0,36.0,58500.0,,,124345.0,,https://physicaltherapy.robbins.baylor.edu/sites/g/files/ecbvkj1266/files/2025-10/2025-dpt-student-financial-fact-sheet.pdf
+4452,University of St. Augustine - Dallas,,Texas,DPT,73.4,100.0,94.0,,,,,,,
+4453,University of Texas Medical Branch at Galveston -  Hybrid Expansion Program,,Texas,DPT,88.5,,26.0,,,,,,,
+4501,University of Utah,,Utah,DPT,82.5,100.0,97.0,33.0,59128.0,,,165360.0,,https://health.utah.edu/documents/dpt-financial-fact-sheet
+4505,Rocky Mountain University of Health Professions,,Utah,DPT,89.3,98.49,197.0,32.0,46534.0,,,125134.0,,
+4506,University of Utah - Expansion Program One,,Utah,DPT,,,,36.0,36000.0,,,108000.0,,https://health.utah.edu/documents/dpt-financial-fact-sheet
+4601,University of Vermont,,Vermont,DPT,73.5,100.0,68.0,30.0,57540.0,,,146655.0,,https://www.uvm.edu/d10-files/documents/2026-01/2025-dpt-student-financial-fact-sheet_UVM_renamed-1-28-26.pdf
+4801,Eastern Washington University,,Washington,DPT,94.7,100.0,76.0,36.0,28164.0,,,153720.0,,https://www.ewu.edu/chsph/physical-therapy/
+4802,University of Puget Sound,,Washington,DPT,85.1,98.51,67.0,36.0,60000.0,,,180000.0,,https://www.pugetsound.edu/sites/default/files/2025-10/2025-dpt-student-financial-fact-sheet.docx
+4803,University of Washington,,Washington,DPT,82.6,100.0,92.0,36.0,57948.0,37076.0,1.0,159357.0,111228.0,https://rehab.washington.edu/education/degrees/doctor-of-physical-therapy
+4811,Pacific Northwest University of Health Sciences,,Washington,DPT,,,,34.0,42539.0,,0.0,119109.0,,https://www.pnwu.edu/academics/school-of-physical-therapy/
+4812,Whitworth University,,Washington,DPT,,,,36.0,,,,134040.0,,https://www.whitworth.edu/cms/media/whitworth/documents/academics/doctor-of-physical-therapy/dpt-student-financial-fact-sheet.pdf
+4902,West Virginia University,,West Virginia,DPT,96.1,100.0,77.0,,44668.0,,,151037.0,,https://medicine.hsc.wvu.edu/media/373238/2025-wvu-dpt-student-financial-fact-sheet.pdf
+4903,Wheeling University,,West Virginia,DPT,79.4,94.74,34.0,32.0,26872.0,,,88740.0,,https://wheeling.edu/wp-content/uploads/2025/09/2025-dpt-student-financial-fact-sheet-COMPLETED.docx.pdf
+4908,Marshall University,,West Virginia,DPT,96.8,100.0,63.0,29.0,33558.0,,,113583.0,,https://www.marshall.edu/physical-therapy/files/2025-dpt-student-financial-fact-sheet-MUSOPT.pdf
+4996,Concordia University Wisconsin - Expansion Program,,Wisconsin,DPT,83.3,,6.0,34.0,,,,,,
+4997,Bellin College,,Wisconsin,DPT,,,,28.0,41748.0,,,103784.0,,https://www.bellincollege.edu/wp-content/uploads/2025/03/2025-DPT-Student-Financial-Fact-Sheet.pdf
+5000,University of Wisconsin-Stevens Point,,Wisconsin,DPT,79.2,,24.0,30.0,24080.0,,0.0,62720.0,,https://www.uwsp.edu/programs/degree/doctor-of-physical-therapy-dpt/
+5001,Marquette University,,Wisconsin,DPT,89.4,100.0,132.0,28.0,51355.0,,,154668.0,,https://www.marquette.edu/physical-therapy/documents/2025-dpt-student-financial-fact-sheet-completed.pdf
+5002,University of Wisconsin - Lacrosse,,Wisconsin,DPT,94.1,100.0,84.0,36.0,,,,,,https://www.uwlax.edu/globalassets/academics/grad/physical-therapy/files/2025-dpt-student-financial-fact-sheet.docx
+5003,University of Wisconsin - Madison,,Wisconsin,DPT,98.7,100.0,78.0,35.0,42267.0,19785.0,1.0,147717.0,57706.25,https://www.med.wisc.edu/wp-content/uploads/2024/01/DPT-financial-fact-sheet-2025-2026.pdf
+5008,Concordia University Wisconsin,,Wisconsin,DPT,93.6,100.0,47.0,30.0,42000.0,,,107822.0,,https://www.cuw.edu/academics/programs/doctor-physical-therapy/_assets/FinancialFactSheet.pdf?v=2025
+5011,Carroll University,,Wisconsin,DPT,85.8,98.65,148.0,36.0,34945.0,,,122943.0,,https://www.carrollu.edu/media-library/academics/doctor-of-physical-therapy/2025-dpt-student-financial-fact-sheet_-carrolluniv.pdf
+5013,University of Wisconsin - Milwaukee,,Wisconsin,DPT,96.0,100.0,50.0,36.0,26410.0,,,68642.0,,https://uwm.edu/rehabilitation-sciences-technology/wp-content/uploads/sites/627/2022/08/2025-dpt-student-financial-fact-sheet2-2.pdf
+5201,University of Puerto Rico - Medical Sciences Campus,,Puerto Rico,DPT,77.8,92.11,36.0,32.0,20000.0,,,54000.0,,https://rcm1.rcm.upr.edu/eps/wp-content/uploads/2021/04/Tuition-Fees-and-Refunds.pdf
+6231,Robert Gordon University - DPT,,,DPT,50.0,,2.0,,,,,,,

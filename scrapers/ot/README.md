@@ -1,6 +1,6 @@
-# OT URL Discovery Agent
+# OT Program Data Pipeline
 
-Finds two separate URLs per OT program:
+Validates and extracts data from two URLs per OT program:
 - **A.4.2** — Outcomes page (cohort size, graduation rate, NBCOT pass rate)
 - **A.4.4** — Tuition/cost page (cost of attendance, program fees)
 
@@ -14,14 +14,10 @@ Both pipelines are independent and can run simultaneously in separate terminals.
 pip install -r requirements.txt
 ```
 
-Set your API keys. Or create a `.env` file in this directory:
+Create a `.env` file in this directory:
 ```
-SERPER_API_KEY=your_key_here
 ANTHROPIC_API_KEY=your_key_here
 ```
-
-> Note: Must be exported in **each terminal** you run a script from. Or create a `.env` file:
-> `echo "SERPER_API_KEY=your_key" > scrapers/ot/.env`
 
 ### Input CSVs
 
@@ -34,7 +30,7 @@ ANTHROPIC_API_KEY=your_key_here
 | `school_name` | ✅ | Full school name |
 | `city` | ✅ | City |
 | `state` | ✅ | State abbreviation |
-| `degree_type` | ✅ | `MOT` or `OTD` — different products |
+| `degree_type` | ✅ | `MOT` or `OTD` |
 | `program_url` | optional | Program's main website |
 
 ---
@@ -45,37 +41,48 @@ ANTHROPIC_API_KEY=your_key_here
 # Step 1 — Load both CSVs
 python 01_load_programs.py
 
-# Step 2a — Find outcomes pages — run in terminal 1
-python 02_discover_outcomes_urls.py
+# Step 2 — Discover program homepage URLs from ACOTA directory (one-time run)
+python 02_discover_urls.py
+# Use --limit 10 to test first; --retry-not-found to retry unmatched schools
 
-# Step 2b — Find tuition pages — run in terminal 2 simultaneously
-python 03_discover_tuition_urls.py
+# Step 3 — Review summary + export low-confidence/unmatched rows
+python 03_export_review.py
+# Open review CSVs, fill in manual_url, set url_status=manual_override
 
-# Step 3 — Review summary + export review files
-python 04_export_review.py
-
-# Step 4 — After filling in manual_url in review CSVs
-python 05_apply_manual.py
+# Step 4 — Apply manual URL corrections
+python 04_apply_manual.py
 
 # Step 5 — Validate URLs with Claude Haiku (run once per pipeline)
-python 06_validate_urls.py --pipeline outcomes
-python 06_validate_urls.py --pipeline tuition
-
-# Step 6 — Re-discover rejected URLs with Claude Sonnet
-python 07_rediscover_rejected.py --pipeline outcomes
-python 07_rediscover_rejected.py --pipeline tuition
-
-# Step 7 — Re-validate newly discovered URLs
-python 06_validate_urls.py --pipeline outcomes
-python 06_validate_urls.py --pipeline tuition
+python 05_validate_urls.py --pipeline outcomes
+python 05_validate_urls.py --pipeline tuition
 ```
 
-### Options (same for both discovery scripts)
+### Options (discover script)
+```bash
+--limit 10           # test on first 10 pending programs only
+--force              # re-match all programs including already-matched
+--retry-not-found    # retry only url_not_found rows
+```
+
+### Options (validate script)
 ```bash
 --limit 10           # test on first 10 rows only
---retry-notfound     # also retry url_not_found rows
---force              # re-run everything including url_found
+--force              # re-run everything including already-valid rows
+--retry-rejected     # retry rejected rows
 ```
+
+---
+
+## Pipeline Scripts
+
+| Script | Role |
+|--------|------|
+| `01_load_programs.py` | Initialize output CSVs from input files |
+| `02_discover_urls.py` | Discover program homepage URLs from ACOTA directory (agentic) |
+| `03_export_review.py` | Export unmatched/unfound rows for manual review |
+| `04_apply_manual.py` | Merge manual URL corrections |
+| `05_validate_urls.py` | Validate URLs + extract data via Claude Haiku |
+| `csv_store.py` | Atomic CSV upsert utility |
 
 ---
 
@@ -83,27 +90,22 @@ python 06_validate_urls.py --pipeline tuition
 
 | File | Description |
 |------|-------------|
+| `output/ot_program_urls.csv` | ACOTA-discovered program homepage URLs — **never delete** |
 | `output/ot_outcomes_urls.csv` | A.4.2 outcomes page URLs — **never delete** |
 | `output/ot_tuition_urls.csv` | A.4.4 tuition page URLs — **never delete** |
 | `output/ot_outcomes_review.csv` | Outcomes rows needing manual review |
 | `output/ot_tuition_review.csv` | Tuition rows needing manual review |
 
 ### Output CSV columns
+
 | Column | Description |
 |--------|-------------|
 | `program_id` | DB ID |
 | `school_name`, `city`, `state`, `degree_type` | Program info |
-| `discovered_url` | Best URL found |
-| `discovered_url_2` | Second-best result (backup) |
-| `url_confidence` | `high` / `medium` / `low` / `manual` |
+| `discovered_url` | URL to validate |
 | `url_status` | See status values below |
-| `estimated_year` | Year extracted from URL (e.g. `2024`) — blank if none found |
-| `search_query_used` | Which query produced the result |
-| `search_attempts` | How many queries were tried |
-| `scrape_notes` | Errors or warnings |
 | `validation_status` | `valid` / `rejected` / `fetch_failed` / `llm_error` |
 | `rejection_reason` | Why the URL was rejected |
-| `rediscovery_status` | `found` / `not_found` (set by Step 6) |
 
 **Outcomes pipeline additional columns:**
 | Column | Description |
@@ -125,85 +127,24 @@ python 06_validate_urls.py --pipeline tuition
 ### URL Status values
 | Status | Meaning |
 |--------|---------|
-| `pending` | Not yet searched |
-| `url_found` | High or medium confidence — ready for Stage 2 |
-| `url_found_low_confidence` | Found but uncertain — review recommended |
-| `url_not_found` | All queries returned nothing useful |
-| `search_exhausted` | Hit 3-attempt max |
+| `pending` | Not yet validated |
 | `manual_override` | Human-verified URL |
 | `error` | Network/API error — auto-retried next run |
 
-### To start completely fresh
-```bash
-rm output/ot_outcomes_urls.csv output/ot_tuition_urls.csv
-python 01_load_programs.py
-```
-
 ---
 
-## Search Query Cascades
+## Important Rules
 
-`{degree_type}` is `MOT` or `OTD` — pulled per-row from the CSV, making queries program-specific.
-
-### Outcomes
-1. `{school_name} {degree_full} Publication of Program Outcomes`
-2. `{school_name} {degree_full} program outcomes cohort graduation rate`
-3. `{school_name} {degree_type} ACOTE outcomes data`
-
-### Tuition
-1. `{school_name} {degree_full} tuition cost of attendance`
-2. `{school_name} {degree_full} program cost fees`
-3. `{school_name} {degree_type} tuition fees cost`
-
-`{degree_full}` expands to the full degree name (e.g. "Master of Occupational Therapy") for better search targeting. `{degree_type}` is the abbreviation (`MOT` or `OTD`).
-
-## Scoring Rules
-
-- Result with **no school name** in domain or URL path: capped at `medium` (prevents false matches from other schools' pages)
-- URL containing a **year before 2023**: capped at `low` (stale data — forces manual review)
-- PDF files get a score boost (ACOTE disclosures are often PDFs)
-- Aggregator sites (US News, LinkedIn, Indeed, etc.) are excluded entirely
+- NEVER delete output CSVs — always upsert
+- Re-running any script is always safe (idempotent via upsert_record)
+- Do NOT accept OTA (Occupational Therapy Assistant) program pages — these are 2-year
+  associate programs, NOT the graduate MOT/OTD programs we need
+- Input CSVs use `encoding="latin-1"` (school names have Windows-1252 special chars)
+- Windows terminal: avoid Unicode chars (use `[OK]/[X]` not `✓/✗`) — cp1252 will crash
 
 ---
 
 ## Cost Estimate
 
-~270 OT schools × 2 pipelines × up to 3 queries = ~1,600 searches worst case.
-Combined with PT's ~900 searches, total = ~2,500 — right at Serper's free limit.
-
-**Recommendation:** Sign up for both Serper (2,500 free) and Scrapingdog (11,000 free, no CC).
-Use Serper for PT, Scrapingdog for OT — total cost: **$0**.
-
-To use Scrapingdog instead of Serper, change in `.env`:
-```
-SCRAPINGDOG_API_KEY=your_key_here
-```
-And update `shared_search.py` → `serper_search()` to use Scrapingdog's endpoint.
-
----
-
-## Handoff to Stage 2
-
-```python
-import pandas as pd
-
-outcomes = pd.read_csv("output/ot_outcomes_urls.csv")
-tuition = pd.read_csv("output/ot_tuition_urls.csv")
-
-# Merge on program_id for programs that have BOTH URLs
-ready_outcomes = outcomes[outcomes["url_status"].isin(["url_found", "manual_override"])]
-ready_tuition = tuition[tuition["url_status"].isin(["url_found", "manual_override"])]
-
-stage2 = ready_outcomes[["program_id", "school_name", "degree_type", "discovered_url"]].rename(
-    columns={"discovered_url": "outcomes_url"}
-).merge(
-    ready_tuition[["program_id", "discovered_url"]].rename(
-        columns={"discovered_url": "tuition_url"}
-    ),
-    on="program_id",
-    how="outer"
-)
-
-stage2.to_csv("ot_stage2_input.csv", index=False)
-print(f"{len(stage2)} programs ready for Stage 2")
-```
+- `02_discover_urls.py`: ~$0.10 one-time (Claude Haiku, directory parse + profile links)
+- `05_validate_urls.py`: ~$2-3 total per pipeline (Claude Haiku, ~1-2 cents/program)

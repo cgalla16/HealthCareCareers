@@ -22,7 +22,7 @@ ANTHROPIC_API_KEY=your_key_here
 
 ### Phase 1 — URL harvest from APTA directory *(one-time, already done)*
 ```bash
-python 07_parse_apta_directory.py
+python 02_parse_apta_directory.py
 ```
 Fetches the APTA accredited schools directory, extracts DPT program homepage URLs, and fuzzy-matches them into `output/pt_programs.csv`.
 
@@ -52,11 +52,11 @@ Keeps the best result: `valid` > `confirmed_landing` > `rejected` > `fetch_faile
 
 ### Phase 3 — Extract program cost and length
 ```bash
-python 08_extract_data.py --limit 5               # test run
-python 08_extract_data.py                          # process all remaining rows
-python 08_extract_data.py --force --recalculate-cost  # re-extract everything (use after prompt changes)
-python 08_extract_data.py --stale-only             # only rows with data_year < 2025
-python 08_extract_data.py --landing-only           # only confirmed_landing rows
+python 06_extract_data.py --limit 5               # test run
+python 06_extract_data.py                          # process all remaining rows
+python 06_extract_data.py --force --recalculate-cost  # re-extract everything (use after prompt changes)
+python 06_extract_data.py --stale-only             # only rows with data_year < 2025
+python 06_extract_data.py --landing-only           # only confirmed_landing rows
 ```
 
 Primary targets: `total_program_cost` (computed from any format) and `program_length_months`.
@@ -80,34 +80,39 @@ For `confirmed_landing` rows: heuristic keyword scoring selects candidate sub-pa
 | `program_id` | Input | DB primary key |
 | `school_name`, `city`, `state` | Input | Location |
 | `fact_sheet_url` | Legacy Serper search | Previously discovered financial fact sheet |
-| `apta_program_url` | `07_parse_apta_directory.py` | APTA-verified DPT homepage |
-| `outcomes_url` | `07_parse_apta_directory.py` | CAPTE outcomes page (A.4.2) |
+| `apta_program_url` | `02_parse_apta_directory.py` | APTA-verified DPT homepage |
+| `outcomes_url` | `02_parse_apta_directory.py` | CAPTE outcomes page (A.4.2) |
 | `validation_status` | `05_validate_urls.py` | See status table above |
 | `extracted_from_url` | `05_validate_urls.py` | Which URL yielded data |
 | `apta_landing_confirmed` | `05_validate_urls.py` | APTA URL verified as correct program page |
-| `total_program_cost` | `08_extract_data.py` | Full program cost (computed if needed) |
+| `total_program_cost` | `06_extract_data.py` | Full program cost (computed if needed) |
 | `tuition_per_year` | `05`/`08` | Annual tuition figure |
-| `cost_basis` | `08_extract_data.py` | How total was derived: total/per_year/per_semester/per_credit |
-| `cost_components` | `08_extract_data.py` | Raw figures e.g. `"1150/cr x 126cr"` |
-| `program_length_months` | `08_extract_data.py` | Total DPT program duration |
+| `cost_basis` | `06_extract_data.py` | How total was derived: total/per_year/per_semester/per_credit |
+| `cost_components` | `06_extract_data.py` | Raw figures e.g. `"1150/cr x 126cr"` |
+| `program_length_months` | `06_extract_data.py` | Total DPT program duration |
 | `data_year` | `05`/`08` | Academic year of extracted data |
-| `extraction_notes` | `08_extract_data.py` | Compact provenance string |
+| `extraction_notes` | `06_extract_data.py` | Compact provenance string |
 
 ---
 
-## Legacy Scripts
+## Pipeline Scripts
 
-These scripts from the original Serper-based discovery phase are no longer needed for new runs:
-- `01_load_programs.py` — initial CSV setup (done)
-- `02_discover_urls.py` — Serper Google search discovery (replaced by `07`)
-- `03_export_review.py` / `04_apply_manual.py` — manual URL review workflow
-- `06_rediscover_rejected.py` — Claude web search rediscovery (replaced by APTA URL fallback)
+| Script | Role |
+|--------|------|
+| `01_load_programs.py` | Initialize master CSV from input |
+| `02_parse_apta_directory.py` | Harvest canonical URLs from APTA directory |
+| `03_export_review.py` | Export unmatched/unfound rows for manual review |
+| `04_apply_manual.py` | Merge manual URL corrections |
+| `05_validate_urls.py` | Validate URLs + extract financial data via Claude Haiku |
+| `06_extract_data.py` | Extract program cost and length |
+| `07_audit_clean.py` | Null known-bad data (run once) |
+| `csv_store.py` | Atomic CSV upsert utility |
 
 ---
 
 ## Cost & Length Data Audit (2026-03-14)
 
-Post-extraction analysis of 299 DPT programs. `09_audit_clean.py` has cleared 56 known-bad rows.
+Post-extraction analysis of 299 DPT programs. `07_audit_clean.py` has cleared 56 known-bad rows.
 
 ### Summary Stats
 
@@ -178,25 +183,25 @@ tuition columns, extract ONLY the out-of-state value. Never sum them."
 
 ### What We Did Well
 
-- APTA directory fetch (07) gave reliable program homepage URLs with no API key
+- APTA directory fetch (02) gave reliable program homepage URLs with no API key
 - `csv_store.py` atomic upserts prevented corruption on interrupts; safe to Ctrl+C and resume
 - `extraction_notes` and `cost_basis` columns provide full traceability for every value
-- `09_audit_clean.py` caught systematic contamination groups and documented root causes
+- `07_audit_clean.py` caught systematic contamination groups and documented root causes
 
 ### Next Steps
 
 **P0 — Done (2026-03-16): audit cleanup expanded to 60 rows**
-- Added IDs 25 (Mercy 12mo), 191 (Winston-Salem $633), 129 (Clarke $102k) to `09_audit_clean.py`
+- Added IDs 25 (Mercy 12mo), 191 (Winston-Salem $633), 129 (Clarke $102k) to `07_audit_clean.py`
 - Clarke ($102k) confirmed wrong via FPTA PDF form fields: actual values Yr1=$39,480 / Yr2=$37,260 / Yr3=$33,200 / Total=$109,940
 - ID 88 (UNF $2,291 in-state) was already in cleanup list and re-nulled
 
 ```bash
-python 09_audit_clean.py   # already run; 60 rows cleaned
+python 07_audit_clean.py   # already run; 60 rows cleaned
 ```
 
 **P1 — Re-extract with hardened prompt (run after adding ANTHROPIC_API_KEY to .env)**
 
-08_extract_data.py now has 3 new guardrails:
+06_extract_data.py now has 3 new guardrails:
 - OOS preference: extracts OOS as `tuition_per_year`, in-state as `tuition_instate`
 - No-summing guard: never add side-by-side columns together
 - Range sanity: flags values outside [$8k–$85k]/yr or [$50k–$280k] total in `notes`
@@ -208,10 +213,10 @@ PDF form field extraction also added (fixes FPTA fillable PDF parsing)
 # Create .env with ANTHROPIC_API_KEY=your_key, then:
 
 # 1. Re-extract known state-school rows with OOS-first prompt
-python 08_extract_data.py --program-ids 19,192,170,267,299
+python 06_extract_data.py --program-ids 19,192,170,267,299
 
 # 2. Re-extract all rows with missing or AUDIT_CLEARED cost/length
-python 08_extract_data.py
+python 06_extract_data.py
 
 # 3. Target: >=85% tuition coverage (>= 255/299) before DB load
 python -c "import pandas as pd; df=pd.read_csv('output/pt_programs.csv'); print(df['tuition_per_year'].notna().sum(), '/ 299 tuition')"
@@ -237,7 +242,7 @@ State school OOS verification checklist (check after re-extraction):
 
 After re-extraction, run `python refresh_db.py` and `cd web && npm run build` to push to production.
 
-### Prompt Guardrails (added to 08_extract_data.py)
+### Prompt Guardrails (added to 06_extract_data.py)
 
 These rules exist because of specific failure modes observed in the 2026-03-14 audit:
 
@@ -255,7 +260,7 @@ These rules exist because of specific failure modes observed in the 2026-03-14 a
 
 ## Spot-Check Audit (2026-03-16) — In-State/OOS Re-extraction + Residency Leakage
 
-After re-running `08_extract_data.py` with the hardened OOS-first prompt, coverage is now ~212/299
+After re-running `06_extract_data.py` with the hardened OOS-first prompt, coverage is now ~212/299
 (71%) tuition. Spot-checking identified additional bad data and new next steps.
 
 ### Spot-Check Findings
@@ -278,7 +283,7 @@ After re-running `08_extract_data.py` with the hardened OOS-first prompt, covera
 | 53 | Arkansas State | per-credit $378 | — | CORRECT — verified on live page |
 | 192 | Western Carolina NC | $8,154 | — | VALID but OOS rate not extracted — re-extract |
 
-**Residency/fellowship leakage — NEW discoveries (programs to null in 09_audit_clean.py):**
+**Residency/fellowship leakage — NEW discoveries (programs to null in 07_audit_clean.py):**
 
 These programs had residency/fellowship financial fact sheets extracted instead of DPT data.
 All show suspiciously low total costs ($225–$9,557) that are only residency fees.
@@ -306,7 +311,7 @@ All show suspiciously low total costs ($225–$9,557) that are only residency fe
 
 ### Next Steps (as of 2026-03-16)
 
-**Step 1 — Add new residency rows to `09_audit_clean.py`:**
+**Step 1 — Add new residency rows to `07_audit_clean.py`:**
 
 Add the following to the `CLEANUPS` list:
 
@@ -326,7 +331,7 @@ Add the following to the `CLEANUPS` list:
 (187, False, True, False, "Faulkner AL: 28mo wrong; website shows 8 semesters (~48mo DPT)"),
 ```
 
-**Step 2 — Add residency detection guardrail to SYSTEM_PROMPT in `08_extract_data.py`:**
+**Step 2 — Add residency detection guardrail to SYSTEM_PROMPT in `06_extract_data.py`:**
 
 ```
 RESIDENCY GUARD: If the page is clearly about a postgraduate residency or fellowship
@@ -340,13 +345,13 @@ This prevents future re-extraction from landing on residency pages after fact_sh
 
 ```bash
 # 1. Apply extended cleanup
-python 09_audit_clean.py
+python 07_audit_clean.py
 
 # 2. Re-extract stale programs (Pacific CA 2022, USC main blank/2022, UPR 2019)
-python 08_extract_data.py --stale-only
+python 06_extract_data.py --stale-only
 
 # 3. Re-extract specific problem programs
-python 08_extract_data.py --program-ids 217,192
+python 06_extract_data.py --program-ids 217,192
 
 # 4. Check coverage
 python -c "
@@ -361,7 +366,7 @@ print('program_length_months:', df['program_length_months'].notna().sum(), '/', 
 
 **Target:** ≥230/299 (77%+) tuition coverage after this pass.
 
-**Step 4 (optional P1) — Add cross-validation sanity check to `09_audit_clean.py`:**
+**Step 4 (optional P1) — Add cross-validation sanity check to `07_audit_clean.py`:**
 
 Flag rows where `total_program_cost / (program_length_months / 12)` differs from
 `tuition_per_year` by more than 40%. This catches future Carroll-style mismatches
@@ -391,15 +396,15 @@ multiplier directly. One variant: the LLM treated an annual figure as per-semest
 
 **2. RANGE_WARN never reached the CSV**
 The LLM was correctly returning `notes='RANGE_WARN: ...'` for out-of-range values, but `build_update()`
-in `08_extract_data.py` never read `result.notes` — it was silently discarded. The `extraction_notes`
+in `06_extract_data.py` never read `result.notes` — it was silently discarded. The `extraction_notes`
 column only received the strategy string (e.g., `"cost+len:apta_direct"`).
 
-**3. 09_audit_clean.py is not safe to re-run**
+**3. 07_audit_clean.py is not safe to re-run**
 The script replays ALL ~60 CLEANUPS entries every time. Of those, 39 rows had already been
 successfully re-extracted after prior cleanup passes. Re-running would re-null all 39, triggering
 another 130+ row processing cycle. Future one-off nulls must use targeted inline commands instead.
 
-### Fixes Applied to `08_extract_data.py`
+### Fixes Applied to `06_extract_data.py`
 
 1. **RESIDENCY_SKIP guard** — added at top of SYSTEM_PROMPT. If the page is a residency/fellowship
    program, LLM returns all null and sets `notes='RESIDENCY_SKIP: not entry-level DPT'`.
@@ -416,7 +421,7 @@ another 130+ row processing cycle. Future one-off nulls must use targeted inline
 5. **`result.notes` now written to CSV** — `build_update()` appends LLM `notes` to `extraction_notes`
    so RANGE_WARN and RESIDENCY_SKIP surface in the output file.
 
-### Warning Added to `09_audit_clean.py`
+### Warning Added to `07_audit_clean.py`
 
 Header now documents the re-run hazard. Groups R and S are added as commented entries only —
 they were applied via targeted one-off null command.

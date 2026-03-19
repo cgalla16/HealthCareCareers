@@ -1,5 +1,5 @@
 """
-05_apply_manual.py — Merge manual review fixes into both OT master CSVs.
+04_apply_manual.py — Merge manual review fixes into both OT master CSVs.
 
 Reads ot_outcomes_review.csv and ot_tuition_review.csv.
 For any row with url_status=manual_override and a manual_url filled in,
@@ -66,7 +66,7 @@ def main():
         print("Fill in manual_url and set url_status=manual_override in the review CSVs first.")
     else:
         print(f"\n[OK] {total} total records updated.")
-        print("Re-run 04_export_review.py to see updated summary.")
+        print("Re-run 03_export_review.py to see updated summary.")
 
 
 if __name__ == "__main__":

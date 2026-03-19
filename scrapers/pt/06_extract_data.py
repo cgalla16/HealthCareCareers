@@ -1,5 +1,5 @@
 """
-08_extract_data.py — Extract program cost and length for PT programs.
+06_extract_data.py — Extract program cost and length for PT programs.
 
 Priority targets:
   1. program_length_months  (new column — not previously extracted)
@@ -15,12 +15,12 @@ Sub-page discovery: keyword-scored links from apta_url + outcomes_url merged,
 fetch top MAX_SUBPAGES candidates, merge best cost + length found.
 
 Usage:
-  python 08_extract_data.py
-  python 08_extract_data.py --limit 5
-  python 08_extract_data.py --force
-  python 08_extract_data.py --stale-only
-  python 08_extract_data.py --landing-only
-  python 08_extract_data.py --recalculate-cost
+  python 06_extract_data.py
+  python 06_extract_data.py --limit 5
+  python 06_extract_data.py --force
+  python 06_extract_data.py --stale-only
+  python 06_extract_data.py --landing-only
+  python 06_extract_data.py --recalculate-cost
 """
 
 import os
@@ -286,6 +286,7 @@ def extract_from_page(client, url: str, school_name: str, page_text: str,
     response = client.messages.parse(
         model="claude-haiku-4-5",
         max_tokens=512,
+        temperature=0,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": user_msg}],
         output_format=DataExtraction,
@@ -324,12 +325,12 @@ def try_subpages(client, landing_url: str, school_name: str,
                 links.append(link)
                 seen_urls.add(link[0])
     if not links:
-        return None, "no_links"
+        return None, "no_links", ""
 
     scored = score_links(links)
     candidates = [url for _, url in scored[:MAX_SUBPAGES]]
     if not candidates:
-        return None, "no_scored_links"
+        return None, "no_scored_links", ""
 
     best_length = None
     best_cost = None
@@ -339,6 +340,7 @@ def try_subpages(client, landing_url: str, school_name: str,
     best_year = None
     length_src = ""
     cost_src = ""
+    cost_url = ""
 
     for sub_url in candidates:
         time.sleep(random.uniform(DELAY_MIN, DELAY_MAX))
@@ -357,6 +359,7 @@ def try_subpages(client, landing_url: str, school_name: str,
         if result.total_program_cost and best_cost is None:
             best_cost = result.total_program_cost
             cost_src = slug
+            cost_url = sub_url
         if result.tuition_per_year and best_tpy is None:
             best_tpy = result.tuition_per_year
         if result.tuition_instate and best_tpy_instate is None:
@@ -369,7 +372,7 @@ def try_subpages(client, landing_url: str, school_name: str,
             break
 
     if best_length is None and best_cost is None and best_tpy is None:
-        return None, "subpages_no_data"
+        return None, "subpages_no_data", ""
 
     merged = DataExtraction(
         program_length_months=best_length,
@@ -384,7 +387,7 @@ def try_subpages(client, landing_url: str, school_name: str,
         note += f"cost:sub{cost_src}"
     if best_length:
         note += ("|" if note else "") + f"len:sub{length_src}"
-    return merged, note
+    return merged, note, cost_url
 
 
 def _merge_cost(base: DataExtraction, src: DataExtraction):
@@ -401,12 +404,13 @@ def _merge_cost(base: DataExtraction, src: DataExtraction):
 def _extract_for_row(client, args, *, school_name, apta_url, fact_url, outcomes_url,
                      extracted_from, vstatus, stale, known_len, has_reliable_cost):
     """
-    Try sources in priority order. Returns (DataExtraction | None, note, force_cost).
+    Try sources in priority order. Returns (DataExtraction | None, note, force_cost, url_used).
 
     Fresh path  — data current (>=2025): re-fetch known source, fall through to subpages if cost null.
     Stale path  — try apta direct → subpages (apta + outcomes) → trusted fact_sheet fallback.
+    url_used    — the exact URL that was fetched to produce the returned data (empty string if None).
     """
-    trusted_fact = fact_url if same_domain(fact_url, apta_url) else ""
+    trusted_fact = fact_url if (not apta_url or same_domain(fact_url, apta_url)) else ""
     if fact_url and not trusted_fact:
         print(f"  [domain mismatch] fact_sheet_url ignored — different school")
 
@@ -414,21 +418,21 @@ def _extract_for_row(client, args, *, school_name, apta_url, fact_url, outcomes_
     if not stale:
         src = extracted_from or trusted_fact or apta_url
         if not src:
-            return None, "no_url", False
+            return None, "no_url", False, ""
         label = "len+cost" if not has_reliable_cost else "len"
         print(f"  fresh: {label}  {src[:70]}")
         result, _ = try_direct(client, src, school_name, known_len)
         if result and not result.total_program_cost and apta_url:
             print(f"  fresh→subpages: cost null, discovering")
-            sub, sub_note = try_subpages(client, apta_url, school_name,
-                                         known_len or result.program_length_months,
-                                         extra_url=outcomes_url)
+            sub, sub_note, sub_cost_url = try_subpages(client, apta_url, school_name,
+                                                        known_len or result.program_length_months,
+                                                        extra_url=outcomes_url)
             if sub and sub.total_program_cost:
                 _merge_cost(result, sub)
-                return result, f"{label}:{url_slug(src)}+{sub_note}", False
+                return result, f"{label}:{url_slug(src)}+{sub_note}", False, sub_cost_url or src
         if result:
-            return result, f"{label}:{url_slug(src)}", False
-        return None, "fetch_failed", False
+            return result, f"{label}:{url_slug(src)}", False, src
+        return None, "fetch_failed", False, ""
 
     # ── Stale path ────────────────────────────────────────────────────────────
     if apta_url and vstatus in ("confirmed_landing", "valid", ""):
@@ -436,18 +440,18 @@ def _extract_for_row(client, args, *, school_name, apta_url, fact_url, outcomes_
         print(f"  stale→apta direct  {apta_url[:70]}")
         result, _ = try_direct(client, apta_url, school_name, known_len)
         if result and result.total_program_cost:
-            return result, "cost+len:apta_direct", True
+            return result, "cost+len:apta_direct", True, apta_url
 
         # Step 2: apta direct had no cost — discover sub-pages (apta + outcomes)
         print(f"  stale→subpages")
         length_hint = known_len or (result.program_length_months if result else None)
-        sub, sub_note = try_subpages(client, apta_url, school_name, length_hint,
-                                     extra_url=outcomes_url)
+        sub, sub_note, sub_cost_url = try_subpages(client, apta_url, school_name, length_hint,
+                                                    extra_url=outcomes_url)
         if sub:
             if result and sub.total_program_cost:
                 _merge_cost(result, sub)
-                return result, f"cost+len:apta_direct+{sub_note}", True
-            return sub, sub_note, True
+                return result, f"cost+len:apta_direct+{sub_note}", True, sub_cost_url or apta_url
+            return sub, sub_note, True, sub_cost_url or apta_url
 
     # Step 3: fallback to fact_sheet_url (only same-domain, not superseded)
     fact_superseded = bool(extracted_from and extracted_from != fact_url)
@@ -455,20 +459,22 @@ def _extract_for_row(client, args, *, school_name, apta_url, fact_url, outcomes_
         print(f"  stale→fact_sheet  {trusted_fact[:70]}")
         result, _ = try_direct(client, trusted_fact, school_name, known_len)
         if result:
-            return result, "cost+len:fact_sheet_stale", True
+            return result, "cost+len:fact_sheet_stale", True, trusted_fact
 
-    return None, "all_sources_failed", False
+    return None, "all_sources_failed", False, ""
 
 
 # ── main ──────────────────────────────────────────────────────────────────────
 
 def build_update(program_id, result: DataExtraction, note: str,
-                 existing_year: str, force_cost: bool = False) -> dict:
+                 existing_year: str, force_cost: bool = False, url_used: str = "") -> dict:
     """
     Build upsert dict. Only overwrites cost/year fields if result is fresher (or force_cost=True).
-    Always writes program_length_months if found.
+    Always writes program_length_months and cost_source_url if found.
     """
     update = {"program_id": program_id}
+    if url_used:
+        update["cost_source_url"] = url_used
 
     if result.program_length_months:
         update["program_length_months"] = str(result.program_length_months)
@@ -511,6 +517,8 @@ def main():
     parser.add_argument("--landing-only", action="store_true", help="Only confirmed_landing rows")
     parser.add_argument("--program-ids", type=str, default=None,
                         help="Comma-separated program IDs to force-reprocess (e.g. 19,192,170)")
+    parser.add_argument("--fill-source-url", action="store_true",
+                        help="Process only rows missing cost_source_url (skip already-populated rows)")
     args = parser.parse_args()
 
     if not ANTHROPIC_API_KEY:
@@ -540,6 +548,8 @@ def main():
         pid = str(row.get("program_id", "")).strip()
         if target_ids is not None:
             return pid in target_ids
+        if args.fill_source_url:
+            return not str(row.get("cost_source_url", "")).strip()
         if args.force:
             return True
         has_length = str(row.get("program_length_months", "")).strip() not in ("", "None")
@@ -589,7 +599,7 @@ def main():
 
         print(f"[{i+1}/{total}] {school_name}  stale={stale}  has_len={has_length}  reliable_cost={has_reliable_cost}")
 
-        result, note, force_cost = _extract_for_row(
+        result, note, force_cost, url_used = _extract_for_row(
             client, args,
             school_name=school_name,
             apta_url=apta_url,
@@ -605,7 +615,7 @@ def main():
         if result:
             if args.recalculate_cost:
                 force_cost = True
-            upsert_record(INPUT_FILE, build_update(program_id, result, note, data_yr, force_cost))
+            upsert_record(INPUT_FILE, build_update(program_id, result, note, data_yr, force_cost, url_used))
             oos_tag = ""
             if result.tuition_instate:
                 oos_tag = f"  instate={result.tuition_instate}  oos={result.tuition_per_year}"

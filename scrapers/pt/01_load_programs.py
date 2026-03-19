@@ -86,7 +86,7 @@ def main():
 
     print(f"Done. {new_count} new programs added, {len(existing_ids)} existing preserved.")
     print(f"Output: output/{OUTPUT_FILE}")
-    print(f"\nNext step: python 02_discover_urls.py")
+    print(f"\nNext step: python 02_parse_apta_directory.py")
 
 
 if __name__ == "__main__":

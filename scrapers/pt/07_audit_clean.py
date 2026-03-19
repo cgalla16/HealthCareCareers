@@ -1,5 +1,5 @@
 """
-09_audit_clean.py — Null known-bad data identified in post-run audit (~60 rows).
+07_audit_clean.py — Null known-bad data identified in post-run audit (~60 rows).
 
 WARNING: This script replays ALL CLEANUPS entries every run. Do NOT re-run after rows have
 been successfully re-extracted — it will re-null them and trigger a 130+ row reprocessing cycle.
@@ -15,7 +15,7 @@ Root causes found:
 Note: rows where cost was extracted from the correct APTA URL (not the bad fact_sheet)
 have null_cost=False — only the bad fact_sheet_url is cleared for those.
 
-Run once, then re-run 08_extract_data.py to re-extract via APTA URLs.
+Run once, then re-run 06_extract_data.py to re-extract via APTA URLs.
 """
 import sys
 import os
@@ -176,7 +176,7 @@ def main():
 
     save_csv(df, INPUT_FILE)
     print(f"\nDone. Cleaned {nulled} rows.")
-    print("Next step: python 08_extract_data.py")
+    print("Next step: python 06_extract_data.py")
 
 
 if __name__ == "__main__":
