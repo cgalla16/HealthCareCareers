@@ -19,35 +19,35 @@ const CAREER_META = {
 const METRICS = [
   {
     key: 'cost',   label: 'Total Program Cost',  sub: 'Full program tuition',
-    icon: '💰', color: 'var(--amber)', barMax: 250000,
+    icon: null, color: 'var(--amber)', barMax: 250000,
     fmt: p => p.cost != null ? fK(p.cost) : null,
     bar: p => p.cost,
     hi: false, scaffold: true,
   },
   {
     key: 'length', label: 'Program Length',  sub: 'Months to complete',
-    icon: '📅', color: 'var(--blue)', barMax: 40,
+    icon: null, color: 'var(--blue)', barMax: 40,
     fmt: p => p.lengthMonths != null ? `${p.lengthMonths} mo` : null,
     bar: p => p.lengthMonths,
     hi: false, scaffold: true,
   },
   {
     key: 'salary', label: 'Avg Area Salary', sub: 'State BLS annual avg',
-    icon: '📍', color: 'var(--teal)', barMax: 130000,
+    icon: null, color: 'var(--teal)', barMax: 130000,
     fmt: p => p.areaSalary != null ? f$(p.areaSalary) : null,
     bar: p => p.areaSalary,
     hi: true, scaffold: false,
   },
   {
     key: 'size',   label: 'Program Size',    sub: 'Students per cohort',
-    icon: '👥', color: '#7C3AED', barMax: 200,
+    icon: null, color: '#7C3AED', barMax: 200,
     fmt: p => p.programSize != null ? `${p.programSize} students` : null,
     bar: p => p.programSize,
     hi: false, scaffold: false,
   },
   {
     key: 'pass',   label: 'Board Pass Rate', sub: 'First-attempt NBCOT / NPTE',
-    icon: '📋', color: 'var(--green)', barMax: 100,
+    icon: null, color: 'var(--green)', barMax: 100,
     fmt: p => p.boardPassRate != null ? `${p.boardPassRate.toFixed(1)}%` : null,
     bar: p => p.boardPassRate,
     hi: true, scaffold: false,
@@ -216,7 +216,7 @@ function CompareTable({ programs, onRemove }) {
       <div key={m.key} className={`metric-row ${rowClass}`} style={{ display:'grid', gridTemplateColumns:gridCols }}>
         <div style={{ padding:'18px 12px 18px 0',borderBottom:'1px solid var(--rule)',display:'flex',flexDirection:'column',justifyContent:'center' }}>
           <div style={{ display:'flex',alignItems:'center',gap:7,marginBottom:3 }}>
-            <span style={{ fontSize:14 }}>{m.icon}</span>
+            {m.icon && <span style={{ fontSize:14 }}>{m.icon}</span>}
             <span style={{ fontSize:13,fontWeight:700,color:'var(--ink)',fontFamily:"'Figtree',sans-serif" }}>{m.label}</span>
           </div>
           <div style={{ ...S.statLabel, paddingLeft: 21 }}>{m.sub}</div>
@@ -326,10 +326,10 @@ function InsightStrip({ programs }) {
     : null;
 
   const items = [
-    cheapest  && { icon:'💸', label:'Lowest Total Cost',  val:fK(cheapest.cost),                        school:cheapest.name,  accent:'var(--amber)' },
-    bestPass  && { icon:'📋', label:'Highest Pass Rate',  val:`${bestPass.boardPassRate.toFixed(1)}%`,  school:bestPass.name,  accent:'var(--green)' },
-    bestValue && { icon:'🏆', label:'Best Value',         val:`${bestValue.boardPassRate.toFixed(1)}% · ${fK(bestValue.cost)}`, school:bestValue.name, accent:'#7C3AED' },
-    bestMkt   && { icon:'📍', label:'Best Salary Market', val:f$(bestMkt.areaSalary),                   school:bestMkt.name,   accent:'var(--teal)'  },
+    cheapest  && { icon: null, label:'Lowest Total Cost',  val:fK(cheapest.cost),                        school:cheapest.name,  accent:'var(--amber)' },
+    bestPass  && { icon: null, label:'Highest Pass Rate',  val:`${bestPass.boardPassRate.toFixed(1)}%`,  school:bestPass.name,  accent:'var(--green)' },
+    bestValue && { icon: null, label:'Best Value',         val:`${bestValue.boardPassRate.toFixed(1)}% · ${fK(bestValue.cost)}`, school:bestValue.name, accent:'#7C3AED' },
+    bestMkt   && { icon: null, label:'Best Salary Market', val:f$(bestMkt.areaSalary),                   school:bestMkt.name,   accent:'var(--teal)'  },
   ].filter(Boolean);
 
   if (!items.length) return null;
@@ -339,7 +339,7 @@ function InsightStrip({ programs }) {
       {items.map((item, i) => (
         <div key={i} style={{ padding:'20px 24px', borderRight:i < items.length-1 ? '1px solid var(--rule)' : 'none' }}>
           <div style={{ display:'flex',alignItems:'center',gap:7,marginBottom:8 }}>
-            <span style={{ fontSize:16 }}>{item.icon}</span>
+            {item.icon && <span style={{ fontSize:16 }}>{item.icon}</span>}
             <span style={{ ...S.statLabel }}>{item.label}</span>
           </div>
           <div style={{ ...S.statValue, fontSize: 26, color: item.accent, marginBottom: 4 }}>{item.val}</div>

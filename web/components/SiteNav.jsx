@@ -28,8 +28,11 @@ export default function SiteNav({ active }) {
     }}>
       {/* Logo */}
       <Link href="/map" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-        <div style={{ width: 30, height: 30, borderRadius: 8, background: 'var(--teal)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15 }}>
-          🏥
+        <div style={{ width: 30, height: 30, borderRadius: 8, background: 'var(--teal)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+          {/* Horizontal bar */}
+          <div style={{ position: 'absolute', width: 14, height: 5, background: 'white', borderRadius: 2 }} />
+          {/* Vertical bar */}
+          <div style={{ position: 'absolute', width: 5, height: 14, background: 'white', borderRadius: 2 }} />
         </div>
         <span style={{ fontSize: 17, fontWeight: 800, color: 'var(--ink)', fontFamily: "'Fraunces', serif", letterSpacing: '-0.02em' }}>
           Health<span style={{ color: 'var(--teal)' }}>Career</span>

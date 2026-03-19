@@ -1,0 +1,327 @@
+Got it — here’s the same breakdown, cleaned up and focused, with clear, actionable tasks for your Next.js codebase.
+
+---
+
+# 1. Make “Median Salary” the Hero Stat
+
+## Goal
+
+Create a clear focal point instead of four equal-weight metrics.
+
+## Tasks
+
+### A. Change layout structure
+
+**Before**
+
+```
+[ A ][ B ][ C ][ D ]
+```
+
+**After**
+
+```
+[   MEDIAN SALARY (large)   ]
+[ A ][ B ][ C ]
+```
+
+---
+
+### B. Implement in Next.js (React + Tailwind example)
+
+```jsx
+<div className="grid gap-6">
+  {/* Hero Stat */}
+  <div className="bg-white rounded-2xl p-8 shadow-sm border">
+    <p className="text-sm text-gray-500">Median Salary</p>
+    <h2 className="text-4xl font-semibold tracking-tight">$101,020</h2>
+  </div>
+
+  {/* Secondary Stats */}
+  <div className="grid grid-cols-3 gap-4">
+    {stats.map((stat) => (
+      <div key={stat.label} className="bg-white rounded-xl p-5 border">
+        <p className="text-xs text-gray-500">{stat.label}</p>
+        <p className="text-lg font-medium">{stat.value}</p>
+      </div>
+    ))}
+  </div>
+</div>
+```
+
+---
+
+### C. Add emphasis
+
+* Increase font size and padding for the hero card
+* Add a subtle background tint or gradient
+* Optionally include a small icon
+
+---
+
+# 2. Introduce Spacing Rhythm
+
+## Goal
+
+Avoid uniform spacing and create visual hierarchy.
+
+## Tasks
+
+### A. Define spacing tokens
+
+```js
+// tailwind.config.js
+spacing: {
+  'section': '80px',
+  'section-tight': '48px',
+  'component': '24px'
+}
+```
+
+---
+
+### B. Apply uneven spacing
+
+```jsx
+<section className="mb-section">
+  <Header />
+  <div className="mt-6">
+    <Stats />
+  </div>
+</section>
+
+<section className="mb-section-tight">
+  <SalaryDistribution />
+</section>
+```
+
+---
+
+### C. Tighten internal grouping
+
+```jsx
+<div className="space-y-2">
+  <h3>At a Glance</h3>
+  <p className="text-sm text-gray-500">BLS data</p>
+</div>
+```
+
+---
+
+# 3. Improve the Map Section
+
+## Goal
+
+Make the map feel structured and intentional.
+
+## Tasks
+
+### A. Add section header
+
+```jsx
+<section className="mb-section">
+  <div className="max-w-4xl">
+    <h2 className="text-2xl font-semibold">
+      Where Physical Therapists Earn the Most
+    </h2>
+    <p className="text-gray-500 mt-2">
+      Explore average salaries by state based on BLS data.
+    </p>
+  </div>
+
+  <Map />
+</section>
+```
+
+---
+
+### B. Wrap map in a container
+
+```jsx
+<div className="bg-white border rounded-2xl p-6 mt-6">
+  <Map />
+</div>
+```
+
+---
+
+### C. Integrate legend into container
+
+```jsx
+<div className="flex justify-between items-center mt-4">
+  <span className="text-sm text-gray-500">$47,730</span>
+  <div className="h-2 flex-1 mx-4 bg-gradient-to-r from-blue-200 to-blue-700 rounded-full" />
+  <span className="text-sm text-gray-500">$120,970</span>
+</div>
+```
+
+---
+
+# 4. Upgrade the Table
+
+## Goal
+
+Improve readability and add visual meaning.
+
+## Tasks
+
+### A. Add zebra striping
+
+```jsx
+<tr className="odd:bg-gray-50 even:bg-white">
+```
+
+---
+
+### B. Add hover state
+
+```jsx
+<tr className="hover:bg-gray-100 transition-colors">
+```
+
+---
+
+### C. Highlight highest value row
+
+```js
+const maxSalary = Math.max(...data.map(d => d.mean));
+```
+
+```jsx
+<tr className={row.mean === maxSalary ? "bg-blue-50" : ""}>
+```
+
+---
+
+### D. Add inline bar visualization
+
+```jsx
+<td>
+  <div className="flex items-center gap-2">
+    <span>${row.mean}</span>
+    <div className="flex-1 bg-gray-200 h-1 rounded">
+      <div
+        className="bg-blue-500 h-1 rounded"
+        style={{ width: `${(row.mean / maxSalary) * 100}%` }}
+      />
+    </div>
+  </div>
+</td>
+```
+
+---
+
+# 5. Add Insight Layer
+
+## Goal
+
+Make the page feel analytical, not just informational.
+
+## Tasks
+
+### A. Add insight callouts
+
+```jsx
+<div className="bg-blue-50 border border-blue-100 rounded-xl p-4 mt-4">
+  <p className="text-sm">
+    Outpatient care centers offer the highest median salaries among work settings.
+  </p>
+</div>
+```
+
+---
+
+### B. Generate insights dynamically
+
+```js
+const highestPaying = data.sort((a,b) => b.mean - a.mean)[0];
+```
+
+---
+
+# 6. Introduce Layout Asymmetry
+
+## Goal
+
+Avoid rigid grids and create a more editorial feel.
+
+## Tasks
+
+### A. Use uneven column layouts
+
+```jsx
+<div className="grid grid-cols-3 gap-6">
+  <div className="col-span-2">
+    <SalaryDistribution />
+  </div>
+  <div>
+    <InsightCard />
+  </div>
+</div>
+```
+
+---
+
+### B. Slightly offset layout
+
+```jsx
+<section className="ml-4">
+```
+
+or constrain width:
+
+```jsx
+<div className="max-w-5xl">
+```
+
+---
+
+# 7. Add Micro-Interactions
+
+## Goal
+
+Improve perceived quality and responsiveness.
+
+## Tasks
+
+### A. Card hover states
+
+```jsx
+className="transition hover:shadow-md hover:-translate-y-0.5"
+```
+
+---
+
+### B. Animate stat numbers
+
+Install:
+
+```bash
+npm install react-countup
+```
+
+Use:
+
+```jsx
+import CountUp from 'react-countup';
+
+<CountUp end={101020} duration={1.2} separator="," prefix="$" />
+```
+
+---
+
+# Priority Order
+
+1. Hero stat redesign
+2. Table inline bars
+3. Map container and header
+4. Spacing rhythm
+5. Insight callouts
+6. Micro-interactions
+7. Asymmetry adjustments
+
+---
+
+# Final Note
+
+You already have a strong foundation. These changes are about shifting from a clean system to something that feels intentional and designed, without requiring a full redesign.

@@ -9,6 +9,7 @@ const interpolateBlues = interpolateRgb('#DBEAFE', '#1E3A8A');
 
 import OccupationNav from './OccupationNav';
 import { S } from '@/lib/styles';
+import { OCCUPATIONS } from '@/lib/constants';
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
@@ -41,121 +42,135 @@ export default function UsaMap({ allData }) {
   // Puerto Rico — show as text note since it's not in the standard TopoJSON
   const prData = byAbbrev['PR'];
 
+  const slugToName = Object.fromEntries(OCCUPATIONS.map(o => [o.slug, o.name]));
+  const occupationName = slugToName[activeSlug] ?? 'Healthcare Workers';
+
   return (
     <div style={{ background: 'var(--cream)', padding: '32px 40px 48px' }}>
-      {/* Occupation selector */}
-      <div style={{ maxWidth: 1100, margin: '0 auto 28px' }}>
-        <OccupationNav activeSlug={activeSlug} onChange={setActiveSlug} />
-      </div>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
 
-      {/* Map + tooltip wrapper */}
-      <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
-        <ComposableMap
-          projection="geoAlbersUsa"
-          style={{ width: '100%', height: 'auto' }}
-        >
-          <Geographies geography={GEO_URL}>
-            {({ geographies }) =>
-              geographies.map(geo => {
-                const abbrev  = geo.properties.name
-                  ? stateNameToAbbrev(geo.properties.name)
-                  : null;
-                const stateData = abbrev ? byAbbrev[abbrev] : null;
-                const fill = stateData?.annualMeanWage
-                  ? colorScale(stateData.annualMeanWage)
-                  : 'var(--rule)';
+        {/* Section header */}
+        <h2 style={{ ...S.sectionHeading, marginBottom: 4 }}>
+          Where {occupationName} Earn the Most
+        </h2>
+        <p style={{ fontSize: 13, fontWeight: 400, color: 'var(--muted)', marginBottom: 24, fontFamily: "'Figtree', sans-serif" }}>
+          Average annual salaries by state — BLS OEWS May 2024
+        </p>
 
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    fill={fill}
-                    stroke="white"
-                    strokeWidth={0.5}
-                    style={{
-                      default: { outline: 'none' },
-                      hover:   { outline: 'none', opacity: 0.85, cursor: 'pointer' },
-                      pressed: { outline: 'none' },
-                    }}
-                    onMouseMove={e => {
-                      if (!stateData) return;
-                      setTooltip({ x: e.clientX, y: e.clientY, state: stateData });
-                    }}
-                    onMouseLeave={() => setTooltip(null)}
-                  />
-                );
-              })
-            }
-          </Geographies>
-        </ComposableMap>
+        {/* Occupation selector */}
+        <div style={{ marginBottom: 20 }}>
+          <OccupationNav activeSlug={activeSlug} onChange={setActiveSlug} />
+        </div>
 
-        {/* Hover tooltip */}
-        {tooltip && (
-          <div style={{
-            position: 'fixed',
-            left: tooltip.x + 14,
-            top:  tooltip.y - 10,
-            background: 'var(--ink)',
-            color: 'white',
-            borderRadius: 8,
-            padding: '10px 14px',
-            fontSize: 13,
-            fontFamily: "'Figtree', sans-serif",
-            pointerEvents: 'none',
-            zIndex: 999,
-            boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
-            minWidth: 180,
-          }}>
-            <div style={{ fontWeight: 700, marginBottom: 6, fontSize: 14 }}>
-              {tooltip.state.stateName}
+        {/* Map card */}
+        <div style={{ background: 'white', border: '1.5px solid var(--rule)', borderRadius: 16, padding: '20px 24px', position: 'relative' }}>
+          <ComposableMap
+            projection="geoAlbersUsa"
+            style={{ width: '100%', height: 'auto' }}
+          >
+            <Geographies geography={GEO_URL}>
+              {({ geographies }) =>
+                geographies.map(geo => {
+                  const abbrev  = geo.properties.name
+                    ? stateNameToAbbrev(geo.properties.name)
+                    : null;
+                  const stateData = abbrev ? byAbbrev[abbrev] : null;
+                  const fill = stateData?.annualMeanWage
+                    ? colorScale(stateData.annualMeanWage)
+                    : 'var(--rule)';
+
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      fill={fill}
+                      stroke="white"
+                      strokeWidth={0.5}
+                      style={{
+                        default: { outline: 'none' },
+                        hover:   { outline: 'none', opacity: 0.85, cursor: 'pointer' },
+                        pressed: { outline: 'none' },
+                      }}
+                      onMouseMove={e => {
+                        if (!stateData) return;
+                        setTooltip({ x: e.clientX, y: e.clientY, state: stateData });
+                      }}
+                      onMouseLeave={() => setTooltip(null)}
+                    />
+                  );
+                })
+              }
+            </Geographies>
+          </ComposableMap>
+
+          {/* Hover tooltip */}
+          {tooltip && (
+            <div style={{
+              position: 'fixed',
+              left: tooltip.x + 14,
+              top:  tooltip.y - 10,
+              background: 'var(--ink)',
+              color: 'white',
+              borderRadius: 8,
+              padding: '10px 14px',
+              fontSize: 13,
+              fontFamily: "'Figtree', sans-serif",
+              pointerEvents: 'none',
+              zIndex: 999,
+              boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
+              minWidth: 180,
+            }}>
+              <div style={{ fontWeight: 700, marginBottom: 6, fontSize: 14 }}>
+                {tooltip.state.stateName}
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16, marginBottom: 2 }}>
+                <span style={{ color: '#9CA3AF' }}>Mean wage</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>
+                  {tooltip.state.annualMeanWage ? f$(tooltip.state.annualMeanWage) : '—'}
+                </span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16, marginBottom: 2 }}>
+                <span style={{ color: '#9CA3AF' }}>Median wage</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>
+                  {tooltip.state.annualMedianWage ? f$(tooltip.state.annualMedianWage) : '—'}
+                </span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16 }}>
+                <span style={{ color: '#9CA3AF' }}>Employed</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>
+                  {tooltip.state.employees ? fN(tooltip.state.employees) : '—'}
+                </span>
+              </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16, marginBottom: 2 }}>
-              <span style={{ color: '#9CA3AF' }}>Mean wage</span>
-              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>
-                {tooltip.state.annualMeanWage ? f$(tooltip.state.annualMeanWage) : '—'}
-              </span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16, marginBottom: 2 }}>
-              <span style={{ color: '#9CA3AF' }}>Median wage</span>
-              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>
-                {tooltip.state.annualMedianWage ? f$(tooltip.state.annualMedianWage) : '—'}
-              </span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16 }}>
-              <span style={{ color: '#9CA3AF' }}>Employed</span>
-              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>
-                {tooltip.state.employees ? fN(tooltip.state.employees) : '—'}
-              </span>
-            </div>
+          )}
+
+          {/* Color legend — inside card */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 12, justifyContent: 'flex-end' }}>
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)', fontFamily: "'Figtree', sans-serif" }}>{f$(minWage)}</span>
+            <div style={{
+              width: 160, height: 10, borderRadius: 5,
+              background: `linear-gradient(to right, ${interpolateBlues(0.2)}, ${interpolateBlues(1)})`,
+            }} />
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)', fontFamily: "'Figtree', sans-serif" }}>{f$(maxWage)}</span>
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)', fontFamily: "'Figtree', sans-serif", marginLeft: 8 }}>Annual Mean Wage</span>
           </div>
+        </div>
+
+        {/* Puerto Rico note */}
+        {prData?.annualMeanWage && (
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)', fontFamily: "'Figtree', sans-serif", margin: '12px 0 0' }}>
+            Puerto Rico (not shown on map) — Mean: {f$(prData.annualMeanWage)}
+            {prData.annualMedianWage ? ` · Median: ${f$(prData.annualMedianWage)}` : ''}
+          </p>
         )}
 
-        {/* Color legend */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 16, justifyContent: 'flex-end' }}>
-          <span style={{ ...S.statLabel, fontSize: 10 }}>{f$(minWage)}</span>
-          <div style={{
-            width: 160, height: 10, borderRadius: 5,
-            background: `linear-gradient(to right, ${interpolateBlues(0.2)}, ${interpolateBlues(1)})`,
-          }} />
-          <span style={{ ...S.statLabel, fontSize: 10 }}>{f$(maxWage)}</span>
-          <span style={{ ...S.statLabel, fontSize: 10, marginLeft: 8 }}>Annual Mean Wage</span>
-        </div>
+        {/* Missing states note */}
+        {missingStates.length > 0 && (
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)', fontFamily: "'Figtree', sans-serif", margin: '6px 0 0' }}>
+            No data available: {missingStates.join(', ')}
+          </p>
+        )}
       </div>
-
-      {/* Puerto Rico note */}
-      {prData?.annualMeanWage && (
-        <p style={{ ...S.statLabel, maxWidth: 1100, margin: '16px auto 0', fontSize: 11 }}>
-          Puerto Rico (not shown on map) — Mean: {f$(prData.annualMeanWage)}
-          {prData.annualMedianWage ? ` · Median: ${f$(prData.annualMedianWage)}` : ''}
-        </p>
-      )}
-
-      {/* Missing states note */}
-      {missingStates.length > 0 && (
-        <p style={{ ...S.statLabel, maxWidth: 1100, margin: '8px auto 0', fontSize: 11 }}>
-          No data available: {missingStates.join(', ')}
-        </p>
-      )}
     </div>
   );
 }

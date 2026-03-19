@@ -10,6 +10,7 @@ import KpiRow from '@/components/KpiRow';
 import SalaryPercentileBar from '@/components/SalaryPercentileBar';
 import WorkSettingsTable from '@/components/WorkSettingsTable';
 import ProgramStatsRow from '@/components/ProgramStatsRow';
+import InsightCallout from '@/components/InsightCallout';
 
 export function generateStaticParams() {
   return OCCUPATIONS.map(occ => ({ slug: occ.slug }));
@@ -68,7 +69,7 @@ export default async function CareerPage({ params }) {
         <hr style={S.divider} />
 
         {/* Salary percentiles */}
-        <h2 style={S.sectionHeading}>Salary Distribution</h2>
+        <h2 style={{ ...S.sectionHeading, marginTop: 8, marginBottom: 16 }}>Salary Distribution</h2>
         <SalaryPercentileBar
           p10={ns?.p10}
           p25={ns?.p25}
@@ -80,8 +81,22 @@ export default async function CareerPage({ params }) {
         <hr style={S.divider} />
 
         {/* Work settings */}
-        <h2 style={S.sectionHeading}>Salary by Work Setting</h2>
-        <WorkSettingsTable rows={ws} />
+        <h2 style={{ ...S.sectionHeading, marginTop: 8, marginBottom: 16 }}>Salary by Work Setting</h2>
+        {(() => {
+          const topSetting = ws && ws.length > 0
+            ? ws.reduce((best, r) => (r.medianWage ?? 0) > (best.medianWage ?? 0) ? r : best, ws[0])
+            : null;
+          return (
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 20, alignItems: 'start' }}>
+              <WorkSettingsTable rows={ws} />
+              <InsightCallout
+                settingName={topSetting?.settingName}
+                medianWage={topSetting?.medianWage}
+                meanWage={topSetting?.meanWage}
+              />
+            </div>
+          );
+        })()}
 
         <hr style={S.divider} />
 
